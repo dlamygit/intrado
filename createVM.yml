@@ -1,5 +1,5 @@
 ---
-- hosts: {{host}}
+- hosts: all
   tasks:
   - name: Create a virtual machine on given ESXi hostname
     vmware_guest:
