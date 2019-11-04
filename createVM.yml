@@ -12,7 +12,7 @@
     state: poweredon
     guest_id: {{guest_id}}
     # This is hostname of particular ESXi server on which user wants VM to be deployed
-    esxi_hostname: {{host}}.localdomain
+    esxi_hostname: {{host}}
     disk:
     - size_gb: {{store_size}}
         type: thin
