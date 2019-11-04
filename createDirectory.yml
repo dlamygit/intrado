@@ -1,5 +1,6 @@
 ---
 - hosts: all
+  beceme: yes
   tasks:
   - name: ansible set permission recursvely for a directory
     file:
