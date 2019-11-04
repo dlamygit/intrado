@@ -15,18 +15,18 @@
     esxi_hostname: {{host}}
     disk:
     - size_gb: {{store_size}}
-        type: thin
-        datastore: {{datastore}}
+      type: thin
+      datastore: {{datastore}}
     hardware:
-        memory_mb: {{memory_mb}}
-        num_cpus: {{num_cpus}}
-        scsi: paravirtual
+      memory_mb: {{memory_mb}}
+      num_cpus: {{num_cpus}}
+      scsi: paravirtual
     networks:
     - name: VM Network
-        mac: aa:bb:dd:aa:00:14
-        ip: 10.10.10.100
-        netmask: 255.255.255.0
-        device_type: vmxnet3
+      mac: aa:bb:dd:aa:00:14
+      ip: 10.10.10.100
+      netmask: 255.255.255.0
+      device_type: vmxnet3
     wait_for_ip_address: yes
     delegate_to: localhost
     register: deploy_vm
