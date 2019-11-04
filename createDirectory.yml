@@ -4,6 +4,6 @@
   - name: ansible set permission recursvely for a directory
     file:
       path: "{{directory_path}}/{{directory_name}}"
-      state: file
+      state: directory
       mode: "u=rw,g=wx,o=rwx"
       recurse: yes
