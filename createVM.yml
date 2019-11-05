@@ -3,23 +3,23 @@
   tasks:
   - name: Create a virtual machine on given ESXi hostname
     vmware_guest:
-      hostname: {{host_ip}}
+      hostname: "{{ host_ip }}"
       username: root
-      password: P4$$word!
+      password: "root718293?"
       validate_certs: no
       folder: /
-      name: {{name_vm}}
+      name: "{{ name_vm }}"
       state: poweredon
-      guest_id: {{guest_id}}
+      guest_id: "{{ guest_id }}"
       # This is hostname of particular ESXi server on which user wants VM to be deployed
-      esxi_hostname: {{host}}
+      esxi_hostname: "{{ host }}"
       disk:
-      - size_gb: {{store_size}}
+      - size_gb: "{{ store_size }}"
         type: thin
-        datastore: {{datastore}}
+        datastore: "{{ datastore }}"
       hardware:
-        memory_mb: {{memory_mb}}
-        num_cpus: {{num_cpus}}
+        memory_mb: "{{ memory_mb }}"
+        num_cpus: "{{ num_cpus }}"
         scsi: paravirtual
       networks:
       - name: VM Network
