@@ -1,12 +1,14 @@
 ---
-- hosts: all
+
+- hosts: localhost, all
   tasks:
   - name: Create a virtual machine on given ESXi hostname
     vmware_guest:
       hostname: "{{ host_ip }}"
       username: root
-      password: "root718293?"
+      password: P4$$word!
       validate_certs: no
+      datacenter: ha-datacenter
       folder: /
       name: "{{ name_vm }}"
       state: poweredon
@@ -19,7 +21,7 @@
         datastore: "{{ datastore }}"
       cdrom:
         type: iso
-        iso_path: "[datastore1] debian-10.1.0-amd64-netinst.iso"
+        iso_path: "[{{ datastore }}] {{ cdrom_name }}{{ cdrom_extension }}"
       hardware:
         memory_mb: "{{ memory_mb }}"
         num_cpus: "{{ num_cpus }}"
@@ -33,5 +35,3 @@
       wait_for_ip_address: yes
     delegate_to: localhost
     register: deploy_vm
-    connection: local
-    

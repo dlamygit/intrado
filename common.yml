@@ -1,0 +1,7 @@
+---
+
+- hosts: localhost, all
+  tasks:
+  - name: Perform some common tasks
+
+    command: sh ./behavior-mock.sh

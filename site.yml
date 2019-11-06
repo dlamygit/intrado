@@ -1,0 +1,14 @@
+---
+# Master Playbook
+
+# Call Playbook for Common tasks
+- import_playbook: common.yml
+
+# Call Playbook for Storage Provisioning
+- import_playbook: storage-provision.yml
+
+# Call Playbook for VM Provisioning
+- import_playbook: vm-provision.yml
+
+# Call Playbook for the Overbuild
+- import_playbook: overbuild.yml
