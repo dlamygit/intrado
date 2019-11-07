@@ -1,4 +1,5 @@
 ---
+# Playbook for Common Tasks
 
 - hosts: localhost, all
   tasks:
