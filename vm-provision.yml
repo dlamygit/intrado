@@ -5,8 +5,8 @@
   - name: Create a virtual machine on given ESXi hostname
     vmware_guest:
       hostname: "{{ host_ip }}"
-      username: root
-      password: P4$$word!
+      username: "{{ username }}"
+      password: "{{ password }}"
       validate_certs: no
       datacenter: ha-datacenter
       folder: /
