@@ -12,7 +12,7 @@
       datacenter: ha-datacenter
       folder: /
       name: "{{ env_name }}_{{ name_vm }}"
-      state: poweredon
+      state: "{{ vm_state }}"
       guest_id: "{{ guest_id }}"
       # This is hostname of particular ESXi server on which user wants VM to be deployed
       esxi_hostname: "{{ host }}"
