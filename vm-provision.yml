@@ -10,7 +10,7 @@
       validate_certs: no
       datacenter: ha-datacenter
       folder: /
-      name: "{{ name_vm }}"
+      name: "{{ env_name }}_{{ name_vm }}"
       state: poweredon
       guest_id: "{{ guest_id }}"
       # This is hostname of particular ESXi server on which user wants VM to be deployed
