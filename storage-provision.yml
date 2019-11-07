@@ -5,3 +5,4 @@
   - name: Create a Storage
 
     command: sh ./behavior-mock.sh
+    register: deployed_provisioned_storage

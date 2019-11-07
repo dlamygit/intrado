@@ -5,3 +5,4 @@
   - name: Perform some common tasks
 
     command: sh ./behavior-mock.sh
+    register: completed_common

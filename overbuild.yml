@@ -5,3 +5,4 @@
   - name: Perform the Overbuild
 
     command: sh ./behavior-mock.sh
+    register: performed_overbuild
