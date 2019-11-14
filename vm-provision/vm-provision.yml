@@ -1,0 +1,18 @@
+---
+
+- hosts: localhost, all
+  tasks:
+  - name: Include parameters as variables
+    include_vars: common-parameters.yml
+  
+  - name: Include clones parameters
+    include_vars: clones_parameters.yml
+  
+  - name: Include folders parameters
+    include_vars: folders_parameters.yml
+  
+  - include_tasks: create-folders.yml
+    loop: "{{ folders_parameters }}"
+
+  - include_tasks: clone-and-poweroff.yml
+    loop: "{{ clones_parameters }}"
