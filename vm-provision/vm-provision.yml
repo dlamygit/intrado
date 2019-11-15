@@ -1,0 +1,23 @@
+---
+
+- hosts: localhost, all
+  tasks:
+  - name: Include parameters as variables
+    include_vars: common-parameters.yml
+    when: (call_from_tower is undefined or call_from_tower|bool == False)
+  
+  - name: Include clones parameters
+    include_vars: clones_parameters.yml
+    when: (call_from_tower is undefined or call_from_tower|bool == False)
+  
+  - name: Include folders parameters
+    include_vars: folders_parameters.yml
+    when: (call_from_tower is undefined or call_from_tower|bool == False)
+  
+  - include_tasks: create-folders.yml
+    loop: "{{ folders_parameters }}"
+    when: folders_parameters is defined
+
+  - include_tasks: clone-and-poweroff.yml
+    loop: "{{ clones_parameters }}"
+    when: clones_parameters is defined
