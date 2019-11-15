@@ -11,9 +11,9 @@
     state: "{{ item.vm_state }}"
     esxi_hostname: "{{ item.host }}"
     disk:
-    - size_gb: "{{ item.store_size | default(omit) }}"
-      type: "{{ item.disk_type | default(omit) }}"
-      datastore: "{{ item.datastore | default(omit) }}"
+    - size_gb: "{{ item.store_size }}"
+      type: "{{ item.disk_type }}"
+      datastore: "{{ item.datastore }}"
     hardware:
       memory_mb: "{{ item.memory_mb | default(omit) }}"
       num_cpus: "{{ item.num_cpus | default(omit) }}"
