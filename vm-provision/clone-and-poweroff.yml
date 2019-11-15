@@ -12,7 +12,7 @@
     esxi_hostname: "{{ item.host }}"
     disk:
     - size_gb: "{{ item.store_size | default(omit) }}"
-      type: "{{ item.disk_type }}"
+      type: "{{ item.disk_type | default(omit) }}"
       datastore: "{{ item.datastore }}"
     hardware:
       memory_mb: "{{ item.memory_mb | default(omit) }}"
