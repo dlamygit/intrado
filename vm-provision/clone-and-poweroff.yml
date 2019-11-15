@@ -10,7 +10,7 @@
     name: "{{ item.vm_name }}"
     state: "{{ item.vm_state }}"
     esxi_hostname: "{{ item.host }}"
-    disk:
+    disk: "{{ item.disk_spec | default(omit) }}"
     - store_size: "{{ item.disk_spec.store_size | default(omit) }}"
       disk_type: "{{ item.disk_spec.disk_type | default(omit) }}"
     hardware:
