@@ -2,13 +2,13 @@
 # Master Playbook to Orchestrate the VM Provisioning Process
 
 # Call Playbook for Common tasks
-- import_playbook: common.yml
+- import_playbook: common/common.yml
 
 # Call Playbook for Storage Provisioning
-- import_playbook: storage-provision.yml
+- import_playbook: storage-provision/storage-provision.yml
 
 # Call Playbook for VM Provisioning
 - import_playbook: vm-provision/vm-provision.yml
 
 # Call Playbook for the Overbuild
-- import_playbook: overbuild.yml
+- import_playbook: overbuild/overbuild.yml
