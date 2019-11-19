@@ -1,0 +1,15 @@
+---
+# Playbook to Create DateStore
+
+- name: Mount VMFS datastores to ESXi
+  vmware_host_datastore:
+      hostname: "{{ vcenter_hostname }}"
+      username: "{{ vcenter_username }}"
+      password: "{{ vcenter_password }}"
+      datastore_name: "datastore2"
+      datastore_type: "disk"
+      vmfs_device_name: "mpx.vmhba0:C0:T0:L0"
+      vmfs_version: 6
+      esxi_hostname: '{{ host_name }}'
+      state: present
+  delegate_to: localhost
