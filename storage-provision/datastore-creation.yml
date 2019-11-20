@@ -1,7 +1,7 @@
 - hosts: localhost, all
   tasks:
     - name: Mount VMFS datastores to ESXi
-      vmware_guest:
+      vmware_host_datastore:
           hostname: "{{ vcenter_hostname }}"
           username: "{{ vcenter_username }}"
           password: "{{ vcenter_password }}"
