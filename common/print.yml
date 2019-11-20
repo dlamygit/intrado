@@ -5,4 +5,4 @@
   tasks:
   - name: Print variables
     debug:
-      msg: datastore_creation
+      msg: "{{ datastore_creation }}"
