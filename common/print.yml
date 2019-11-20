@@ -5,4 +5,4 @@
   tasks:
   - name: Print variables
     debug:
-      msg: "{{ param }}"
+      msg: "{{ other }}"
