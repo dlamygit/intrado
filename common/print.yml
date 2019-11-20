@@ -5,6 +5,6 @@
   tasks:
   - name: Print variables
     vars:
-        test1: "{{ test }}"
+        test1: "{{ version }}"
     debug:
       msg: "{{ test1 }}"
