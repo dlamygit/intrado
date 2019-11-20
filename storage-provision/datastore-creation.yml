@@ -6,7 +6,7 @@
           username: "{{ vcenter_username }}"
           password: "{{ vcenter_password }}"
           datastore_name: "datastore2"
-          datastore_type: "disk"
+          datastore_type: "vmfs"
           vmfs_device_name: "mpx.vmhba0:C0:T0:L0"
           vmfs_version: 6
           esxi_hostname: "{{ host_name }}"
