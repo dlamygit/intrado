@@ -5,4 +5,6 @@
   tasks:
   - name: Print variables
     debug:
-      msg: "{{ other }}"
+      vars:
+        my_version: "{{ other }}"
+      msg: "{{ my_version }}"
