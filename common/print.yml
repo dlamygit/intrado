@@ -4,4 +4,4 @@
 - hosts: localhost, all
   tasks:
   - name: Print variables
-    - debug: msg="{{ foo }}"
+    debug: msg="{{ foo }}"
