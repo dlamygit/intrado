@@ -9,8 +9,8 @@
 
 # Call Playbook for Printing variables
 #- import_playbook: common/print.yml --e "test=asd"
-- import_playbook: common/print.yml --e '{"test":asd}'
-#- import_playbook: common/print.yml --e '{"version":"1.23.45","other_variable":"foo"}'
+#- import_playbook: common/print.yml --e '{"test":asd}'
+- import_playbook: common/print.yml --e "foo=whatever"
 
 
 # Call Playbook for VM Provisioning
