@@ -13,7 +13,7 @@
     validate_certs: no
     
     #name: "{{ customer_id }}-{{ customer_name }}_{{ item.file_name }}.flp"
-    name: "dev-S2-S2_Atlanta & Suwanee-Linux-CentOS-Cloned-VM-1"
+    #name: "dev-S2-S2_Atlanta & Suwanee-Linux-CentOS-Cloned-VM-1"
     
     disk:
       - size_kb: 1440
