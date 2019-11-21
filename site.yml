@@ -7,6 +7,9 @@
 # Call Playbook for Storage Provisioning
 - import_playbook: storage-provision/storage-provision.yml
 
+# Call Playbook for Printing variables
+#- import_playbook: common/print.yml
+
 # Call Playbook for VM Provisioning
 - import_playbook: vm-provision/vm-provision.yml
 
