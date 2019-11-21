@@ -16,7 +16,7 @@
     name: "dev-S2-S1-S2-T1_Atlanta & Suwanee-Linux-CentOS-Cloned-VM-1"
     
     disk:
-      - size_mb: 1.44
+      - size_kb: 1440
         type: thin
         datastore: "{{ datastore_name }}"
         state: present
