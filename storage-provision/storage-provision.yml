@@ -18,7 +18,13 @@
     delegate_to: localhost
     register: datastore_creation
   
-  - name: Create a Storage
+    - name: Create a Storage
 
-    command: sh ./behavior-mock.sh
-    register: deployed_provisioned_storage
+      command: sh ./behavior-mock.sh
+      register: deployed_provisioned_storage
+
+    - include_tasks: floppy-disk-creation.yml
+
+    #- include_tasks: floppy-disk-creation.yml
+    #  loop: "{{ answer_files }}"
+    #  when: answer_files is defined

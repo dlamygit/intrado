@@ -1,0 +1,28 @@
+---
+# Playbook to Create Floppy Disk based on Answer file
+
+- name: Create Floppy Disk based on Answer file
+  vmware_guest_disk:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    
+    #datacenter: "{{ item.datacenter_name }}"
+    datacenter: "DatacenterDev"
+    
+    validate_certs: no
+    
+    #name: "{{ customer_id }}-{{ customer_name }}_{{ item.file_name }}.flp"
+    name: "test1.flp"
+    
+    disk:
+      - size_mb: 1.44
+        type: thin
+        datastore: "{{ datastore_name }}"
+        state: present
+        scsi_controller: 1
+        unit_number: 1
+        scsi_type: 'paravirtual'
+
+  delegate_to: localhost
+  register: floppy_disk
