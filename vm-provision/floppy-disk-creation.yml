@@ -8,6 +8,17 @@
   shell: 'mkfs.msdos -C /test/floppy.flp 1440'
   delegate_to: localhost
 
-- name: Create a Floppy Disk
+- name: Copy answer file
   shell: 'mcopy -i /test/floppy.flp /test/c1-platformConfig.xml ::/'
+  delegate_to: localhost
+
+- name: Copy answer file to datastore 
+  vsphere_copy:
+    hostname: '{{ vcenter_hostname }}'
+    username: '{{ vcenter_username }}'
+    password: '{{ vcenter_password }}'
+    src: /test/floppy.flp
+    datacenter: '{{ item.datacenter_name }}'
+    datastore: '{{ datastore_name }}'
+    path: floppy.flp
   delegate_to: localhost
