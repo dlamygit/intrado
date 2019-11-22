@@ -5,5 +5,5 @@
 #  register: floppy_creation
 
 - name: Create a Floppy Disk
-  shell: 'sudo mkfs.msdos -C /tmp/imagefile.img 1440'
+  shell: 'mkfs.msdos -C /imagefile.img 1440'
   delegate_to: localhost
