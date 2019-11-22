@@ -7,3 +7,7 @@
 - name: Create a Floppy Disk
   shell: 'mkfs.msdos -C /test/floppy.flp 1440'
   delegate_to: localhost
+
+- name: Create a Floppy Disk
+  shell: 'mcopy -i /test/floppy.flp /test/c1-platformConfig.xml ::/'
+  delegate_to: localhost
