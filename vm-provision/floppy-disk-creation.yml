@@ -1,0 +1,25 @@
+#- name: Create a Floppy Disk
+
+  #command: sh ./create_floppy.sh {{ item.full_folder_path }} {{ item.host }}
+#  command: sh ./create_floppy.sh
+#  register: floppy_creation
+
+- name: Create a Floppy Disk
+  shell: 'mkfs.msdos -C /images/{{ item.host }}.flp 1440'
+  delegate_to: localhost
+
+- name: Copy answer file
+  shell: 'mcopy -i /images/{{ item.host }}.flp /images/{{ item.answer_file_name }} ::/'
+  delegate_to: localhost
+
+- name: Copy answer file to datastore 
+  vsphere_copy:
+    hostname: '{{ vcenter_hostname }}'
+    username: '{{ vcenter_username }}'
+    password: '{{ vcenter_password }}'
+    validate_certs: no
+    src: '/images/{{ item.host }}.flp'
+    datacenter: '{{ item.datacenter_name }}'
+    datastore: '{{ datastore_name }}'
+    path: '{{ item.host }}.flp'
+  delegate_to: localhost
