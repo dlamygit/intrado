@@ -9,7 +9,7 @@
   delegate_to: localhost
 
 - name: Copy answer file
-  shell: 'mcopy -i /images/{{ item.host }}.flp /images/{{ answer_file_name }} ::/'
+  shell: 'mcopy -i /images/{{ item.host }}.flp /images/{{ item.answer_file_name }} ::/'
   delegate_to: localhost
 
 - name: Copy answer file to datastore 
