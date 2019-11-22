@@ -40,3 +40,4 @@ clones_parameters:
   num_cpus: '1'
   host: '{{host_name}}'
   vm_final_state: 'poweredoff'
+  answer_file_name: 'c1-platformConfig.xml'
