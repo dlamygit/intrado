@@ -1,10 +1,8 @@
 ---
 # Playbook to Provision Storages
 
-- hosts: localhost, all
-  tasks:
-  - name: Create a Floppy Disk
+- name: Create a Floppy Disk
 
-    #command: sh ./create_floppy.sh {{ item.full_folder_path }} {{ item.host }}
-    command: sh ./create_floppy.sh
-    register: floppy_creation
+command: sh ./create_floppy.sh {{ item.full_folder_path }} {{ item.host }}
+#command: sh ./create_floppy.sh
+register: floppy_creation
