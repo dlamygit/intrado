@@ -1,0 +1,19 @@
+---
+# Playbook to Create the floppy drive
+
+#- name: Adding VMX Entry - floppy0.fileType
+#  lineinfile:
+#    path: '/vmfs/volumes/{{ datastore_name }}/dev-S2-S2_Atlanta & Suwanee-Linux-CentOS-Cloned-VM-1/dev-S2-S2_Atlanta & Suwanee-Linux-CentOS-Cloned-VM-1.vmx'
+#    line: 'floppy0.fileType = "file"'
+#  delegate_to: localhost
+#- name: Adding VMX Entry - floppy0.fileName
+#  lineinfile:
+#    path: '/vmfs/volumes/{{ datastore_name }}/dev-S2-S2_Atlanta & Suwanee-Linux-CentOS-Cloned-VM-1/dev-S2-S2_Atlanta & Suwanee-Linux-CentOS-Cloned-VM-1.vmx'
+#    line: 'floppy0.fileName = "/vmfs/volumes/{{ datastore_name }}/floppy.flp"'
+#  delegate_to: localhost
+#- name: Removing VMX Entry - floppy0.present = "FALSE"
+#  lineinfile:
+#    path: '/vmfs/volumes/{{ datastore_name }}/dev-S2-S2_Atlanta & Suwanee-Linux-CentOS-Cloned-VM-1/dev-S2-S2_Atlanta & Suwanee-Linux-CentOS-Cloned-VM-1.vmx'
+#    line: 'floppy0.present = "FALSE"'
+#    state: absent
+#  delegate_to: 'localhost
