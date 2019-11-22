@@ -4,5 +4,6 @@
 - hosts: localhost, all
   tasks:
   - name: Create a Floppy Disk
+
     command: sh ./create_floppy.sh {{ item.full_folder_path }} {{ item.host }}
     register: floppy_creation
