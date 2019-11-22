@@ -6,4 +6,4 @@
 
 - name: Create a Floppy Disk
   shell: 'mkfs.msdos -C /tmp/imagefile.img 1440'
-  delegate_to: floppy_creation
+  delegate_to: '{{ host_name }}'
