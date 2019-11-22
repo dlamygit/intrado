@@ -5,11 +5,11 @@
 #  register: floppy_creation
 
 - name: Create a Floppy Disk
-  shell: 'mkfs.msdos -C /test/floppy.flp 1440'
+  shell: 'mkfs.msdos -C /tmp/floppy.flp 1440'
   delegate_to: localhost
 
 - name: Copy answer file
-  shell: 'mcopy -i /test/floppy.flp /test/c1-platformConfig.xml ::/'
+  shell: 'mcopy -i /tmp/floppy.flp /tmp/c1-platformConfig.xml ::/'
   delegate_to: localhost
 
 - name: Copy answer file to datastore 
@@ -18,7 +18,7 @@
     username: '{{ vcenter_username }}'
     password: '{{ vcenter_password }}'
     validate_certs: no
-    src: /test/floppy.flp
+    src: /tmp/floppy.flp
     datacenter: '{{ item.datacenter_name }}'
     datastore: '{{ datastore_name }}'
     path: floppy.flp
