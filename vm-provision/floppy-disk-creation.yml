@@ -17,6 +17,7 @@
     hostname: '{{ vcenter_hostname }}'
     username: '{{ vcenter_username }}'
     password: '{{ vcenter_password }}'
+    validate_certs: no
     src: /test/floppy.flp
     datacenter: '{{ item.datacenter_name }}'
     datastore: '{{ datastore_name }}'
