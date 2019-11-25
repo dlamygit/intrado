@@ -17,6 +17,10 @@
     when: (call_from_tower is undefined or call_from_tower|bool == False)
     register: included_folders_parameters
   
+  - name: include answer-file-c1-parameters
+    include_vars: answer-file-c1-parameters.yml
+    when: (call_from_tower is undefined or call_from_tower|bool == False)
+
   - include_tasks: create-folders.yml
     loop: "{{ folders_parameters }}"
     when: folders_parameters is defined
@@ -28,6 +32,9 @@
   - include_tasks: clone.yml
     loop: "{{ clones_parameters }}"
     when: clones_parameters is defined
+
+  #- include_tasks: answer-file-creation-cucm.yml
+  #  when: clones_parameters is defined
 
   - include_tasks: floppy-drive-creation.yml
     loop: "{{ clones_parameters }}"
