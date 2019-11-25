@@ -17,15 +17,3 @@
     wait_for_ip_address: yes
   delegate_to: localhost
   register: deployed_cloned_vm
-
-- name: Power On or Off the recently created/cloned VM
-  vmware_guest:
-    hostname: "{{ vcenter_hostname }}"
-    username: "{{ vcenter_username }}"
-    password: "{{ vcenter_password }}"
-    datastore: "{{ item.datastore }}"
-    validate_certs: no
-    name: "{{ item.vm_name }}"
-    state: "{{ item.vm_final_state }}"
-  delegate_to: localhost
-  register: powered_changed_cloned_vm
