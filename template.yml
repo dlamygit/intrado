@@ -1,6 +1,6 @@
 ---
 call_from_tower: True
-env_name: 'dev'
+env_name: 'qa'
 
 # vCenter Server Data
 vcenter_hostname: 'photon-machine.localdomain'
@@ -16,7 +16,7 @@ host_name: '172.10.3.29'
 
 # DateStore Parameters
 datastore_name: 'datastore2'
-datastore_device_name: 'mpx.vmhba0:C0:T0:L0'
+datastore_device_name: 'mpx.vmhba1:C0:T1:L0'
 datastore_type: 'vmfs'
 vmfs_version: 6
 
