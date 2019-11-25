@@ -10,5 +10,5 @@
     parent_folder: "{{ item.parent_folder_name }}"
     state: "{{ item.folder_state }}"
     validate_certs: no
-  register: "sub_folder_creation_result_{{ item.datacenter_name }}"
+  register: "sub_folder_creation_result"
   delegate_to: localhost
