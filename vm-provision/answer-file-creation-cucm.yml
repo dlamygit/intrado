@@ -1,0 +1,51 @@
+---
+
+- hosts: localhost, all
+  tasks:
+  
+  - name: include answer-file-c1-template
+    include_vars: answer-file-c1-template.yml
+
+  - name: Create CUCM platformConfig.xml
+    file:
+      path: 'temp/{{ customer_name }}'
+      state: directory
+      mode: 0777
+    register: "answer_files_folder"
+    delegate_to: localhost
+  
+  - include_tasks: answer-file-passwords.yml
+
+  - name: Create CUCM platformConfig.xml
+    file:
+      path: '{{ answer_file_path }}'
+      state: touch
+      mode: 0777
+    register: "cucm_primary_answer_file"
+    delegate_to: localhost
+
+  - name: Add initial XML line
+    lineinfile:
+      path: '{{ answer_file_path }}'
+      line: '<?xml version="1.0"?><PlatformData></PlatformData>'
+    register: "cucm_initial_line_primary_answer_file"
+    delegate_to: localhost
+
+  - name: Add a 'Version' element to the 'PlatformData' element
+    xml:
+      path: '{{ answer_file_path }}'
+      xpath: /PlatformData/Version
+      value: 11.5.1
+      pretty_print: yes
+  
+  - include_tasks: answer-file-base-element.yml
+    loop: "{{ c1_template_platform_data_children }}"
+
+  - name: Add a 'CertX509' element to the 'PlatformData' element
+    xml:
+      path: '{{ answer_file_path }}'
+      xpath: /PlatformData/CertX509
+      pretty_print: yes
+
+  - include_tasks: answer-file-base-element.yml
+    loop: "{{ c1_template_certx509_children }}"
