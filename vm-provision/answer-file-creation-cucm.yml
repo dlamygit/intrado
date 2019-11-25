@@ -2,10 +2,16 @@
 
 - hosts: localhost, all
   tasks:
-  
-  - name: include answer-file-c1-template
-    include_vars: answer-file-c1-template.yml
 
+  - name: include overall parameters
+    include_vars: overall-parameters.yml
+
+  - name: include c1-parameters
+    include_vars: c1-parameters.yml
+  
+  - name: include c1-template
+    include_vars: c1-template.yml
+  
   - name: Create CUCM platformConfig.xml
     file:
       path: 'temp/{{ customer_name }}'
@@ -18,7 +24,7 @@
 
   - name: Create CUCM platformConfig.xml
     file:
-      path: '{{ answer_file_path }}'
+      path: '{{ cucm_primary_node.answer_file_path }}'
       state: touch
       mode: 0777
     register: "cucm_primary_answer_file"
@@ -26,14 +32,14 @@
 
   - name: Add initial XML line
     lineinfile:
-      path: '{{ answer_file_path }}'
+      path: '{{ cucm_primary_node.answer_file_path }}'
       line: '<?xml version="1.0"?><PlatformData></PlatformData>'
     register: "cucm_initial_line_primary_answer_file"
     delegate_to: localhost
 
   - name: Add a 'Version' element to the 'PlatformData' element
     xml:
-      path: '{{ answer_file_path }}'
+      path: '{{ cucm_primary_node.answer_file_path }}'
       xpath: /PlatformData/Version
       value: 11.5.1
       pretty_print: yes
@@ -43,7 +49,7 @@
 
   - name: Add a 'CertX509' element to the 'PlatformData' element
     xml:
-      path: '{{ answer_file_path }}'
+      path: '{{ cucm_primary_node.answer_file_path }}'
       xpath: /PlatformData/CertX509
       pretty_print: yes
 

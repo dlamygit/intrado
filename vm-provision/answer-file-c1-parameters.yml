@@ -1,33 +1,36 @@
 ---
 
-answer_file_prefix: c1
-answer_file_path: temp/{{ customer_name }}/{{ answer_file_prefix }}-paramConfig.xml
-host_name: some-host-name
-host_ip: '172.10.3.35'
-host_mask: '255.255.240.0'
-host_gateway: '172.10.2.2'
-primary_dns: '172.10.2.2'
-secondary_dns: ''
-domain_name: local
-host_timezone: America/Argentina/Buenos_Aires
-host_continent: America
-host_city: Argentina
-host_admin: cucm_admin
-host_admin_password: Pa$$word!
-host_security_password: Pa$$word!
-host_app_user_password: Pa$$word!
-certificate_organization: Intrado-AR
-certificate_unit: UCBOP-AR
-certificate_location: Santa Fe
-certificate_state: Santa Fe
-certificate_country: AR
-locale_id: ''
-ccm_version: ''
-ccm_first_node: 'yes'
-call_home_disable: 'Disabled'
-ip_security_first_node: 'yes'
-auto_register_primary: '0'
-app_user_username: 'cucm_appuser'
-ntp_server_1: '173.224.149.136'
-ntp_server_2: '173.224.157.252'
-ntp_server_3: '199.38.38.3'
+cucm_primary_node_common:
+  answer_file_prefix: 'c1'
+
+cucm_primary_node:
+  answer_file_path: 'temp/{{ customer_name }}/{{ cucm_primary_node_common.answer_file_prefix }}-paramConfig.xml'
+  host_name: some-host-name
+  host_ip: '172.10.3.35'
+  host_mask: '255.255.240.0'
+  host_gateway: '172.10.2.2'
+  primary_dns: '172.10.2.2'
+  secondary_dns: ''
+  domain_name: 'local'
+  host_timezone: 'America/Argentina/Buenos_Aires'
+  host_continent: 'America'
+  host_city: 'Argentina'
+  host_admin: 'cucm_admin'
+  host_admin_password: 'Pa$$word!'
+  host_security_password: 'Pa$$word!'
+  host_app_user_password: 'Pa$$word!'
+  certificate_organization: 'Intrado-AR'
+  certificate_unit: 'UCBOP-AR'
+  certificate_location: 'Santa Fe'
+  certificate_state: 'Santa Fe'
+  certificate_country: 'AR'
+  locale_id: ''
+  ccm_version: ''
+  ccm_first_node: 'yes'
+  call_home_disable: 'Disabled'
+  ip_security_first_node: 'yes'
+  auto_register_primary: '0'
+  app_user_username: 'cucm_appuser'
+  ntp_server_1: '173.224.149.136'
+  ntp_server_2: '173.224.157.252'
+  ntp_server_3: '199.38.38.3'
