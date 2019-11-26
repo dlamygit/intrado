@@ -8,9 +8,14 @@
   shell: 'mkfs.msdos -C /images/{{ item.host }}.flp 1440'
   delegate_to: localhost
 
+#- name: Create answer file with the correct name for the Floppy
+#  shell: 'cp /images/{{ item.answer_file_name }} /images/platformConfig.xml'
+#  delegate_to: localhost
 - name: Create answer file with the correct name for the Floppy
-  shell: 'cp /images/{{ item.answer_file_name }} /images/platformConfig.xml'
-  delegate_to: localhost
+  copy:
+    src: /images/{{ item.answer_file_name }}
+    dest: /images/platformConfig.xml
+    force: no
 
 - name: Copy answer file
   shell: 'mcopy -i /images/{{ item.host }}.flp /images/platformConfig.xml ::/'
