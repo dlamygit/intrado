@@ -5,6 +5,6 @@
   tasks:
 
   - name: Perform some common tasks
-    command: ./behavior-mock.sh
+    command: sh ./behavior-mock.sh
     register: completed_common
     delegate_to: localhost
