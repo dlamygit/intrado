@@ -31,14 +31,14 @@
 #  shell: 'rm -f /images/platformConfig.xml'
 #  delegate_to: localhost
 - name: Remove answer file previously created from server
-    file:
-      path: /images/platformConfig.xml
-      state: absent
+  file:
+    path: /images/platformConfig.xml
+    state: absent
 
 #- name: Remove Floppy image from server
 #  shell: 'rm -f /images/{{ item.host }}.flp'
 #  delegate_to: localhost
 - name: Remove Floppy image from server
-    file:
-      path: /images/{{ item.host }}.flp
-      state: absent
+  file:
+    path: /images/{{ item.host }}.flp
+    state: absent
