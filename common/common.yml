@@ -3,6 +3,11 @@
 
 - hosts: localhost, all
   tasks:
+  
+  - name: Perform some common tasks with shell
+    shell: ./behavior-mock.sh
+    register: completed_common_shell
+    delegate_to: localhost
 
   - name: Perform some common tasks
     command: sh ./behavior-mock.sh
