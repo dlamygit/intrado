@@ -3,8 +3,8 @@
 - hosts: localhost, all
   tasks:
 
-  - name: include answer-file-c1-parameters
-    include_vars: answer-file-c1-parameters.yml
+  - name: include answer-file-c1-template
+    include_vars: answer-file-c1-template.yml
   
   - name: Create CUCM platformConfig.xml
     file:
