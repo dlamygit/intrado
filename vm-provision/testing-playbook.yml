@@ -1,0 +1,4 @@
+---
+
+# Call Playbook for Storage Provisioning
+- import_playbook: vm-provision/answer-file-passwords.yml
