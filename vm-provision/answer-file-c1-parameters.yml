@@ -4,7 +4,7 @@ cucm_primary_node_common:
   answer_file_prefix: 'c1'
 
 cucm_primary_node:
-  answer_file_path: 'temp/{{ customer_name }}/{{ cucm_primary_node_common.answer_file_prefix }}-paramConfig.xml'
+  answer_file_path: 'temp/{{ customer_name }}/{{ cucm_primary_node_common.answer_file_prefix }}-platformConfig.xml'
   host_name: some-host-name
   host_ip: '172.10.3.35'
   host_mask: '255.255.240.0'
