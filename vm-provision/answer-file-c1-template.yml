@@ -5,149 +5,186 @@ c1_template_platform_data_children:
   param_name_text: Deployment
   param_default_value: CallManager
   param_value: callmanager
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/PlatformConfigurationDone
   param_name_text: Status of platform configuration
   param_default_value: 'no'
   param_value: 'no'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/PreLoadedSoftware
   param_name_text: Create a pre loaded software 'no'de
   param_default_value: 'no'
   param_value: 'yes'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/InstallType
   param_name_text: Install or upgrade type
   param_default_value: basic
   param_value: Basic Install
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/LocalHostNICAuto
   param_name_text: Auto Configure speed and duplex
   param_default_value: 'yes'
   param_value: 'yes'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/LocalHostName
   param_name_text: Host Name for this machine
   param_default_value: localhost
-  param_value: '{{ host_name }}'
+  param_value: '{{ cucm_primary_node.host_name }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/LocalHostDHCP
   param_name_text: Is DHCP enabled for this machine
   param_default_value: 'no'
   param_value: 'no'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/LocalHostIP0
   param_name_text: Host IP0 addr for this node
   param_default_value: '127.0.0.1'
-  param_value: '{{ host_ip }}'
+  param_value: '{{ cucm_primary_node.host_ip }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/LocalHostMask0
   param_name_text: Host IP0 mask for this node
   param_default_value: '255.255.255.0'
-  param_value: '{{ host_mask }}'
+  param_value: '{{ cucm_primary_node.host_mask }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/LocalHostGW0
   param_name_text: Gateway for this node
   param_default_value: '127.0.0.1'
-  param_value: '{{ host_gateway }}'
+  param_value: '{{ cucm_primary_node.host_gateway }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/LocalHostDnsPrimary
   param_name_text: Primary DNS server IP address
   param_default_value: '0.0.0.0'
-  param_value: '{{ primary_dns }}'
+  param_value: '{{ cucm_primary_node.primary_dns }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/LocalHostDnsSecondary
   param_name_text: Secondary DNS server IP address
   param_default_value: '0.0.0.0'
-  param_value: '{{ secondary_dns }}'
+  param_value: '{{ cucm_primary_node.secondary_dns }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/LocalHostDomain
   param_name_text: Domain name for this machine
   param_default_value: 'cisco.com'
-  param_value: '{{ domain_name }}'
+  param_value: '{{ cucm_primary_node.domain_name }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/LocalHostTimezone
   param_name_text: Timezone for this node
   param_default_value: America/Los_Angeles
-  param_value: '{{ host_timezone }}'
+  param_value: '{{ cucm_primary_node.host_timezone }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/LocalHostContinent
   param_name_text: Continent for this node
   param_default_value: America
-  param_value: '{{ host_continent }}'
+  param_value: '{{ cucm_primary_node.host_continent }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/LocalHostCity
   param_name_text: City for this node
   param_default_value: Los_Angeles
-  param_value: '{{ host_city }}'
+  param_value: '{{ cucm_primary_node.host_city }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/LocalHostAdminName
   param_name_text: Administrator name for this node
   param_default_value: administrator
-  param_value: '{{ host_admin }}'
+  param_value: '{{ cucm_primary_node.host_admin }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/LocalHostAdminPwCrypt
   param_name_text: Admin PW for this node
   param_default_value: password
   param_value: '{{ encrypted_admin_password.stdout_lines[0] }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/LocaleId
   param_name_text: Microsoft assigned locale identifier value
   param_default_value: '00000409'
-  param_value: '{{ locale_id }}'
+  param_value: '{{ cucm_primary_node.locale_id }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/CCMVersion
   param_name_text: CM version on the server backed up
   param_default_value: 'CCM ver 5.0'
-  param_value: '{{ ccm_version }}'
+  param_value: '{{ cucm_primary_node.ccm_version }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/CcmFirstNode
   param_name_text: First CCM node in the cluster
   param_default_value: 'yes'
-  param_value: '{{ ccm_first_node }}'
+  param_value: '{{ cucm_primary_node.ccm_first_node }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/CallHomeDisable
   param_name_text: This tag will be present when SCH and ACH is disabled by the user
   param_default_value: 'Disable'
-  param_value: '{{ call_home_disable }}'
+  param_value: '{{ cucm_primary_node.call_home_disable }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/SftpPwCrypt
   param_name_text: Security PW for this node
   param_default_value: 'password'
   param_value: '{{ encrypted_security_password.stdout_lines[0] }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/IPSecFirstNode
   param_name_text: First IPSec node in the cluster
   param_default_value: 'yes'
-  param_value: '{{ ip_security_first_node }}'
+  param_value: '{{ cucm_primary_node.ip_security_first_node }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/IPSecEnabled
   param_name_text: IPSec Configuration for this node
   param_default_value: 'no'
   param_value: 'no'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/IPSecSecurityPwCrypt
   param_name_text: Security PW for this node
   param_default_value: 'password'
   param_value: '{{ encrypted_security_password.stdout_lines[0] }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/NtpServer
   param_name_text: Address Range for NTP server
   param_default_value: 'none'
-  param_value: '{{ ntp_server_1 }}'
+  param_value: '{{ cucm_primary_node.ntp_server_1 }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/NtpServer
   param_name_text: Address Range for NTP server
   param_default_value: 'none'
-  param_value: '{{ ntp_server_2 }}'
+  param_value: '{{ cucm_primary_node.ntp_server_2 }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/NtpServer
   param_name_text: Address Range for NTP server
   param_default_value: 'none'
-  param_value: '{{ ntp_server_3 }}'
+  param_value: '{{ cucm_primary_node.ntp_server_3 }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/PostInstallAutoRegister
   param_name_text: Number of Hours to Enable Auto Register Post-Install on Pub
   param_default_value: '24'
-  param_value: '{{ auto_register_primary }}'
+  param_value: '{{ cucm_primary_node.auto_register_primary }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/ApplUserUsername
   param_name_text: Application User Username
   param_default_value: 'CCMAdministrator'
-  param_value: '{{ app_user_username }}'
+  param_value: '{{ cucm_primary_node.app_user_username }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/ApplUserPwCrypt
   param_name_text: Application User Password
   param_default_value: 'password'
   param_value: '{{ encrypted_app_user_password.stdout_lines[0] }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 
 c1_template_certx509_children:
 - xpath: /PlatformData/CertX509/Org
   param_name_text: Certification Signing Request Organization
   param_default_value: none
-  param_value: '{{ certificate_organization }}'
+  param_value: '{{ cucm_primary_node.certificate_organization }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/CertX509/Unit
   param_name_text: Certification Signing Request Unit
   param_default_value: none
-  param_value: '{{ certificate_unit }}'
+  param_value: '{{ cucm_primary_node.certificate_unit }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/CertX509/Location
   param_name_text: Certification Signing Request Location
   param_default_value: none
-  param_value: '{{ certificate_location }}'
+  param_value: '{{ cucm_primary_node.certificate_location }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/CertX509/State
   param_name_text: Certification Signing Request State
   param_default_value: none
-  param_value: '{{ certificate_state }}'
+  param_value: '{{ cucm_primary_node.certificate_state }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'
 - xpath: /PlatformData/CertX509/Country
   param_name_text: Certification Signing Request Country
   param_default_value: none
-  param_value: '{{ certificate_country }}'
+  param_value: '{{ cucm_primary_node.certificate_country }}'
+  file_path: '{{ cucm_primary_node.answer_file_path }}'

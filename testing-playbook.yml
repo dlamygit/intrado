@@ -1,0 +1,7 @@
+---
+
+# Call Playbook for Common tasks
+- import_playbook: common/common.yml
+
+# Call Playbook for Storage Provisioning
+- import_playbook: vm-provision/answer-file-creation-cucm.yml
