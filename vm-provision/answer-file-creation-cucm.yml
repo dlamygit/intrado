@@ -3,10 +3,10 @@
 - hosts: localhost, all
   tasks:
 
-  - name: include answer-file-c1-parameters
-    include_vars: answer-file-c1-parameters.yml
+  - name: include answer-file-c1-template
+    include_vars: answer-file-c1-template.yml
   
-  - name: Create CUCM platformConfig.xml
+  - name: Create Directory to place CUCM platformConfig.xml
     file:
       path: 'temp/{{ customer_name }}'
       state: directory
@@ -15,6 +15,13 @@
     delegate_to: localhost
   
   - include_tasks: answer-file-passwords.yml
+
+  - name: Delete CUCM platformConfig.xml if exists
+    file:
+      path: '{{ cucm_primary_node.answer_file_path }}'
+      state: absent
+    register: "cucm_primary_answer_file"
+    delegate_to: localhost
 
   - name: Create CUCM platformConfig.xml
     file:
@@ -49,3 +56,14 @@
 
   - include_tasks: answer-file-base-element.yml
     loop: "{{ c1_template_certx509_children }}"
+
+  - name: Copy XML file to common the folder with the following playbook
+    copy:
+      src: '{{ cucm_primary_node.answer_file_path }}'
+      dest: '/images/{{ cucm_primary_node_common.answer_file_prefix }}-platformConfig.xml'
+      force: no
+
+  - name: Recursively remove Client's directory
+    file:
+      path: 'temp/{{ customer_name }}'
+      state: absent
