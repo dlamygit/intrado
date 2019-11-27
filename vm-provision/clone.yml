@@ -14,6 +14,6 @@
       memory_mb: "{{ item.memory_mb }}"
       num_cpus: "{{ item.num_cpus }}"
     template: "{{ item.vm_template_name }}"
-    wait_for_ip_address: yes
+    wait_for_ip_address: no
   delegate_to: localhost
   register: deployed_cloned_vm
