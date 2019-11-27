@@ -1,3 +1,5 @@
+---
+
 - name: Create a Floppy Disk
   shell: 'mkfs.msdos -C /images/{{ item.host }}.flp 1440'
   delegate_to: localhost
