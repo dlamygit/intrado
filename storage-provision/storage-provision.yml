@@ -1,7 +1,7 @@
 ---
 # Playbook to Provision Storages
 
-- hosts: localhost, all
+- hosts: localhost
   tasks:
   - name: Create Datastore on ESXi
     vmware_host_datastore:

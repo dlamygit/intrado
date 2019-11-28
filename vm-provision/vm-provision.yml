@@ -1,6 +1,6 @@
 ---
 
-- hosts: localhost, all
+- hosts: localhost
   tasks:
   - name: Include parameters as variables
     include_vars: common-parameters.yml
