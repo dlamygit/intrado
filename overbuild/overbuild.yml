@@ -1,7 +1,7 @@
 ---
 # Playbook to Perform the Overbuild Process
 
-- hosts: localhost, all
+- hosts: localhost
   tasks:
   - name: Perform the Overbuild
 

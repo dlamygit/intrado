@@ -1,7 +1,7 @@
 ---
 # Playbook for Common Tasks
 
-- hosts: localhost, all
+- hosts: localhost
   tasks:
   - name: Print variables
     debug: msg="{{ datastore_creation }}"
