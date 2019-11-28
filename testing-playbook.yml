@@ -4,4 +4,4 @@
 - import_playbook: common/common.yml
 
 # Call Playbook for Storage Provisioning
-- import_playbook: vm-provision/floppy-drive-creation.yml
+- import_playbook: common/print.yml
