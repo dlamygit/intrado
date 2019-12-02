@@ -1,0 +1,6 @@
+---
+
+- name: Remove Answer File from server
+  file:
+    path: /images/c1-platformConfig.xml
+    state: absent
