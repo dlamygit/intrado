@@ -44,8 +44,3 @@
   file:
     path: /images/{{ item.host }}.flp
     state: absent
-
-- name: Remove Answer File from server
-  file:
-    path: /images/{{ item.answer_file_name }}
-    state: absent
