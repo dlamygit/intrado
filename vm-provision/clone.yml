@@ -1,3 +1,5 @@
+---
+
 - name: Clone a virtual machine on the given ESXi hostname, from the specified template
   vmware_guest:
     hostname: "{{ vcenter_hostname }}"
