@@ -31,6 +31,9 @@
   - include_tasks: floppy-disk-creation.yml
     loop: "{{ clones_parameters }}"
     when: clones_parameters is defined
+  
+  - include_tasks: answer-files-cleanup.yml
+    when: clones_parameters is defined
 
   - include_tasks: clone.yml
     loop: "{{ clones_parameters }}"

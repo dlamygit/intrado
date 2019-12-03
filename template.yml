@@ -8,7 +8,7 @@ vcenter_username: 'administrator@vsphere.local'
 vcenter_password: 'Root718293?'
 
 # Customer Data
-customer_id: '1234INT'
+customer_id: '1202INT'
 customer_name: 'INTRADO'
 
 # Destination Host (ESXi)
@@ -36,7 +36,7 @@ clones_parameters:
   # Atlanta & Suwanee VMs
 - datacenter_name: 'DatacenterDev'
   vm_state: 'poweredoff'
-  vm_name: '{{ env_name }}_Atlanta & Suwanee-Linux-CentOS-Cloned-VM-1'
+  vm_name: '{{ env_name }}_INTCCM1P01SWN'
   vm_template_name: 'Linux-CentOS-Template-Dev'
   full_folder_path: '/Atlanta & Suwanee - Customers/{{customer_id}} - {{customer_name}}'
   datastore: '{{ datastore_name }}'
@@ -48,7 +48,7 @@ clones_parameters:
   # Denver VMs
 - datacenter_name: 'DatacenterDev'
   vm_state: 'poweredoff'
-  vm_name: '{{ env_name }}_Denver-Linux-CentOS-Cloned-VM-1'
+  vm_name: '{{ env_name }}_INTCCM1P01DEN'
   vm_template_name: 'Linux-CentOS-Template-1'
   full_folder_path: '/Denver - Customers/{{customer_id}} - {{customer_name}}'
   datastore: '{{ datastore_name }}'
