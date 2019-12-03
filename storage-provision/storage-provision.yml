@@ -1,9 +1,23 @@
 ---
 # Playbook to Provision Storages
 
-- hosts: localhost, all
+- hosts: localhost
   tasks:
+  - name: Create Datastore on ESXi
+    vmware_host_datastore:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: no
+        datastore_name: "{{ datastore_name }}"
+        datastore_type: "{{ datastore_type }}"
+        vmfs_device_name: "{{ datastore_device_name }}"
+        vmfs_version: "{{ vmfs_version }}"
+        esxi_hostname: "{{ host_name }}"
+        state: present
+    delegate_to: localhost
+    register: datastore_creation
+  
   - name: Create a Storage
-
     command: sh ./behavior-mock.sh
     register: deployed_provisioned_storage

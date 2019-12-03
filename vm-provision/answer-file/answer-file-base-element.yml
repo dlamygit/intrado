@@ -1,0 +1,28 @@
+---
+
+- name: Add a new element
+  xml:
+    path: '{{ item.file_path }}'
+    xpath: '{{ item.xpath }}'
+    pretty_print: yes
+
+- name: Add a new sub-element
+  xml:
+    path: '{{ item.file_path }}'
+    xpath: '{{ item.xpath }}/ParamNameText'
+    value: '{{ item.param_name_text }}'
+    pretty_print: yes
+
+- name: Add a new sub-element
+  xml:
+    path: '{{ item.file_path }}'
+    xpath: '{{ item.xpath }}/ParamDefaultValue'
+    value: '{{ item.param_default_value }}'
+    pretty_print: yes
+
+- name: Add a new sub-element
+  xml:
+    path: '{{ item.file_path }}'
+    xpath: '{{ item.xpath }}/ParamValue'
+    value: '{{ item.param_value }}'
+    pretty_print: yes

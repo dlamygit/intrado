@@ -1,0 +1,37 @@
+---
+
+- name: Create a Floppy Disk
+  shell: 'mkfs.msdos -C /images/{{ item.host }}.flp 1440'
+  delegate_to: localhost
+
+- name: Create answer file with the correct name for the Floppy
+  copy:
+    src: /images/{{ item.answer_file_name }}
+    dest: /images/platformConfig.xml
+    force: no
+
+- name: Copy answer file
+  shell: 'mcopy -i /images/{{ item.host }}.flp /images/platformConfig.xml ::/'
+  delegate_to: localhost
+
+- name: Copy answer file to datastore 
+  vsphere_copy:
+    hostname: '{{ vcenter_hostname }}'
+    username: '{{ vcenter_username }}'
+    password: '{{ vcenter_password }}'
+    validate_certs: no
+    src: '/images/{{ item.host }}.flp'
+    datacenter: '{{ item.datacenter_name }}'
+    datastore: '{{ datastore_name }}'
+    path: '{{ item.host }}.flp'
+  delegate_to: localhost
+
+- name: Remove answer file previously created from server
+  file:
+    path: /images/platformConfig.xml
+    state: absent
+
+- name: Remove Floppy image from server
+  file:
+    path: /images/{{ item.host }}.flp
+    state: absent

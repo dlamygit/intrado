@@ -1,26 +1,32 @@
 ---
 
-- hosts: localhost, all
+- hosts: localhost
   tasks:
-  - name: Include parameters as variables
-    include_vars: common-parameters.yml
-    when: (call_from_tower is undefined or call_from_tower|bool == False)
-    register: included_common_parameters
   
-  - name: Include clones parameters
-    include_vars: clones_parameters.yml
-    when: (call_from_tower is undefined or call_from_tower|bool == False)
-    register: included_clones_parameters
-  
-  - name: Include folders parameters
-    include_vars: folders_parameters.yml
-    when: (call_from_tower is undefined or call_from_tower|bool == False)
-    register: included_folders_parameters
-  
-  - include_tasks: create-folders.yml
+  # Create Sub-Folders to place the new upcoming VMs
+  - include_tasks: folders/folders-creation.yml
     loop: "{{ folders_parameters }}"
     when: folders_parameters is defined
-
-  - include_tasks: clone-and-poweroff.yml
+  
+  # Create Answer Files
+  - include_tasks: answer-file/answer-file-creation-cucm.yml
+    when: clones_parameters is defined
+  
+  # Create Floppy Disks
+  - include_tasks: floppy-disk/floppy-disk-creation.yml
+    loop: "{{ clones_parameters }}"
+    when: clones_parameters is defined
+  
+  #Cleanup Answer Files
+  - include_tasks: answer-file/answer-file-cleanup.yml
+    when: clones_parameters is defined
+  
+  # Clone Templates to VMs
+  - include_tasks: clone.yml
+    loop: "{{ clones_parameters }}"
+    when: clones_parameters is defined
+  
+  # Power Off the Created VMs
+  - include_tasks: poweroff.yml
     loop: "{{ clones_parameters }}"
     when: clones_parameters is defined
