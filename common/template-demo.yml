@@ -1,6 +1,6 @@
 ---
 call_from_tower: True
-env_name: 'dev'
+env_name: 'demo'
 
 # vCenter Server Data
 vcenter_hostname: 'photon-machine.localdomain'
@@ -12,7 +12,7 @@ customer_id: '1202INT'
 customer_name: 'INTRADO'
 
 # Destination Host (ESXi)
-host_name: '172.10.3.29'
+host_name: '172.10.6.244'
 
 # DateStore Parameters
 datastore_name: 'datastore2'
@@ -22,11 +22,11 @@ vmfs_version: 6
 
 # New Destination Folders for the new VMs
 folders_parameters:
-- datacenter_name: 'DatacenterDev'
+- datacenter_name: 'DatacenterDemo'
   sub_folder_name: '{{customer_id}} - {{customer_name}}'
   parent_folder_name: 'Atlanta & Suwanee - Customers'
   folder_state: 'present'
-- datacenter_name: 'DatacenterDev'
+- datacenter_name: 'DatacenterDemo'
   sub_folder_name: '{{customer_id}} - {{customer_name}}'
   parent_folder_name: 'Denver - Customers'
   folder_state: 'present'
@@ -34,10 +34,10 @@ folders_parameters:
 # Clones Configuration
 clones_parameters:
   # Atlanta & Suwanee VMs
-- datacenter_name: 'DatacenterDev'
+- datacenter_name: 'DatacenterDemo'
   vm_state: 'poweredoff'
   vm_name: '{{ env_name }}_INTCCM1P01SWN'
-  vm_template_name: 'Linux-CentOS-Template-Dev'
+  vm_template_name: 'Linux-CentOS-Template-Demo'
   full_folder_path: '/Atlanta & Suwanee - Customers/{{customer_id}} - {{customer_name}}'
   datastore: '{{ datastore_name }}'
   memory_mb: '512'
@@ -46,10 +46,10 @@ clones_parameters:
   vm_final_state: 'poweredoff'
   answer_file_name: 'c1-platformConfig.xml'
   # Denver VMs
-- datacenter_name: 'DatacenterDev'
+- datacenter_name: 'DatacenterDemo'
   vm_state: 'poweredoff'
   vm_name: '{{ env_name }}_INTCCM1P01DEN'
-  vm_template_name: 'Linux-CentOS-Template-1'
+  vm_template_name: 'Linux-CentOS-Template-Demo'
   full_folder_path: '/Denver - Customers/{{customer_id}} - {{customer_name}}'
   datastore: '{{ datastore_name }}'
   memory_mb: '512'
