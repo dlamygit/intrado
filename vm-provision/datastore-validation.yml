@@ -1,8 +1,5 @@
 ---
 
-- name: Print variables
-  debug: msg="{{ item }}"
-
 - name: Gather info from datacenter about specific datastore
   vmware_datastore_info:
     hostname: "{{ vcenter_hostname }}"
@@ -13,9 +10,6 @@
     datacenter: "{{ item.datacenter_name }}"
   delegate_to: localhost
   register: datastore_info
-
-- name: Print variables
-  debug: msg="{{ datastore_info }}"
 
 - fail:
     msg: The datastore does not exist
