@@ -1,0 +1,16 @@
+---
+
+- name: Gather info from datacenter about specific datastore
+  vmware_datastore_info:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    name: "{{ item.datastore }}"
+    validate_certs: no
+    datacenter: "{{ item.datacenter_name }}"
+  delegate_to: localhost
+  register: datastore_info
+
+- fail:
+    msg: The datastore does not exist
+  when: (datastore_info.datastores is defined) and (datastore_info.datastores|length > 0)
