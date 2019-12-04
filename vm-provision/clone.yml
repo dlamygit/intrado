@@ -15,9 +15,9 @@
     hardware:
       memory_mb: "{{ item.memory_mb | default(omit) }}"
       num_cpus: "{{ item.num_cpus | default(omit) }}"
-    networks:
-    - name: "VM network"
-      mac: 00:50:56:97:e4:b7
+    #networks:
+    #- name: "VM Network"
+    #  mac: 00:50:56:97:e4:b7
     template: "{{ item.vm_template_name }}"
     wait_for_ip_address: no
   delegate_to: localhost
