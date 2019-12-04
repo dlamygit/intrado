@@ -1,0 +1,12 @@
+---
+
+- name: Gather info from datacenter about specific datastore
+  vmware_datastore_facts:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    name: "{{ item.datastore }}"
+    validate_certs: no
+    datacenter: "{{ item.datacenter_name }}"
+  delegate_to: localhost
+  register: datastore_info
