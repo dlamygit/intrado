@@ -22,3 +22,34 @@
     wait_for_ip_address: no
   delegate_to: localhost
   register: deployed_cloned_vm
+
+- name: Wait for system to become reachable over WinRM
+  wait_for_connection:
+    timeout: 180
+
+- name: Mount Floppy Disk
+  mount:
+    path: /mnt/floppy
+    src: "{{ item.datastore }}/{{ item.host }}.flp"
+    fstype: thin
+    opts: ro
+    state: present
+
+#- name: Mount Floppy Disk
+#  vmware_guest:
+#    hostname: "{{ vcenter_hostname }}"
+#    username: "{{ vcenter_username }}"
+#    password: "{{ vcenter_password }}"
+#    datastore: "{{ item.datastore }}"
+#    validate_certs: no
+#    datacenter: "{{ item.datacenter_name }}"
+#    folder: "{{ item.full_folder_path }}"
+#    name: "{{ item.vm_name }}"
+#    state: "{{ item.vm_state }}"
+#    esxi_hostname: "{{ item.host }}"
+#    disk:
+#    - size_gb: '{{ vm_disk_gb }}'
+#      type: thin
+#      datastore: '{{ esxi_datastore }}'
+#  delegate_to: localhost
+#  register: deploy_vm
