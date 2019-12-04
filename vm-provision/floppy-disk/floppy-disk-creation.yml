@@ -4,9 +4,6 @@
   shell: 'mkfs.msdos -C /images/{{ item.host }}.flp 1440'
   delegate_to: localhost
 
-#- name: Create answer file with the correct name for the Floppy
-#  shell: 'cp /images/{{ item.answer_file_name }} /images/platformConfig.xml'
-#  delegate_to: localhost
 - name: Create answer file with the correct name for the Floppy
   copy:
     src: /images/{{ item.answer_file_name }}
@@ -29,17 +26,11 @@
     path: '{{ item.host }}.flp'
   delegate_to: localhost
 
-#- name: Remove answer file previously created from server
-#  shell: 'rm -f /images/platformConfig.xml'
-#  delegate_to: localhost
 - name: Remove answer file previously created from server
   file:
     path: /images/platformConfig.xml
     state: absent
 
-#- name: Remove Floppy image from server
-#  shell: 'rm -f /images/{{ item.host }}.flp'
-#  delegate_to: localhost
 - name: Remove Floppy image from server
   file:
     path: /images/{{ item.host }}.flp

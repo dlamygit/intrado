@@ -1,7 +1,0 @@
----
-
-# Call Playbook for Common tasks
-- import_playbook: common/common.yml
-
-# Call Playbook for Storage Provisioning
-- import_playbook: common/print.yml
