@@ -1,5 +1,8 @@
 ---
 
+- name: Print variables
+  debug: msg="{{ item }}"
+
 - name: Gather info from datacenter about specific datastore
   vmware_datastore_info:
     hostname: "{{ vcenter_hostname }}"
