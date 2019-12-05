@@ -1,5 +1,9 @@
 ---
 
+tasks:
+- name: Print datastore_info
+  debug: msg="{{ item.datastore }} at {{ item.datacenter_name }}"
+
 - name: Gather info from datacenter about specific datastore
   vmware_datastore_info:
     hostname: "{{ vcenter_hostname }}"
