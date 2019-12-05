@@ -1,7 +1,6 @@
 ---
 
-tasks:
-- name: Print datastore_info
+- name: Print item data
   debug: msg="{{ item.datastore }} at {{ item.datacenter_name }}"
 
 - name: Gather info from datacenter about specific datastore
@@ -15,11 +14,9 @@ tasks:
   delegate_to: localhost
   register: datastore_info
 
-tasks:
 - name: Print datastore_info
   debug: msg="{{ datastore_info }}"
 
-tasks:
 - name: Print datastore_info.datastores
   debug: msg="{{ datastore_info.datastores }}"
 
