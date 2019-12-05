@@ -13,4 +13,4 @@
 
 - fail:
     msg: The datastore does not exist
-  when: (datastore_info.datastores is defined) and (datastore_info.datastores|length > 0)
+  when: ((datastore_info.datastores is defined) and (datastore_info.datastores|length == 0)) or (datastore_info.datastores is undefined)
