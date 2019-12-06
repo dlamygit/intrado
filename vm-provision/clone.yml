@@ -47,7 +47,7 @@
     datastore: "{{ item.datastore }}"
     validate_certs: no
     name: "{{ item.vm_name }}"
-    state: powered-on
+    state: poweredon
   delegate_to: localhost
   register: deployed_cloned_vm_poweron
 
