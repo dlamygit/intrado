@@ -1,0 +1,12 @@
+---
+
+# Answer Files Manager
+# Playbook that orchestrates the creation of the required answer files
+
+- include_tasks: answer-file-creation-cucm-primary.yml
+  loop: "{{ answer_files_config }}"
+  when: item.product_type == 'cucm' and item.node_type == 'primary'
+
+#- include_tasks: answer-file-creation-cucm-secondary.yml
+#  loop: "{{ answer_files_config }}"
+#  when: item.product_type == 'cucm' and item.node_type == 'secondary'

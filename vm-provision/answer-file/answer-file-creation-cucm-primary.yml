@@ -1,11 +1,25 @@
 ---
 
-- name: include answer-file-c1-template
-  include_vars: answer-file-c1-template.yml
+# Playbook to create the Answer File for a Primary Node for the CUCM (Cisco Unified Communications Manager)
+
+- name: setting answer_file_path variable
+  set_fact:
+    answer_file_path: "temp/{{ customer_id|upper }}/CUCM/{{ item.host_name|upper }}.xml"
+
+- name: include answer-file-template-cucm-primary
+  include_vars: answer-file-template-cucm-primary.yml
 
 - name: Create Directory to place CUCM platformConfig.xml
   file:
-    path: 'temp/{{ customer_name }}'
+    path: 'temp/{{ customer_id|upper }}'
+    state: directory
+    mode: 0777
+  register: "customer_folder"
+  delegate_to: localhost
+
+- name: Create Directory to place CUCM platformConfig.xml
+  file:
+    path: 'temp/{{ customer_id|upper }}/CUCM'
     state: directory
     mode: 0777
   register: "answer_files_folder"
@@ -16,14 +30,14 @@
 
 - name: Delete CUCM platformConfig.xml if exists
   file:
-    path: '{{ cucm_primary_node.answer_file_path }}'
+    path: '{{ answer_file_path }}'
     state: absent
   register: "cucm_primary_answer_file"
   delegate_to: localhost
 
 - name: Create CUCM platformConfig.xml
   file:
-    path: '{{ cucm_primary_node.answer_file_path }}'
+    path: '{{ answer_file_path }}'
     state: touch
     mode: 0777
   register: "cucm_primary_answer_file"
@@ -31,39 +45,41 @@
 
 - name: Add initial XML line
   lineinfile:
-    path: '{{ cucm_primary_node.answer_file_path }}'
+    path: '{{ answer_file_path }}'
     line: '<?xml version="1.0"?><PlatformData></PlatformData>'
   register: "cucm_initial_line_primary_answer_file"
   delegate_to: localhost
 
 - name: Add a 'Version' element to the 'PlatformData' element
   xml:
-    path: '{{ cucm_primary_node.answer_file_path }}'
+    path: '{{ answer_file_path }}'
     xpath: /PlatformData/Version
     value: 11.5.1
     pretty_print: yes
 
 # Loop through the elements in the processed template, to add direct children of the root element (PlatformData)
 - include_tasks: answer-file-base-element.yml
-  loop: "{{ c1_template_platform_data_children }}"
+  loop: "{{ cucm_primary_template_platform_data_children }}"
 
 - name: Add a 'CertX509' element to the 'PlatformData' element
   xml:
-    path: '{{ cucm_primary_node.answer_file_path }}'
+    path: '{{ answer_file_path }}'
     xpath: /PlatformData/CertX509
     pretty_print: yes
 
 # Loop through the elements in the processed template, to add direct children of the CertX509 element
 - include_tasks: answer-file-base-element.yml
-  loop: "{{ c1_template_certx509_children }}"
+  loop: "{{ cucm_primary_template_certx509_children }}"
 
 - name: Copy XML file to common the folder with the following playbook
   copy:
-    src: '{{ cucm_primary_node.answer_file_path }}'
-    dest: '/images/{{ cucm_primary_node_common.answer_file_prefix }}-platformConfig.xml'
+    src: '{{ answer_file_path }}'
+    dest: '/images/{{ item.host_name|upper }}.xml'
     force: no
+  when: no
 
 - name: Recursively remove Client's directory
   file:
-    path: 'temp/{{ customer_name }}'
+    path: 'temp/{{ customer_id|upper }}'
     state: absent
+  when: no
