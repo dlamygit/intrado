@@ -28,14 +28,14 @@
     hostname: "{{ vcenter_hostname }}"
     username: "{{ vcenter_username }}"
     password: "{{ vcenter_password }}"
-    datastore: "{{ item.datastore }}"
-    datacenter: "{{ item.datacenter_name }}"
-    esxi_hostname: "{{ item.host }}"
+    #datastore: "{{ item.datastore }}"
+    #datacenter: "{{ item.datacenter_name }}"
+    #esxi_hostname: "{{ item.host }}"
     validate_certs: no
     folder: "{{ item.full_folder_path }}"
     name: "{{ item.vm_name }}"
     state: powered-on
-    wait_for_ip_address: no
+    #wait_for_ip_address: no
   delegate_to: localhost
   register: deployed_cloned_vm_poweron
 
