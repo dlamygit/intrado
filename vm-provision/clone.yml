@@ -39,7 +39,7 @@
   wait_for_connection:
     timeout: 180
 
-- vars:
+vars:
   esxi_login: &esxi_login
     hostname: '{{ host_name }}'
     username: '{{ host_username }}'
