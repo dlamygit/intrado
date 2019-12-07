@@ -51,16 +51,17 @@
     state: present
   delegate_to: localhost
 
-#- name: Enable ESX Shell (TSM)
-#  vmware_host_service_manager:
-#    #<<: *esxi_login
-#    #esxi_hostname: '{{ host_name }}'
-#    hostname: '{{ host_name }}'
-#    username: '{{ host_username }}'
-#    password: '{{ host_password }}'
-#    service_name: TSM
-#    state: present
-#  delegate_to: localhost
+- name: Enable ESX Shell (TSM)
+  vmware_host_service_manager:
+    #<<: *esxi_login
+    esxi_hostname: '{{ host_name }}'
+    hostname: '{{ host_name }}'
+    username: '{{ host_username }}'
+    password: '{{ host_password }}'
+    validate_certs: no
+    service_name: TSM
+    state: present
+  delegate_to: localhost
 
 #- name: Manage Log level setting for all ESXi hosts in given Cluster
 #  vmware_host_config_manager:
