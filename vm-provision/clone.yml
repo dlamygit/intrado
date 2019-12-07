@@ -39,20 +39,20 @@
   wait_for_connection:
     timeout: 180
 
-- name: Enable ESX SSH (TSM-SSH)
-  vmware_host_service_manager:
-    <<: *esxi_login
-    esxi_hostname: '{{ host_name }}'
-    service_name: TSM-SSH
-    state: present
-  delegate_to: localhost
-- name: Enable ESX Shell (TSM)
-  vmware_host_service_manager:
-    <<: *esxi_login
-    esxi_hostname: '{{ host_name }}'
-    service_name: TSM
-    state: present
-  delegate_to: localhost
+#- name: Enable ESX SSH (TSM-SSH)
+#  vmware_host_service_manager:
+#    <<: *esxi_login
+#    esxi_hostname: '{{ host_name }}'
+#    service_name: TSM-SSH
+#    state: present
+#  delegate_to: localhost
+#- name: Enable ESX Shell (TSM)
+#  vmware_host_service_manager:
+#    <<: *esxi_login
+#    esxi_hostname: '{{ host_name }}'
+#    service_name: TSM
+#    state: present
+#  delegate_to: localhost
 
 - name: Removing VMX Entry - floppy0.fileName = "Floppy drive 1"
   lineinfile:
