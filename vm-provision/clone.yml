@@ -41,11 +41,11 @@
 
 - name: Enable ESX SSH (TSM-SSH)
   vmware_host_service_manager:
-    <<: *esxi_login
+    #<<: *esxi_login
     esxi_hostname: '{{ host_name }}'
     #hostname: '{{ host_name }}'
-    #username: '{{ host_username }}'
-    #password: '{{ host_password }}'
+    username: '{{ host_username }}'
+    password: '{{ host_password }}'
     service_name: TSM-SSH
     state: present
   delegate_to: localhost
