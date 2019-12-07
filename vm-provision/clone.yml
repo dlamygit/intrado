@@ -39,10 +39,32 @@
   wait_for_connection:
     timeout: 180
 
+- vars:
+  esxi_login: &esxi_login
+    hostname: '{{ host_name }}'
+    username: '{{ host_username }}'
+    password: '{{ host_password }}'  
+    validate_certs: no 
+
+- name: Enable ESX SSH (TSM-SSH)
+  vmware_host_service_manager:
+    <<: *esxi_login
+    esxi_hostname: '{{ host_name }}'
+    service_name: TSM-SSH
+    state: present
+  delegate_to: localhost
+- name: Enable ESX Shell (TSM)
+  vmware_host_service_manager:
+    <<: *esxi_login
+    esxi_hostname: '{{ host_name }}'
+    service_name: TSM
+    state: present
+  delegate_to: localhost
+
 - name: Removing VMX Entry - floppy0.fileName = "Floppy drive 1"
   lineinfile:
     path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
-    line: 'loppy0.fileName = "Floppy drive 1"'
+    line: 'floppy0.fileName = "Floppy drive 1"'
     state: absent
   delegate_to: '{{ item.host }}'
 - name: Removing VMX Entry - floppy0.present = "FALSE"
