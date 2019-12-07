@@ -55,13 +55,21 @@
   wait_for_connection:
     timeout: 180
 
-- name: Mount Floppy Disk
-  mount:
-    path: /mnt/floppy
-    src: "{{ item.datastore }}/{{ item.host }}.flp"
-    fstype: thin
-    opts: ro
-    state: present
+- name: Mouht Floppy
+  vsphere_guest:
+    vcenter_hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    #guest: newvm001
+    state: poweredon
+    vm_hardware:
+      vm_floppy:
+        type: "image"
+        image_path: "{{ item.datastore }}/{{ item.host }}.flp"
+    esxi:
+      datacenter: "{{ item.datacenter_name }}"
+      hostname: "{{ item.host }}"
+  delegate_to: localhost
 
 #- name: Mount Floppy Disk
 #  vmware_guest:
