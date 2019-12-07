@@ -39,13 +39,6 @@
   wait_for_connection:
     timeout: 180
 
-vars:
-  esxi_login: &esxi_login
-    hostname: '{{ host_name }}'
-    username: '{{ host_username }}'
-    password: '{{ host_password }}'  
-    validate_certs: no 
-
 - name: Enable ESX SSH (TSM-SSH)
   vmware_host_service_manager:
     <<: *esxi_login
