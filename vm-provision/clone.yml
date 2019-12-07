@@ -23,22 +23,6 @@
   delegate_to: localhost
   register: deployed_cloned_vm
 
-#- name: Set the state of a virtual machine to poweron
-#  vmware_guest_powerstate:
-#    hostname: "{{ vcenter_hostname }}"
-#    username: "{{ vcenter_username }}"
-#    password: "{{ vcenter_password }}"
-    #datastore: "{{ item.datastore }}"
-    #datacenter: "{{ item.datacenter_name }}"
-    #esxi_hostname: "{{ item.host }}"
-#    validate_certs: no
-#    folder: "{{ item.full_folder_path }}"
-#    name: "{{ item.vm_name }}"
-#    state: powered-on
-    #wait_for_ip_address: no
-#  delegate_to: localhost
-#  register: deployed_cloned_vm_poweron
-
 - name: Power On the recently created/cloned VM
   vmware_guest:
     hostname: "{{ vcenter_hostname }}"
@@ -55,37 +39,25 @@
   wait_for_connection:
     timeout: 180
 
-- name: Mouht Floppy
-  vmware_guest:
-    hostname: "{{ vcenter_hostname }}"
-    username: "{{ vcenter_username }}"
-    password: "{{ vcenter_password }}"
-    datastore: "{{ item.datastore }}"
-    datacenter: "{{ item.datacenter_name }}"
-    esxi_hostname: "{{ item.host }}"
-    #guest: newvm001
-    state: poweredon
-    vm_hardware:
-      vm_floppy:
-        type: "image"
-        image_path: "{{ item.datastore }}/{{ item.host }}.flp"
-  delegate_to: localhost
-
-#- name: Mount Floppy Disk
-#  vmware_guest:
-#    hostname: "{{ vcenter_hostname }}"
-#    username: "{{ vcenter_username }}"
-#    password: "{{ vcenter_password }}"
-#    datastore: "{{ item.datastore }}"
-#    validate_certs: no
-#    datacenter: "{{ item.datacenter_name }}"
-#    folder: "{{ item.full_folder_path }}"
-#    name: "{{ item.vm_name }}"
-#    state: "{{ item.vm_state }}"
-#    esxi_hostname: "{{ item.host }}"
-#    disk:
-#    - size_gb: '{{ vm_disk_gb }}'
-#      type: thin
-#      datastore: '{{ esxi_datastore }}'
-#  delegate_to: localhost
-#  register: deploy_vm
+- name: Removing VMX Entry - floppy0.fileName = "Floppy drive 1"
+  lineinfile:
+    path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
+    line: 'loppy0.fileName = "Floppy drive 1"'
+    state: absent
+  delegate_to: '{{ item.host }}'
+- name: Removing VMX Entry - floppy0.present = "FALSE"
+  lineinfile:
+    path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
+    line: 'floppy0.present = "FALSE"'
+    state: absent
+  delegate_to: '{{ item.host }}'
+- name: Adding VMX Entry - floppy0.fileType
+  lineinfile:
+    path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
+    line: 'floppy0.fileType = "file"'
+  delegate_to: '{{ item.host }}'
+- name: Adding VMX Entry - floppy0.fileName
+  lineinfile:
+    path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
+    line: 'floppy0.fileName = "/vmfs/volumes/{{ item.datastore  }}/{{ item.host }}.flp"'
+  delegate_to: '{{ item.host }}'
