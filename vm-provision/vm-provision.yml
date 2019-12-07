@@ -1,13 +1,6 @@
 ---
 
 - hosts: localhost
-  vars:
-    esxi_login: &esxi_login
-      hostname: '{{ host_name }}'
-      username: '{{ host_username }}'
-      password: '{{ host_password }}'  
-      validate_certs: no 
-    
   tasks:
   
   # Validate that the required datastore(s) are created
