@@ -66,20 +66,20 @@
     path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
     line: 'floppy0.fileName = "Floppy drive 1"'
     state: absent
-  delegate_to: localhost
+  delegate_to: '{{ host_name }}'
 - name: Removing VMX Entry - floppy0.present = "FALSE"
   lineinfile:
     path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
     line: 'floppy0.present = "FALSE"'
     state: absent
-  delegate_to: localhost
+  delegate_to: '{{ host_name }}'
 - name: Adding VMX Entry - floppy0.fileType
   lineinfile:
     path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
     line: 'floppy0.fileType = "file"'
-  delegate_to: localhost
+  delegate_to: '{{ host_name }}'
 - name: Adding VMX Entry - floppy0.fileName
   lineinfile:
     path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
     line: 'floppy0.fileName = "/vmfs/volumes/{{ item.datastore  }}/{{ item.host }}.flp"'
-  delegate_to: localhost
+  delegate_to: '{{ host_name }}'
