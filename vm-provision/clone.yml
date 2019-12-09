@@ -73,6 +73,17 @@
     line: 'floppy0.present = "FALSE"'
     state: absent
   delegate_to: '{{ host_name }}'
+- name: Removing VMX Entry - floppy0.startConnected = "FALSE"
+  lineinfile:
+    path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
+    line: 'floppy0.startConnected = "FALSE"'
+    state: absent
+  delegate_to: '{{ host_name }}'
+- name: Adding VMX Entry - floppy0.startConnected = "TRUE"
+  lineinfile:
+    path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
+    line: 'floppy0.startConnected = "TRUE"'
+  delegate_to: '{{ host_name }}'
 - name: Adding VMX Entry - floppy0.fileType
   lineinfile:
     path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
