@@ -67,23 +67,23 @@
     line: 'floppy0.fileName = "Floppy drive 1"'
     state: absent
     validate_certs: no
-  delegate_to: '{{ item.host }}'
+  delegate_to: localhost
 - name: Removing VMX Entry - floppy0.present = "FALSE"
   lineinfile:
     path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
     line: 'floppy0.present = "FALSE"'
     state: absent
     validate_certs: no
-  delegate_to: '{{ item.host }}'
+  delegate_to: localhost
 - name: Adding VMX Entry - floppy0.fileType
   lineinfile:
     path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
     line: 'floppy0.fileType = "file"'
     validate_certs: no
-  delegate_to: '{{ item.host }}'
+  delegate_to: localhost
 - name: Adding VMX Entry - floppy0.fileName
   lineinfile:
     path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
     line: 'floppy0.fileName = "/vmfs/volumes/{{ item.datastore  }}/{{ item.host }}.flp"'
     validate_certs: no
-  delegate_to: '{{ item.host }}'
+  delegate_to: localhost
