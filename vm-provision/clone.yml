@@ -37,6 +37,7 @@
 
 - name: Wait for system to become reachable over WinRM
   wait_for_connection:
+    delay: 120
     timeout: 180
 
 - name: Enable ESX SSH (TSM-SSH)
