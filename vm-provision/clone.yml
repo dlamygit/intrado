@@ -40,17 +40,11 @@
     timeout: 180
 
 - name: Enable ESX SSH (TSM-SSH)
-  vmware_host_service_manager:
-    #esxi_hostname: '{{ host_name }}'
-    #hostname: '{{ host_name }}'
-    #username: '{{ host_username }}'
-    #password: '{{ host_password }}'
-    
+  vmware_host_service_manager:  
     hostname: '{{ vcenter_hostname }}'
     username: '{{ vcenter_username }}'
     password: '{{ vcenter_password }}'
     esxi_hostname: '{{ host_name }}'
-
     validate_certs: no
     service_name: TSM-SSH
     state: present
@@ -58,16 +52,10 @@
 
 - name: Enable ESX Shell (TSM)
   vmware_host_service_manager:
-    #esxi_hostname: '{{ host_name }}'
-    #hostname: '{{ host_name }}'
-    #username: '{{ host_username }}'
-    #password: '{{ host_password }}'
-
     hostname: '{{ vcenter_hostname }}'
     username: '{{ vcenter_username }}'
     password: '{{ vcenter_password }}'
     esxi_hostname: '{{ host_name }}'
-
     validate_certs: no
     service_name: TSM
     state: present
@@ -78,20 +66,24 @@
     path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
     line: 'floppy0.fileName = "Floppy drive 1"'
     state: absent
+    validate_certs: no
   delegate_to: '{{ item.host }}'
 - name: Removing VMX Entry - floppy0.present = "FALSE"
   lineinfile:
     path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
     line: 'floppy0.present = "FALSE"'
     state: absent
+    validate_certs: no
   delegate_to: '{{ item.host }}'
 - name: Adding VMX Entry - floppy0.fileType
   lineinfile:
     path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
     line: 'floppy0.fileType = "file"'
+    validate_certs: no
   delegate_to: '{{ item.host }}'
 - name: Adding VMX Entry - floppy0.fileName
   lineinfile:
     path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
     line: 'floppy0.fileName = "/vmfs/volumes/{{ item.datastore  }}/{{ item.host }}.flp"'
+    validate_certs: no
   delegate_to: '{{ item.host }}'
