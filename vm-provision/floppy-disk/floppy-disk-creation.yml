@@ -11,7 +11,7 @@
 - name: Remove flp file if it already exists
   file:
     path: /images/{{ customer_id|upper }}/{{ item.host }}.flp
-    state: absen
+    state: absent
 
 - name: Create a Floppy Disk
   shell: 'mkfs.msdos -C /images/{{ customer_id|upper }}/{{ item.host }}.flp 1440'
