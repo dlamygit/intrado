@@ -60,6 +60,8 @@
 # Loop through the elements in the processed template, to add direct children of the root element (PlatformData)
 - include_tasks: answer-file-base-element.yml
   loop: "{{ imp_secondary_template_platform_data_children }}"
+  loop_control:
+    loop_var: xml_item
 
 - name: Add a 'CertX509' element to the 'PlatformData' element
   xml:
@@ -70,6 +72,8 @@
 # Loop through the elements in the processed template, to add direct children of the CertX509 element
 - include_tasks: answer-file-base-element.yml
   loop: "{{ imp_secondary_template_certx509_children }}"
+  loop_control:
+    loop_var: xml_item
 
 - name: Create Directory to place XML files for the following playbook
   file:
