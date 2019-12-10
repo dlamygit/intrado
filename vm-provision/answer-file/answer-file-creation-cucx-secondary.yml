@@ -61,7 +61,7 @@
 - include_tasks: answer-file-base-element.yml
   loop: "{{ cucx_secondary_template_platform_data_children }}"
   loop_control:
-    loop_var: outer_item
+    loop_var: xml_item
 
 - name: Add a 'CertX509' element to the 'PlatformData' element
   xml:
@@ -73,7 +73,7 @@
 - include_tasks: answer-file-base-element.yml
   loop: "{{ cucx_secondary_template_certx509_children }}"
   loop_control:
-    loop_var: outer_item
+    loop_var: xml_item
 
 - name: Create Directory to place XML files for the following playbook
   file:
