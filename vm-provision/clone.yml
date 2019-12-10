@@ -10,7 +10,7 @@
     datacenter: "{{ item.datacenter_name }}"
     folder: "{{ item.full_folder_path }}"
     name: "{{ item.vm_name }}"
-    state: poweredon
+    state: "{{ item.vm_state }}"
     esxi_hostname: "{{ item.host }}"
     hardware:
       memory_mb: "{{ item.memory_mb | default(omit) }}"
@@ -22,23 +22,24 @@
     wait_for_ip_address: no
   delegate_to: localhost
   register: deployed_cloned_vm
-
-#- name: Power On the recently created/cloned VM
-#  vmware_guest:
-#    hostname: "{{ vcenter_hostname }}"
-#    username: "{{ vcenter_username }}"
-#    password: "{{ vcenter_password }}"
-#    datastore: "{{ item.datastore }}"
-#    validate_certs: no
-#    name: "{{ item.vm_name }}"
-#    state: poweredon
-#  delegate_to: localhost
-#  register: deployed_cloned_vm_poweron
-
-- name: Wait for system to become reachable over WinRM
-  wait_for_connection:
-    delay: 120
-    timeout: 180
+  
+- name: Change virtual machine's boot order and related parameters
+  vmware_guest_boot_manager:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    datastore: "{{ item.datastore }}"
+    validate_certs: no
+    datacenter: "{{ item.datacenter_name }}"
+    folder: "{{ item.full_folder_path }}"
+    name: "{{ item.vm_name }}"
+    boot_firmware: bios
+    boot_order:
+      - cdrom
+      - disk
+      - floppy
+  delegate_to: localhost
+  register: vm_boot_order
 
 - name: Enable ESX SSH (TSM-SSH)
   vmware_host_service_manager:  
@@ -62,36 +63,22 @@
     state: present
   delegate_to: localhost
 
-- name: Removing VMX Entry - floppy0.fileName = "Floppy drive 1"
-  lineinfile:
-    path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
-    line: 'floppy0.fileName = "Floppy drive 1"'
-    state: absent
-  delegate_to: '{{ host_name }}'
-- name: Removing VMX Entry - floppy0.present = "FALSE"
-  lineinfile:
-    path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
-    line: 'floppy0.present = "FALSE"'
-    state: absent
-  delegate_to: '{{ host_name }}'
-- name: Removing VMX Entry - floppy0.startConnected = "FALSE"
-  lineinfile:
-    path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
-    line: 'floppy0.startConnected = "FALSE"'
-    state: absent
-  delegate_to: '{{ host_name }}'
-- name: Adding VMX Entry - floppy0.startConnected = "TRUE"
-  lineinfile:
-    path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
-    line: 'floppy0.startConnected = "TRUE"'
-  delegate_to: '{{ host_name }}'
-- name: Adding VMX Entry - floppy0.fileType
-  lineinfile:
-    path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
-    line: 'floppy0.fileType = "file"'
-  delegate_to: '{{ host_name }}'
-- name: Adding VMX Entry - floppy0.fileName
-  lineinfile:
-    path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
-    line: 'floppy0.fileName = "/vmfs/volumes/{{ item.datastore  }}/{{ item.host }}.flp"'
-  delegate_to: '{{ host_name }}'
+
+
+- name: Power On the recently created/cloned VM
+  vmware_guest:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    datastore: "{{ item.datastore }}"
+    validate_certs: no
+    name: "{{ item.vm_name }}"
+    state: poweredon
+  delegate_to: localhost
+  register: deployed_cloned_vm_poweron
+
+#- name: Wait for system to become reachable over WinRM
+#  wait_for_connection:
+#    delay: 120
+#    timeout: 180
+
