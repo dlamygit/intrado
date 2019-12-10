@@ -8,6 +8,11 @@
   register: "flp_customer_folder"
   delegate_to: localhost
 
+- name: Remove flp file if it already exists
+  file:
+    path: /images/{{ customer_id|upper }}/{{ item.host }}.flp
+    state: absen
+
 - name: Create a Floppy Disk
   shell: 'mkfs.msdos -C /images/{{ customer_id|upper }}/{{ item.host }}.flp 1440'
   delegate_to: localhost
