@@ -1,8 +1,8 @@
 ---
 
-# Template of an Answer File for a Secondary Node for the CUCM (Cisco Unified Communications Manager)
+# Template of an Answer File for a Primary Node for the IM&P (Cisco Unified Communications Manager IM and Presence)
 
-cucm_secondary_template_platform_data_children:
+imp_primary_template_platform_data_children:
 - xpath: /PlatformData/ProductDeployment
   param_name_text: Deployment
   param_default_value: CallManager
@@ -108,11 +108,6 @@ cucm_secondary_template_platform_data_children:
   param_default_value: 'yes'
   param_value: "{{ item.ccm_first_node|default('') }}"
   file_path: '{{ answer_file_path }}'
-- xpath: /PlatformData/CallHomeDisable
-  param_name_text: This tag will be present when SCH and ACH is disabled by the user
-  param_default_value: 'Disable'
-  param_value: "{{ item.call_home_disable|default('') }}"
-  file_path: '{{ answer_file_path }}'
 - xpath: /PlatformData/SftpPwCrypt
   param_name_text: Security PW for this node
   param_default_value: 'password'
@@ -133,41 +128,10 @@ cucm_secondary_template_platform_data_children:
   param_default_value: 'password'
   param_value: "{{ encrypted_security_password.stdout_lines[0]|default('') }}"
   file_path: '{{ answer_file_path }}'
-- xpath: /PlatformData/CcmDBHost
-  param_name_text: Host Name for DataBase
-  param_default_value: 'none'
-  # Primary Host's host_name
-  param_value: "{{ item.primary_host_name|default('') }}"
-  file_path: '{{ answer_file_path }}'
-- xpath: /PlatformData/CcmDBIpAddr
-  param_name_text: Host IP Addr for DataBase
-  param_default_value: 'none'
-  # Primary Host's host_ip
-  param_value: "{{ item.primary_host_ip|default('') }}"
-  file_path: '{{ answer_file_path }}'
-- xpath: /PlatformData/IPSecMasterHost
-  param_name_text: Host name for IPSec
-  param_default_value: 'none'
-  # Primary Host's host_name
-  param_value: "{{ item.primary_host_name|default('') }}"
-  file_path: '{{ answer_file_path }}'
-- xpath: /PlatformData/IPSecMasterIpAddr
-  param_name_text: Host IP Addr for IPSec
-  param_default_value: 'none'
-  # Primary Host's host_ip
-  param_value: "{{ item.primary_host_ip|default('') }}"
-  file_path: '{{ answer_file_path }}'
-- xpath: /PlatformData/NTPServerHost
-  param_name_text: Cluster NTP Server Host name
-  param_default_value: 'none'
-  # Primary Host's host_name
-  param_value: "{{ item.primary_host_name|default('') }}"
-  file_path: '{{ answer_file_path }}'
-- xpath: /PlatformData/NTPServerIpAddr
-  param_name_text: Cluster NTP Server Host IP Addr
-  param_default_value: 'none'
-  # Primary Host's host_ip
-  param_value: "{{ item.primary_host_ip|default('') }}"
+- xpath: /PlatformData/PostInstallAutoRegister
+  param_name_text: Number of Hours to Enable Auto Register Post-Install on Pub
+  param_default_value: '24'
+  param_value: "{{ item.auto_register_primary|default('') }}"
   file_path: '{{ answer_file_path }}'
 - xpath: /PlatformData/ApplUserUsername
   param_name_text: Application User Username
@@ -180,7 +144,34 @@ cucm_secondary_template_platform_data_children:
   param_value: "{{ encrypted_app_user_password.stdout_lines[0]|default('') }}"
   file_path: '{{ answer_file_path }}'
 
-cucm_secondary_template_certx509_children:
+imp_primary_template_ntpservers:
+- xpath: /PlatformData/NtpServer
+  param_name_text: Address Range for NTP server
+  param_default_value: 'none'
+  param_value: "{{ item.ntp_server_1|default('') }}"
+  file_path: '{{ answer_file_path }}'
+- xpath: /PlatformData/NtpServer
+  param_name_text: Address Range for NTP server
+  param_default_value: 'none'
+  param_value: "{{ item.ntp_server_2|default('') }}"
+  file_path: '{{ answer_file_path }}'
+- xpath: /PlatformData/NtpServer
+  param_name_text: Address Range for NTP server
+  param_default_value: 'none'
+  param_value: "{{ item.ntp_server_3|default('') }}"
+  file_path: '{{ answer_file_path }}'
+- xpath: /PlatformData/NtpServer
+  param_name_text: Address Range for NTP server
+  param_default_value: 'none'
+  param_value: "{{ item.ntp_server_4|default('') }}"
+  file_path: '{{ answer_file_path }}'
+- xpath: /PlatformData/NtpServer
+  param_name_text: Address Range for NTP server
+  param_default_value: 'none'
+  param_value: "{{ item.ntp_server_5|default('') }}"
+  file_path: '{{ answer_file_path }}'
+
+imp_primary_template_certx509_children:
 - xpath: /PlatformData/CertX509/Org
   param_name_text: Certification Signing Request Organization
   param_default_value: none

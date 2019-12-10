@@ -1,15 +1,15 @@
 ---
 
-# Playbook to create the Answer File for a Secondary Node for the CUCM (Cisco Unified Communications Manager)
+# Playbook to create the Answer File for a Secondary Node for the CUCx (Cisco Unity Connection)
 
 - name: setting answer_file_path variable
   set_fact:
-    answer_file_path: "temp/{{ customer_id|upper }}/CUCM/{{ item.host_name|upper }}.xml"
+    answer_file_path: "temp/{{ customer_id|upper }}/CUCx/{{ item.host_name|upper }}.xml"
 
-- name: include answer-file-template-cucm-secondary
-  include_vars: answer-file-template-cucm-secondary.yml
+- name: include answer-file-template-cucx-secondary
+  include_vars: answer-file-template-cucx-secondary.yml
 
-- name: Create Directory to place CUCM platformConfig.xml
+- name: Create Directory to place CUCx platformConfig.xml
   file:
     path: 'temp/{{ customer_id|upper }}'
     state: directory
@@ -19,7 +19,7 @@
 
 - name: Create Directory to place the XML File
   file:
-    path: 'temp/{{ customer_id|upper }}/CUCM'
+    path: 'temp/{{ customer_id|upper }}/CUCx'
     state: directory
     mode: 0777
   register: "answer_files_folder"
@@ -32,22 +32,22 @@
   file:
     path: '{{ answer_file_path }}'
     state: absent
-  register: "cucm_primary_answer_file"
+  register: "cucx_secondary_answer_file"
   delegate_to: localhost
 
-- name: Create CUCM platformConfig.xml
+- name: Create CUCx platformConfig.xml
   file:
     path: '{{ answer_file_path }}'
     state: touch
     mode: 0777
-  register: "cucm_primary_answer_file"
+  register: "cucx_secondary_answer_file"
   delegate_to: localhost
 
 - name: Add initial XML line
   lineinfile:
     path: '{{ answer_file_path }}'
     line: '<?xml version="1.0"?><PlatformData></PlatformData>'
-  register: "cucm_initial_line_primary_answer_file"
+  register: "cucx_initial_line_secondary_answer_file"
   delegate_to: localhost
 
 - name: Add a 'Version' element to the 'PlatformData' element
@@ -59,7 +59,7 @@
 
 # Loop through the elements in the processed template, to add direct children of the root element (PlatformData)
 - include_tasks: answer-file-base-element.yml
-  loop: "{{ cucm_secondary_template_platform_data_children }}"
+  loop: "{{ cucx_secondary_template_platform_data_children }}"
 
 - name: Add a 'CertX509' element to the 'PlatformData' element
   xml:
@@ -69,7 +69,7 @@
 
 # Loop through the elements in the processed template, to add direct children of the CertX509 element
 - include_tasks: answer-file-base-element.yml
-  loop: "{{ cucm_secondary_template_certx509_children }}"
+  loop: "{{ cucx_secondary_template_certx509_children }}"
 
 - name: Create Directory to place XML files for the following playbook
   file:

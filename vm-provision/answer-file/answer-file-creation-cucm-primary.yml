@@ -17,7 +17,7 @@
   register: "customer_folder"
   delegate_to: localhost
 
-- name: Create Directory to place CUCM platformConfig.xml
+- name: Create Directory to place the XML File
   file:
     path: 'temp/{{ customer_id|upper }}/CUCM'
     state: directory
@@ -28,7 +28,7 @@
 # Encrypt Passwords
 - include_tasks: answer-file-passwords.yml
 
-- name: Delete CUCM platformConfig.xml if exists
+- name: Delete the XML File if it already exists
   file:
     path: '{{ answer_file_path }}'
     state: absent
@@ -61,6 +61,11 @@
 - include_tasks: answer-file-base-element.yml
   loop: "{{ cucm_primary_template_platform_data_children }}"
 
+# Loop through the NTP Server elements in the processed template
+- include_tasks: answer-file-ntp-servers.yml
+  loop: "{{ cucm_primary_template_ntpservers }}"
+  when: item.param_value is defined and item.param_value != ""
+
 - name: Add a 'CertX509' element to the 'PlatformData' element
   xml:
     path: '{{ answer_file_path }}'
@@ -71,15 +76,21 @@
 - include_tasks: answer-file-base-element.yml
   loop: "{{ cucm_primary_template_certx509_children }}"
 
+- name: Create Directory to place XML files for the following playbook
+  file:
+    path: '/images/{{ customer_id|upper }}'
+    state: directory
+    mode: 0777
+  register: "customer_folder_flp"
+  delegate_to: localhost
+
 - name: Copy XML file to common the folder with the following playbook
   copy:
     src: '{{ answer_file_path }}'
-    dest: '/images/{{ item.host_name|upper }}.xml'
+    dest: '/images/{{ customer_id|upper }}/{{ item.host_name|upper }}.xml'
     force: no
-  when: no
 
 - name: Recursively remove Client's directory
   file:
     path: 'temp/{{ customer_id|upper }}'
     state: absent
-  when: no

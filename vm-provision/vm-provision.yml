@@ -6,8 +6,7 @@
   # Validate that the required datastore(s) are created
   - include_tasks: datastore-validation.yml
     loop: "{{ clones_parameters }}"
-    when: no
-      # folders_parameters is defined
+    when: folders_parameters is defined
   
   # Create Sub-Folders to place the new upcoming VMs
   - include_tasks: folders/folders-creation.yml
@@ -17,10 +16,6 @@
   # Create Answer Files
   - include_tasks: answer-file/answer-file-manager.yml
     when: clones_parameters is defined
-  
-  - fail:
-      msg: failing
-    when: yes
 
   # Create Floppy Disks
   - include_tasks: floppy-disk/floppy-disk-creation.yml

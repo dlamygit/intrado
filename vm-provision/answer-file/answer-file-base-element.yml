@@ -17,8 +17,9 @@
   xml:
     path: '{{ item.file_path }}'
     xpath: '{{ item.xpath }}/ParamDefaultValue'
-    value: '{{ item.param_default_value }}'
+    value: '{{ item.param_default_value|default("") }}'
     pretty_print: yes
+  when: item.param_default_value is defined
 
 - name: Add a new sub-element
   xml:
