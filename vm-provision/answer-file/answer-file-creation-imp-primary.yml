@@ -64,7 +64,9 @@
 # Loop through the NTP Server elements in the processed template
 - include_tasks: answer-file-ntp-servers.yml
   loop: "{{ imp_primary_template_ntpservers }}"
-  when: item.param_value is defined and item.param_value != ""
+  when: ntpserver_item.param_value is defined and ntpserver_item.param_value != ""
+  loop_control:
+    loop_var: ntpserver_item
 
 - name: Add a 'CertX509' element to the 'PlatformData' element
   xml:

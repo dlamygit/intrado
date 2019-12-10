@@ -2,16 +2,16 @@
 
 - name: Add child element
   xml:
-    path: "{{ item.file_path }}"
+    path: "{{ ntpserver_item.file_path }}"
     xpath: /PlatformData
     add_children:
       - NtpServer: ''
 
 - name: Add child element
   xml:
-    path: "{{ item.file_path }}"
+    path: "{{ ntpserver_item.file_path }}"
     xpath: /PlatformData/NtpServer
     add_children:
-      - ParamNameText: "{{ item.param_name_text }}"
-      - ParamDefaultValue: "{{ item.param_default_value }}"
-      - ParamValue: "{{ item.param_value }}"
+      - ParamNameText: "{{ ntpserver_item.param_name_text }}"
+      - ParamDefaultValue: "{{ ntpserver_item.param_default_value }}"
+      - ParamValue: "{{ ntpserver_item.param_value }}"
