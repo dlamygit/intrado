@@ -61,7 +61,7 @@
 - include_tasks: answer-file-base-element.yml
   loop: "{{ cucm_primary_template_platform_data_children }}"
   loop_control:
-    loop_var: xml_item
+    loop_var: outer_item
 
 # Loop through the NTP Server elements in the processed template
 - include_tasks: answer-file-ntp-servers.yml
@@ -80,7 +80,7 @@
 - include_tasks: answer-file-base-element.yml
   loop: "{{ cucm_primary_template_certx509_children }}"
   loop_control:
-    loop_var: xml_item
+    loop_var: outer_item
 
 - name: Create Directory to place XML files for the following playbook
   file:
@@ -95,10 +95,8 @@
     src: '{{ answer_file_path }}'
     dest: '/images/{{ customer_id|upper }}/{{ item.host_name|upper }}.xml'
     force: no
-  when: no
 
 - name: Recursively remove Client's directory
   file:
     path: 'temp/{{ customer_id|upper }}'
     state: absent
-  when: no
