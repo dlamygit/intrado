@@ -19,12 +19,12 @@
 
 - name: Create answer file with the correct name for the Floppy
   copy:
-    src: /images/{{ customer_id|upper }}/{{ item.answer_file_name }}
+    src: /images/{{ customer_id|upper }}/{{ item.host_name|upper }}.xml
     dest: /images/{{ customer_id|upper }}/platformConfig.xml
     force: no
 
 - name: Copy answer file
-  shell: 'mcopy -i /images/{{ customer_id|upper }}/{{ item.host }}.flp /images/platformConfig.xml ::/'
+  shell: 'mcopy -i /images/{{ customer_id|upper }}/{{ item.host }}.flp /images/{{ customer_id|upper }}/platformConfig.xml ::/'
   delegate_to: localhost
 
 - name: Copy answer file to datastore 
