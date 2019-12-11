@@ -5,30 +5,30 @@
 
 # Create Answer Files for CUCM Primary Nodes
 - include_tasks: answer-file-creation-cucm-primary.yml
-  loop: "{{ clone_item.answer_file_config }}"
-  when: item.product_type == 'cucm' and item.node_type == 'primary'
+  # loop: "{{ clone_item.answer_file_config }}"
+  when: clone_item.product_type == 'cucm' and clone_item.node_type == 'primary'
 
 # Create Answer Files for CUCM Secondary Nodes
 - include_tasks: answer-file-creation-cucm-secondary.yml
-  loop: "{{ clone_item.answer_files_config }}"
-  when: item.product_type == 'cucm' and item.node_type == 'secondary'
+  # loop: "{{ clone_item.answer_files_config }}"
+  when: clone_item.product_type == 'cucm' and clone_item.node_type == 'secondary'
 
 # Create Answer Files for CUCX Primary Nodes
 - include_tasks: answer-file-creation-cucx-primary.yml
-  loop: "{{ clone_item.answer_files_config }}"
-  when: item.product_type == 'cucx' and item.node_type == 'primary'
+  # loop: "{{ clone_item.answer_files_config }}"
+  when: clone_item.product_type == 'cucx' and clone_item.node_type == 'primary'
 
 # Create Answer Files for CUCX Secondary Nodes
 - include_tasks: answer-file-creation-cucx-secondary.yml
-  loop: "{{ clone_item.answer_files_config }}"
-  when: item.product_type == 'cucx' and item.node_type == 'secondary'
+  # loop: "{{ clone_item.answer_files_config }}"
+  when: clone_item.product_type == 'cucx' and clone_item.node_type == 'secondary'
 
 # Create Answer Files for IM&P Primary Nodes
 - include_tasks: answer-file-creation-imp-primary.yml
-  loop: "{{ clone_item.answer_files_config }}"
-  when: item.product_type == 'im&p' and item.node_type == 'primary'
+  # loop: "{{ clone_item.answer_files_config }}"
+  when: clone_item.product_type == 'im&p' and clone_item.node_type == 'primary'
 
 # Create Answer Files for IM&P Secondary Nodes
 - include_tasks: answer-file-creation-imp-secondary.yml
-  loop: "{{ clone_item.answer_files_config }}"
-  when: item.product_type == 'im&p' and item.node_type == 'secondary'
+  # loop: "{{ clone_item.answer_files_config }}"
+  when: clone_item.product_type == 'im&p' and clone_item.node_type == 'secondary'
