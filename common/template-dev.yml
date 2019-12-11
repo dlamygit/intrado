@@ -25,11 +25,9 @@ folders_parameters:
 - datacenter_name: 'Datacenters'
   sub_folder_name: '{{customer_id}} - {{customer_name}}'
   parent_folder_name: 'Atlanta & Suwanee - Customers'
-  folder_state: 'present'
 - datacenter_name: 'Datacenters'
   sub_folder_name: '{{customer_id}} - {{customer_name}}'
   parent_folder_name: 'Denver - Customers'
-  folder_state: 'present'
 
 # Clones Configuration
 clones_parameters:

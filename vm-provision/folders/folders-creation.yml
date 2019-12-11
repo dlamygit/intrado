@@ -8,7 +8,7 @@
     datacenter_name: "{{ item.datacenter_name }}"
     folder_name: "{{ item.sub_folder_name }}"
     parent_folder: "{{ item.parent_folder_name }}"
-    state: "{{ item.folder_state }}"
+    state: "present"
     validate_certs: no
   register: "sub_folder_creation_result"
   delegate_to: localhost
