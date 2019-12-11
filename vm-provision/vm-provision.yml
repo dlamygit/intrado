@@ -15,7 +15,10 @@
   
   # Create Answer Files
   - include_tasks: answer-file/answer-file-manager.yml
+    loop: "{{ clones_parameters }}"
     when: clones_parameters is defined
+    loop_control:
+      loop_var: clone_item
 
   # Create Floppy Disks
   - include_tasks: floppy-disk/floppy-disk-creation.yml

@@ -19,7 +19,7 @@
 
 - name: Create answer file with the correct name for the Floppy
   copy:
-    src: /images/{{ customer_id|upper }}/{{ item.vm_name|upper }}.xml
+    src: /images/{{ customer_id|upper }}/{{ item.answer_file_config.host_name|upper }}.xml
     dest: /images/{{ customer_id|upper }}/platformConfig.xml
     force: no
 
