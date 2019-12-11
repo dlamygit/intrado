@@ -15,13 +15,27 @@
     hardware:
       memory_mb: "{{ item.memory_mb | default(omit) }}"
       num_cpus: "{{ item.num_cpus | default(omit) }}"
-    networks:
-    - name: "Network adapter 1"
-      mac: "00:50:56:97:e4:b7"
     template: "{{ item.vm_template_name }}"
     wait_for_ip_address: no
   delegate_to: localhost
   register: deployed_cloned_vm
+
+- name: Change network adapter settings of virtual machine
+  vmware_guest_network:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    datastore: "{{ item.datastore }}"
+    validate_certs: no
+    datacenter: "{{ item.datacenter_name }}"
+    name: "{{ item.vm_name }}"
+    gather_network_info: false
+    networks:
+      - name: "VM Network"
+        state: new
+        manual_mac: "00:50:56:97:e4:b7"
+  delegate_to: localhost
+  register: network_info
 
 - name: Change virtual machine's boot order and related parameters
   vmware_guest_boot_manager:
