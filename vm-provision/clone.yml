@@ -106,7 +106,7 @@
 - name: Adding VMX Entry - floppy0.fileName
   lineinfile:
     path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
-    line: 'floppy0.fileName = "/vmfs/volumes/{{ item.datastore  }}/{{ item.host }}.flp"'
+    line: 'floppy0.fileName = "/vmfs/volumes/{{ item.datastore  }}/{{ item.answer_file_config.host_name|upper }}.flp"'
   become: yes
   become_user: root
   delegate_to: '{{ host_name }}'
