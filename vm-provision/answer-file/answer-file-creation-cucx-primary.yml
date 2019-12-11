@@ -4,7 +4,7 @@
 
 - name: setting answer_file_path variable
   set_fact:
-    answer_file_path: "temp/{{ customer_id|upper }}/CUCx/{{ clone_item.host_name|upper }}.xml"
+    answer_file_path: "temp/{{ customer_id|upper }}/CUCx/{{ clone_item.answer_file_config.host_name|upper }}.xml"
 
 - name: include answer-file-template-cucx-primary
   include_vars: answer-file-template-cucx-primary.yml
@@ -93,7 +93,7 @@
 - name: Copy XML file to common the folder with the following playbook
   copy:
     src: '{{ answer_file_path }}'
-    dest: '/images/{{ customer_id|upper }}/{{ clone_item.host_name|upper }}.xml'
+    dest: '/images/{{ customer_id|upper }}/{{ clone_item.answer_file_config.host_name|upper }}.xml'
     force: no
 
 - name: Recursively remove Client's directory
