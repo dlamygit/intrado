@@ -25,7 +25,6 @@
     hostname: "{{ vcenter_hostname }}"
     username: "{{ vcenter_username }}"
     password: "{{ vcenter_password }}"
-    datastore: "{{ item.datastore }}"
     validate_certs: no
     datacenter: "{{ item.datacenter_name }}"
     name: "{{ item.vm_name }}"
