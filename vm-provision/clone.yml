@@ -32,7 +32,7 @@
     networks:
       - name: "VM Network"
         state: new
-        manual_mac: "00:50:56:97:e4:b7"
+        manual_mac: "00:50:56:97:e4:b8"
         state: present
         label: "Network adapter 1"
         connected: true
