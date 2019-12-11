@@ -10,11 +10,11 @@
 
 - name: Remove flp file if it already exists
   file:
-    path: /images/{{ customer_id|upper }}/{{ item.vm_name }}.flp
+    path: /images/{{ customer_id|upper }}/{{ item.answer_file_config.host_name|upper }}.flp
     state: absent
 
 - name: Create a Floppy Disk
-  shell: 'mkfs.msdos -C /images/{{ customer_id|upper }}/{{ item.vm_name }}.flp 1440'
+  shell: 'mkfs.msdos -C /images/{{ customer_id|upper }}/{{ item.answer_file_config.host_name|upper }}.flp 1440'
   delegate_to: localhost
 
 - name: Create answer file with the correct name for the Floppy
@@ -24,7 +24,7 @@
     force: no
 
 - name: Copy answer file
-  shell: 'mcopy -i /images/{{ customer_id|upper }}/{{ item.vm_name }}.flp /images/{{ customer_id|upper }}/platformConfig.xml ::/'
+  shell: 'mcopy -i /images/{{ customer_id|upper }}/{{ item.answer_file_config.host_name|upper }}.flp /images/{{ customer_id|upper }}/platformConfig.xml ::/'
   delegate_to: localhost
 
 - name: Copy answer file to datastore 
@@ -33,10 +33,10 @@
     username: '{{ vcenter_username }}'
     password: '{{ vcenter_password }}'
     validate_certs: no
-    src: '/images/{{ customer_id|upper }}/{{ item.vm_name }}.flp'
+    src: '/images/{{ customer_id|upper }}/{{ item.answer_file_config.host_name|upper }}.flp'
     datacenter: '{{ item.datacenter_name }}'
     datastore: '{{ datastore_name }}'
-    path: '{{ item.vm_name }}.flp'
+    path: '{{ item.answer_file_config.host_name|upper }}.flp'
   delegate_to: localhost
 
 - name: Remove answer file previously created from server
@@ -46,5 +46,5 @@
 
 - name: Remove Floppy image from server
   file:
-    path: /images/{{ customer_id|upper }}/{{ item.vm_name }}.flp
+    path: /images/{{ customer_id|upper }}/{{ item.answer_file_config.host_name|upper }}.flp
     state: absent
