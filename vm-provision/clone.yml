@@ -33,6 +33,8 @@
       - name: "VM Network"
         state: new
         manual_mac: "00:50:56:97:e4:b7"
+        state: present
+        label: "Network adapter 1"
   delegate_to: localhost
   register: network_info
 
