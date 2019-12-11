@@ -65,6 +65,8 @@
     path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
     line: 'floppy0.fileName = "Floppy drive 1"'
     state: absent
+  become: yes
+  become_user: root
   delegate_to: '{{ host_name }}'
 
 - name: Removing VMX Entry - floppy0.present = "FALSE"
@@ -72,6 +74,8 @@
     path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
     line: 'floppy0.present = "FALSE"'
     state: absent
+  become: yes
+  become_user: root
   delegate_to: '{{ host_name }}'
 
 - name: Removing VMX Entry - floppy0.startConnected = "FALSE"
@@ -79,24 +83,32 @@
     path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
     line: 'floppy0.startConnected = "FALSE"'
     state: absent
+  become: yes
+  become_user: root
   delegate_to: '{{ host_name }}'
 
 - name: Adding VMX Entry - floppy0.startConnected = "TRUE"
   lineinfile:
     path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
     line: 'floppy0.startConnected = "TRUE"'
+  become: yes
+  become_user: root
   delegate_to: '{{ host_name }}'
 
 - name: Adding VMX Entry - floppy0.fileType = "file"
   lineinfile:
     path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
     line: 'floppy0.fileType = "file"'
+  become: yes
+  become_user: root
   delegate_to: '{{ host_name }}'
 
 - name: Adding VMX Entry - floppy0.fileName
   lineinfile:
     path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
     line: 'floppy0.fileName = "/vmfs/volumes/{{ item.datastore  }}/{{ item.host }}.flp"'
+  become: yes
+  become_user: root
   delegate_to: '{{ host_name }}'
 
 - name: Power On the recently created/cloned VM
