@@ -32,7 +32,8 @@
     networks:
       - manual_mac: "00:50:56:97:e4:b8"
         state: present
-        label: "Network adapter 1"
+        #label: "Network adapter 1"
+        device_type: "VMXNET 3"
         connected: true
   delegate_to: localhost
   register: network_info
