@@ -1,17 +1,30 @@
 ---
 
+- name: Create Directory to place CUCM platformConfig.xml
+  file:
+    path: '/images/{{ customer_id|upper }}'
+    state: directory
+    mode: 0777
+  register: "flp_customer_folder"
+  delegate_to: localhost
+
+- name: Remove flp file if it already exists
+  file:
+    path: /images/{{ customer_id|upper }}/{{ item.answer_file_config.host_name|upper }}.flp
+    state: absent
+
 - name: Create a Floppy Disk
-  shell: 'mkfs.msdos -C /images/{{ item.host }}.flp 1440'
+  shell: 'mkfs.msdos -C /images/{{ customer_id|upper }}/{{ item.answer_file_config.host_name|upper }}.flp 1440'
   delegate_to: localhost
 
 - name: Create answer file with the correct name for the Floppy
   copy:
-    src: /images/{{ item.answer_file_name }}
-    dest: /images/platformConfig.xml
+    src: /images/{{ customer_id|upper }}/{{ item.answer_file_config.host_name|upper }}.xml
+    dest: /images/{{ customer_id|upper }}/platformConfig.xml
     force: no
 
 - name: Copy answer file
-  shell: 'mcopy -i /images/{{ item.host }}.flp /images/platformConfig.xml ::/'
+  shell: 'mcopy -i /images/{{ customer_id|upper }}/{{ item.answer_file_config.host_name|upper }}.flp /images/{{ customer_id|upper }}/platformConfig.xml ::/'
   delegate_to: localhost
 
 - name: Copy answer file to datastore 
@@ -20,18 +33,18 @@
     username: '{{ vcenter_username }}'
     password: '{{ vcenter_password }}'
     validate_certs: no
-    src: '/images/{{ item.host }}.flp'
+    src: '/images/{{ customer_id|upper }}/{{ item.answer_file_config.host_name|upper }}.flp'
     datacenter: '{{ item.datacenter_name }}'
     datastore: '{{ datastore_name }}'
-    path: '{{ item.host }}.flp'
+    path: '{{ item.answer_file_config.host_name|upper }}.flp'
   delegate_to: localhost
 
 - name: Remove answer file previously created from server
   file:
-    path: /images/platformConfig.xml
+    path: /images/{{ customer_id|upper }}/platformConfig.xml
     state: absent
 
 - name: Remove Floppy image from server
   file:
-    path: /images/{{ item.host }}.flp
+    path: /images/{{ customer_id|upper }}/{{ item.answer_file_config.host_name|upper }}.flp
     state: absent
