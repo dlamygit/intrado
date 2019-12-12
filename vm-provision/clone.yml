@@ -15,6 +15,12 @@
     hardware:
       memory_mb: "{{ item.memory_mb | default(omit) }}"
       num_cpus: "{{ item.num_cpus | default(omit) }}"
+    networks:
+      - name: "VM Network"
+        manual_mac: "00:50:56:97:e4:b8"
+        state: present
+        label: "Network adapter 1"
+        connected: true
     template: "{{ item.vm_template_name }}"
     wait_for_ip_address: no
   delegate_to: localhost
