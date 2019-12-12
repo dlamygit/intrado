@@ -33,8 +33,8 @@
       - manual_mac: "00:50:56:97:e4:b8"
         state: present
         #label: "Network adapter 1"
-        name: "VM Network"
-        device_type: "vmxnet3"
+        #name: "VM Network"
+        #device_type: "vmxnet3"
         connected: true
         start_connected: true
   delegate_to: localhost
