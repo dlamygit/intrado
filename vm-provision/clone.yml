@@ -15,14 +15,18 @@
     hardware:
       memory_mb: "{{ item.memory_mb | default(omit) }}"
       num_cpus: "{{ item.num_cpus | default(omit) }}"
+    
+    # Network configuration is only for the lab
     networks:
       - name: "VM Network"
         mac: "{{ item.vm_mac }}"
+
     template: "{{ item.vm_template_name }}"
     wait_for_ip_address: no
   delegate_to: localhost
   register: deployed_cloned_vm
 
+# Network configuration is only for the lab
 - name: Change network adapter settings of virtual machine
   vmware_guest_network:
     hostname: "{{ vcenter_hostname }}"
@@ -41,15 +45,6 @@
   delegate_to: localhost
   register: network_info
 
-- name: Gather info about virtual machine's boot order and related parameters
-  vmware_guest_boot_info:
-    hostname: "{{ vcenter_hostname }}"
-    username: "{{ vcenter_username }}"
-    password: "{{ vcenter_password }}"
-    validate_certs: no
-    name: "{{ item.vm_name }}"
-  register: vm_boot_order_info
-
 - name: Change virtual machine's boot order and related parameters
   vmware_guest_boot_manager:
     hostname: "{{ vcenter_hostname }}"
@@ -64,36 +59,6 @@
       - floppy
   delegate_to: localhost
   register: vm_boot_order
-
-- name: Gather info about virtual machine's boot order and related parameters
-  vmware_guest_boot_info:
-    hostname: "{{ vcenter_hostname }}"
-    username: "{{ vcenter_username }}"
-    password: "{{ vcenter_password }}"
-    validate_certs: no
-    name: "{{ item.vm_name }}"
-  register: vm_boot_order_info
-
-- name: Change virtual machine's boot order and related parameters
-  vmware_guest_boot_manager:
-    hostname: "{{ vcenter_hostname }}"
-    username: "{{ vcenter_username }}"
-    password: "{{ vcenter_password }}"
-    validate_certs: no
-    name: "{{ item.vm_name }}"
-    boot_firmware: bios
-    boot_order: []
-  delegate_to: localhost
-  register: vm_boot_order
-
-- name: Gather info about virtual machine's boot order and related parameters
-  vmware_guest_boot_info:
-    hostname: "{{ vcenter_hostname }}"
-    username: "{{ vcenter_username }}"
-    password: "{{ vcenter_password }}"
-    validate_certs: no
-    name: "{{ item.vm_name }}"
-  register: vm_boot_order_info
 
 - name: Enable ESX SSH (TSM-SSH)
   vmware_host_service_manager:  
