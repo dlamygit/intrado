@@ -41,6 +41,15 @@
   delegate_to: localhost
   register: network_info
 
+- name: Gather info about virtual machine's boot order and related parameters
+  vmware_guest_boot_info:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    validate_certs: no
+    name: "{{ item.vm_name }}"
+  register: vm_boot_order_info
+
 - name: Change virtual machine's boot order and related parameters
   vmware_guest_boot_manager:
     hostname: "{{ vcenter_hostname }}"
