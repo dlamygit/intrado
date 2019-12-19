@@ -36,7 +36,7 @@
     src: '/images/{{ customer_id|upper }}/{{ item.answer_file_config.host_name|upper }}.flp'
     datacenter: '{{ item.datacenter_name }}'
     datastore: '{{ datastore_name }}'
-    path: '/vmfs/volumes/{{ item.datastore }}/{{ item.answer_file_config.host_name|upper }}.flp'
+    path: '{{ item.answer_file_config.host_name|upper }}.flp'
   delegate_to: localhost
 
 - name: Remove answer file previously created from server
