@@ -144,7 +144,7 @@
     state: poweredon
   delegate_to: localhost
   register: deployed_cloned_vm_poweron
-  when: '{{ item.node_type}} == "primary"'
+  when: '{{ item.answer_file_config.node_type}} == "primary"'
 
 
 #- name: Run utils import config on the Primary node
@@ -182,5 +182,5 @@
     state: poweredon
   delegate_to: localhost
   register: deployed_cloned_vm_poweron
-  when: '{{ item.node_type}} == "secondary"'
+  when: '{{ item.answer_file_config.node_type}} == "secondary"'
 
