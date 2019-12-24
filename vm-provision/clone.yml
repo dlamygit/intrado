@@ -144,7 +144,7 @@
     state: poweredon
   delegate_to: localhost
   register: deployed_cloned_vm_poweron
-  when: "{{ item.answer_file_config.node_type}} == 'primary'"
+#  when: "{{ item.answer_file_config.node_type}} == 'primary'"
 
 
 #- name: Run utils import config on the Primary node
@@ -171,16 +171,16 @@
 #  delegate_to: localhost
 #  when: "{{ item.node_type}}" == "primary"
 
-- name: Power On the Secondary node
-  vmware_guest:
-    hostname: "{{ vcenter_hostname }}"
-    username: "{{ vcenter_username }}"
-    password: "{{ vcenter_password }}"
-    datastore: "{{ item.datastore }}"
-    validate_certs: no
-    name: "{{ item.vm_name }}"
-    state: poweredon
-  delegate_to: localhost
-  register: deployed_cloned_vm_poweron
-  when: '{{ item.answer_file_config.node_type}} == "secondary"'
+#- name: Power On the Secondary node
+#  vmware_guest:
+#    hostname: "{{ vcenter_hostname }}"
+#    username: "{{ vcenter_username }}"
+#    password: "{{ vcenter_password }}"
+#    datastore: "{{ item.datastore }}"
+#    validate_certs: no
+#    name: "{{ item.vm_name }}"
+#    state: poweredon
+#  delegate_to: localhost
+#  register: deployed_cloned_vm_poweron
+#  when: '{{ item.answer_file_config.node_type}} == "secondary"'
 
