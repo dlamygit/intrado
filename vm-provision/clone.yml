@@ -133,7 +133,7 @@
   become_user: root
   delegate_to: '{{ host_name }}'
 
-- name: Power On the recently created/cloned VM
+- name: Power On the Primary node
   vmware_guest:
     hostname: "{{ vcenter_hostname }}"
     username: "{{ vcenter_username }}"
@@ -144,11 +144,42 @@
     state: poweredon
   delegate_to: localhost
   register: deployed_cloned_vm_poweron
-
-#- name: Wait for system to become reachable over WinRM
-#  wait_for_connection:
-#    delay: 120
-#    timeout: 180
+  when: "{{ item.node_type}}" == "primary"
 
 
+#- name: Run utils import config on the Primary node
+#  vmware_host_service_manager:
+#    hostname: '{{ vcenter_hostname }}'
+#    username: '{{ vcenter_username }}'
+#    password: '{{ vcenter_password }}'
+#    esxi_hostname: '{{ host_name }}'
+#    validate_certs: no
+#    service_name: TSM
+#    state: present
+#  delegate_to: localhost
+#  when: "{{ item.node_type}}" == "primary"
 
+#- name: Add subscriber servers
+#  vmware_host_service_manager:
+#    hostname: '{{ vcenter_hostname }}'
+#    username: '{{ vcenter_username }}'
+#    password: '{{ vcenter_password }}'
+#    esxi_hostname: '{{ host_name }}'
+#    validate_certs: no
+#    service_name: TSM
+#    state: present
+#  delegate_to: localhost
+#  when: "{{ item.node_type}}" == "primary"
+
+- name: Power On the Secondary node
+  vmware_guest:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    datastore: "{{ item.datastore }}"
+    validate_certs: no
+    name: "{{ item.vm_name }}"
+    state: poweredon
+  delegate_to: localhost
+  register: deployed_cloned_vm_poweron
+  when: "{{ item.node_type}}" == "secondary"
