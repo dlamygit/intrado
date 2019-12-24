@@ -8,7 +8,7 @@ vcenter_username: 'administrator@vsphere.local'
 vcenter_password: 'Root718293?'
 
 # Customer Data
-customer_id: '1211INT'
+customer_id: '1223INT'
 customer_name: 'INTRADO'
 
 # Destination Host (ESXi)
@@ -32,19 +32,20 @@ clones_parameters:
   # Atlanta & Suwanee VMs
 - datacenter_name: 'Datacenters'
   vm_state: 'poweredoff'
-  vm_name: '{{ env_name }}_INTCCM1P01SWN'
+  vm_name: '{{ env_name }}_INTCCM1P01SWN-TEST'
   vm_template_name: 'CUCM 11.5 SU6 7500usr Skip Template'
   full_folder_path: '/Atlanta & Suwanee - Customers/{{customer_id}} - {{customer_name}}'
   datastore: '{{ datastore_name }}'
   host: '{{host_name}}'
   vm_final_state: 'poweredoff'
-  vm_mac: '00:50:56:97:e4:b8'
+  vm_mac: '00:50:56:97:e4:a1'
+  vm_network_name: "VM Network"
   answer_file_config:
     # CUCM Primary Node
     product_type: 'cucm'
     node_type: 'primary'
     host_name: 'testhost'
-    host_ip: '172.10.3.80'
+    host_ip: '172.10.3.82'
     host_mask: '255.255.240.0'
     host_gateway: '172.10.2.2'
     primary_dns: ''

@@ -18,7 +18,7 @@
     
     # Network configuration is only for the lab
     networks:
-      - name: "VM Network"
+      - name: "{{ item.vm_network_name }}"
         mac: "{{ item.vm_mac }}"
 
     template: "{{ item.vm_template_name }}"
