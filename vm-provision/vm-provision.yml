@@ -13,6 +13,16 @@
     loop: "{{ folders_parameters }}"
     when: folders_parameters is defined
   
+  # Create Resource Pool
+  - include_tasks: resource-pools/resource-pool-creation.yml
+    loop: "{{ folders_parameters }}"
+    when: folders_parameters is defined
+
+  # Check Created Resource Pool
+  - include_tasks: resource-pools/resource-pool-check.yml
+    loop: "{{ folders_parameters }}"
+    when: folders_parameters is defined
+
   # Create Answer Files
   - include_tasks: answer-file/answer-file-manager.yml
     loop: "{{ clones_parameters }}"
