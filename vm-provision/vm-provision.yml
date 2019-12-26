@@ -48,3 +48,4 @@
   #- include_tasks: poweroff.yml
   #  loop: "{{ clones_parameters }}"
   #  when: clones_parameters is defined
+  
