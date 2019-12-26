@@ -190,3 +190,4 @@
   delegate_to: localhost
   register: deployed_cloned_vm_poweron
   when: item.answer_file_config.node_type == 'secondary'
+
