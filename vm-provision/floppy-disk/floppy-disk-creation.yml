@@ -48,3 +48,4 @@
   file:
     path: /images/{{ customer_id|upper }}/{{ item.answer_file_config.host_name|upper }}.flp
     state: absent
+    
