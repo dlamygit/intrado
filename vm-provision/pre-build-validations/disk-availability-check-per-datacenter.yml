@@ -2,14 +2,15 @@
 
 - name: Set available size per datacenter for Medium Size Builds
   set_fact:
-    required_size: 1127
+    available_size: 1024
   when: build_size == 'medium'
 
 - name: Set required size per datacenter for Medium Size Builds
   set_fact:
-    required_size: 1051.5
+    required_size_primary_datacenter: 580
+    required_size_secondary_datacenter: 470
   when: build_size == 'medium'
 
 - fail:
     msg: There's not enough space for the Build
-  when: (required_size > required_size)
+  when: (build_size == 'medium') and ((available_size < required_size_primary_datacenter) or (available_size < required_size_secondary_datacenter))
