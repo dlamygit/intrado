@@ -151,6 +151,7 @@
 #    hostname: "{{ vcenter_hostname }}"
 #    username: "{{ vcenter_username }}"
 #    password: "{{ vcenter_password }}"
+#    validate_certs: no
 #    datacenter: "{{ item.datacenter_name }}"
 #    folder: "{{ item.full_folder_path }}"
 #    vm_id: "{{ item.vm_name }}"
