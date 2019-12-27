@@ -14,37 +14,42 @@ customer_name: 'INTRADO'
 # Destination Host (ESXi)
 host_name: '172.10.3.29'
 
+#Build Data
+build_size: 'medium'
+
 # DateStore Parameters
 datastore_name: 'datastore2'
 datastore_device_name: 'mpx.vmhba0:C0:T0:L0'
 datastore_type: 'vmfs'
 vmfs_version: 6
 
-build_size: 'medium'
-
 # New Destination Folders for the new VMs
 folders_parameters:
-- datacenter_name: 'Datacenters'
+- datacenter_name: 'Suwanee'
   sub_folder_name: '{{customer_id}} - {{customer_name}}'
-  parent_folder_name: 'Atlanta & Suwanee - Customers'
+  parent_folder_name: 'HCS Customers'
   folder_state: 'present'
-- datacenter_name: 'Datacenters'
+  cluster_name: 'TEMP-CLU01'
+- datacenter_name: 'Denver'
   sub_folder_name: '{{customer_id}} - {{customer_name}}'
-  parent_folder_name: 'Denver - Customers'
+  parent_folder_name: 'HCS Customers'
   folder_state: 'present'
+  cluster_name: 'TEMP-CLU01'
 
 # Clones Configuration
 clones_parameters:
 # Atlanta & Suwanee VMs
 # CUCM Subscriber Node  
-- datacenter_name: 'Datacenters'
+- datacenter_name: 'Denver'
   vm_state: 'poweredoff'
   vm_name: 'INTCCM1S01SWN'
   vm_template_name: 'CUCM 11.5 SU6 7500usr Skip Template'
-  full_folder_path: '/Atlanta & Suwanee - Customers/{{customer_id}} - {{customer_name}}'
+  full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: '{{ datastore_name }}'
   host: '{{host_name}}'
   vm_final_state: 'poweredoff'
+  vm_mac: '00:50:56:97:e4:b9'
+  vm_network_name: "VM Network"
   answer_file_config:
     product_type: 'cucm'
     node_type: 'secondary'
@@ -76,14 +81,16 @@ clones_parameters:
     ip_security_first_node: 'no'
     app_user_username: 'intrado_appuser'
 # IM&P Secondary Node
-- datacenter_name: 'Datacenters'
+- datacenter_name: 'Denver'
   vm_state: 'poweredoff'
   vm_name: 'INTIMP1S01SWN'
   vm_template_name: 'IM&P 11.5 SU6 5000usr Skip Template'
-  full_folder_path: '/Atlanta & Suwanee - Customers/{{customer_id}} - {{customer_name}}'
+  full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: '{{ datastore_name }}'
   host: '{{host_name}}'
   vm_final_state: 'poweredoff'
+  vm_mac: '00:50:56:97:e4:a1'
+  vm_network_name: "VM Network"
   answer_file_config:
     product_type: 'im&p'
     node_type: 'secondary'
@@ -115,14 +122,16 @@ clones_parameters:
     ip_security_first_node: 'no'
     app_user_username: 'intrado_appuser'
 # CUCx Primary Node
-- datacenter_name: 'Datacenters'
+- datacenter_name: 'Denver'
   vm_state: 'poweredoff'
   vm_name: 'INTIMP1S01SWN'
   vm_template_name: 'IM&P 11.5 SU6 5000usr Skip Template'
-  full_folder_path: '/Atlanta & Suwanee - Customers/{{customer_id}} - {{customer_name}}'
+  full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: '{{ datastore_name }}'
   host: '{{host_name}}'
   vm_final_state: 'poweredoff'
+  vm_mac: '00:50:56:97:e4:a2'
+  vm_network_name: "VM Network"
   answer_file_config:
     product_type: 'cucx'
     node_type: 'primary'
@@ -157,14 +166,16 @@ clones_parameters:
     ntp_server_3: '199.38.38.3'
 # Denver VMs
 # CUCM Publisher Node
-- datacenter_name: 'Datacenters'
+- datacenter_name: 'Denver'
   vm_state: 'poweredoff'
   vm_name: 'INTCCM1P01DEN'
   vm_template_name: 'CUCM 11.5 SU6 7500usr Template'
-  full_folder_path: '/Denver - Customers/{{customer_id}} - {{customer_name}}'
+  full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: '{{ datastore_name }}'
   host: '{{host_name}}'
   vm_final_state: 'poweredoff'
+  vm_mac: '00:50:56:97:e4:b8'
+  vm_network_name: "VM Network"
   answer_file_config:
     product_type: 'cucm'
     node_type: 'primary'
@@ -198,14 +209,16 @@ clones_parameters:
     ntp_server_2: '173.224.157.252'
     ntp_server_3: '199.38.38.3'
 # CUCM Subscriber Node
-- datacenter_name: 'Datacenters'
+- datacenter_name: 'Denver'
   vm_state: 'poweredoff'
   vm_name: 'INTCCM1S01DEN'
   vm_template_name: 'CUCM 11.5 SU6 7500usr Skip Template'
-  full_folder_path: '/Denver - Customers/{{customer_id}} - {{customer_name}}'
+  full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: '{{ datastore_name }}'
   host: '{{host_name}}'
   vm_final_state: 'poweredoff'
+  vm_mac: '00:50:56:97:e4:a3'
+  vm_network_name: "VM Network"
   answer_file_config:
     product_type: 'cucm'
     node_type: 'secondary'
@@ -237,14 +250,16 @@ clones_parameters:
     ip_security_first_node: 'no'
     app_user_username: 'intrado_appuser'
 # CUCx Subscriber Node
-- datacenter_name: 'Datacenters'
+- datacenter_name: 'Denver'
   vm_state: 'poweredoff'
   vm_name: 'INTCUC1S01DEN'
   vm_template_name: 'CUCx 11.5 SU6 5000usr Skip Template'
-  full_folder_path: '/Denver - Customers/{{customer_id}} - {{customer_name}}'
+  full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: '{{ datastore_name }}'
   host: '{{host_name}}'
   vm_final_state: 'poweredoff'
+  vm_mac: '00:50:56:97:e4:a4'
+  vm_network_name: "VM Network"
   answer_file_config:
     product_type: 'cucx'
     node_type: 'secondary'
@@ -276,14 +291,16 @@ clones_parameters:
     ip_security_first_node: 'no'
     app_user_username: 'intrado_appuser'
 # IM&P Subscriber Node
-- datacenter_name: 'Datacenters'
+- datacenter_name: 'Denver'
   vm_state: 'poweredoff'
   vm_name: 'INTIMP1S01DEN'
   vm_template_name: 'IM&P 11.5 SU6 5000usr Skip Template'
-  full_folder_path: '/Denver - Customers/{{customer_id}} - {{customer_name}}'
+  full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: '{{ datastore_name }}'
   host: '{{host_name}}'
   vm_final_state: 'poweredoff'
+  vm_mac: '00:50:56:97:e4:a5'
+  vm_network_name: "VM Network"
   answer_file_config:
     product_type: 'im&p'
     node_type: 'secondary'
@@ -291,7 +308,7 @@ clones_parameters:
     primary_host_name: 'INTCCM1P01DEN'
     primary_host_ip: '172.10.3.80'
     host_name: 'INTIMP1S01DEN'
-    host_ip: '172.10.3.91'
+    host_ip: '172.10.3.86'
     host_mask: '255.255.240.0'
     host_gateway: '172.10.2.2'
     primary_dns: '172.10.2.2'
