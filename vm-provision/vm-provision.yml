@@ -4,15 +4,23 @@
   tasks:
   
   # Validate that the required datastore(s) are created
-  - include_tasks: datastore-validation.yml
-    loop: "{{ clones_parameters }}"
-    when: folders_parameters is defined
+  - include_tasks: pre-build-validations/pre-build-validations-manager.yml
   
   # Create Sub-Folders to place the new upcoming VMs
   - include_tasks: folders/folders-creation.yml
     loop: "{{ folders_parameters }}"
     when: folders_parameters is defined
   
+  # Create Resource Pool
+  - include_tasks: resource-pools/resource-pool-creation.yml
+    loop: "{{ folders_parameters }}"
+    when: folders_parameters is defined
+
+  # Check Created Resource Pool
+  - include_tasks: resource-pools/resource-pool-check.yml
+    loop: "{{ folders_parameters }}"
+    when: folders_parameters is defined
+
   # Create Answer Files
   - include_tasks: answer-file/answer-file-manager.yml
     loop: "{{ clones_parameters }}"
@@ -38,3 +46,4 @@
   #- include_tasks: poweroff.yml
   #  loop: "{{ clones_parameters }}"
   #  when: clones_parameters is defined
+  

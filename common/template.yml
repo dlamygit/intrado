@@ -11,6 +11,9 @@ vcenter_password: 'Root718293?'
 customer_id: '1202INT'
 customer_name: 'INTRADO'
 
+# Build Data
+build_size: 'medium'
+
 # Destination Host (ESXi)
 host_name: '172.10.6.244'
 
