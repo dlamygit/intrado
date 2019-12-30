@@ -1,6 +1,6 @@
 ---
 
-- name: Create Directory to place CUCM platformConfig.xml
+- name: Create Directory to place the final platformConfig.xml
   file:
     path: '/images/{{ customer_id|upper }}'
     state: directory

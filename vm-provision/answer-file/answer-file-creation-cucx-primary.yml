@@ -9,7 +9,7 @@
 - name: include answer-file-template-cucx-primary
   include_vars: answer-file-template-cucx-primary.yml
 
-- name: Create Directory to place CUCx platformConfig.xml
+- name: Create Directory to place CUCx platformConfig.xml - Primary
   file:
     path: 'temp/{{ customer_id|upper }}'
     state: directory
