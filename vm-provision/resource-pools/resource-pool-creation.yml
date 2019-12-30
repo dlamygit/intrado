@@ -2,7 +2,7 @@
 
 - name: Create Variable for the  Resorce Pool name
   set_fact:
-    resource_pool_name: '{{ customer_id }} - {{ customer_name }}'
+    resource_pool_name: '{{ item.datacenter_name }} - {{ customer_id }} - {{ customer_name }}'
 
 - name: Add resource pool to vCenter
   vmware_resource_pool:

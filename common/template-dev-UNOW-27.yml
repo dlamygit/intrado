@@ -8,7 +8,7 @@ vcenter_username: 'administrator@vsphere.local'
 vcenter_password: 'Root718293?'
 
 # Customer Data
-customer_id: '1206int'
+customer_id: '1231INT'
 customer_name: 'INTRADO'
 
 # Destination Host (ESXi)
@@ -124,7 +124,7 @@ clones_parameters:
 # CUCx Primary Node
 - datacenter_name: 'Suwanee'
   vm_state: 'poweredoff'
-  vm_name: 'INTIMP1S01SWN'
+  vm_name: 'INTCUC1P01SWN'
   vm_template_name: 'IM&P 11.5 SU6 5000usr Skip Template'
   full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: 'datastore8'
@@ -135,7 +135,7 @@ clones_parameters:
   answer_file_config:
     product_type: 'cucx'
     node_type: 'secondary'
-    host_name: 'INTIMP1S01SWN'
+    host_name: 'INTCUC1P01SWN'
     host_ip: '172.10.3.83'
     host_mask: '255.255.240.0'
     host_gateway: '172.10.2.2'
@@ -306,9 +306,9 @@ clones_parameters:
   answer_file_config:
     product_type: 'cucx'
     node_type: 'secondary'
-    primary_host_name: cucxprimary
+    primary_host_name: 'INTCUC1P01SWN'
     primary_host_ip: '172.10.3.83'
-    host_name: cucxsecondaryone
+    host_name: 'INTCUC1S01DEN'
     host_ip: '172.10.3.85'
     host_mask: '255.255.240.0'
     host_gateway: '172.10.2.2'
