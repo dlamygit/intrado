@@ -65,7 +65,7 @@
     hostname: '{{ vcenter_hostname }}'
     username: '{{ vcenter_username }}'
     password: '{{ vcenter_password }}'
-    esxi_hostname: '{{ host_name }}'
+    esxi_hostname: '{{ item.host }}'
     validate_certs: no
     service_name: TSM-SSH
     state: present
@@ -76,7 +76,7 @@
     hostname: '{{ vcenter_hostname }}'
     username: '{{ vcenter_username }}'
     password: '{{ vcenter_password }}'
-    esxi_hostname: '{{ host_name }}'
+    esxi_hostname: '{{ item.host }}'
     validate_certs: no
     service_name: TSM
     state: present
@@ -89,7 +89,7 @@
     state: absent
   become: yes
   become_user: root
-  delegate_to: '{{ host_name }}'
+  delegate_to: '{{ item.host }}'
 
 - name: Removing VMX Entry - floppy0.present = "FALSE"
   lineinfile:
@@ -98,7 +98,7 @@
     state: absent
   become: yes
   become_user: root
-  delegate_to: '{{ host_name }}'
+  delegate_to: '{{ item.host }}'
 
 - name: Removing VMX Entry - floppy0.startConnected = "FALSE"
   lineinfile:
@@ -107,7 +107,7 @@
     state: absent
   become: yes
   become_user: root
-  delegate_to: '{{ host_name }}'
+  delegate_to: '{{ item.host }}'
 
 - name: Adding VMX Entry - floppy0.startConnected = "TRUE"
   lineinfile:
@@ -115,7 +115,7 @@
     line: 'floppy0.startConnected = "TRUE"'
   become: yes
   become_user: root
-  delegate_to: '{{ host_name }}'
+  delegate_to: '{{ item.host }}'
 
 - name: Adding VMX Entry - floppy0.fileType = "file"
   lineinfile:
@@ -123,7 +123,7 @@
     line: 'floppy0.fileType = "file"'
   become: yes
   become_user: root
-  delegate_to: '{{ host_name }}'
+  delegate_to: '{{ item.host }}'
 
 - name: Adding VMX Entry - floppy0.fileName
   lineinfile:
@@ -131,7 +131,7 @@
     line: 'floppy0.fileName = "/vmfs/volumes/{{ item.datastore  }}/{{ item.answer_file_config.host_name|upper }}.flp"'
   become: yes
   become_user: root
-  delegate_to: '{{ host_name }}'
+  delegate_to: '{{ item.host }}'
 
 - name: Power On the Primary node
   vmware_guest:
