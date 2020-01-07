@@ -1,6 +1,9 @@
 ---
 
-# Power Off the Created VMs
-- include_tasks: poweroff.yml
-  loop: "{{ clones_parameters }}"
-  when: clones_parameters is defined
+- hosts: localhost
+  tasks:
+
+  # Power Off the Created VMs
+  - include_tasks: poweroff.yml
+    loop: "{{ clones_parameters }}"
+    when: clones_parameters is defined
