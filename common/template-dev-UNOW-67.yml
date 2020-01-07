@@ -285,7 +285,7 @@ clones_parameters:
   vm_name: 'INTCUC1S01DEN'
   vm_template_name: 'Expressway C&E'
   full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
-  datastore: 'datastore4'
+  datastore: 'datastore3'
   host: '172.10.3.29'
   vm_mac: '00:50:56:97:e4:a4'
   vm_network_name: "VM Network"
@@ -363,7 +363,7 @@ clones_parameters:
   vm_name: 'INTEWC1P01DEN'
   vm_template_name: 'Expressway C&E'
   full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
-  datastore: 'datastore4'
+  datastore: 'datastore3'
   host: '172.10.3.29'
   vm_mac: '00:50:56:97:e4:a7'
   vm_network_name: "VM Network"
