@@ -34,13 +34,11 @@ folders_parameters:
 clones_parameters:
   # Atlanta & Suwanee VMs
 - datacenter_name: 'Datacenters'
-  vm_state: 'poweredoff'
   vm_name: '{{ env_name }}_INTCCM1P01SWN-TEST'
   vm_template_name: 'CUCM 11.5 SU6 7500usr Skip Template'
   full_folder_path: '/Atlanta & Suwanee - Customers/{{customer_id}} - {{customer_name}}'
   datastore: '{{ datastore_name }}'
   host: '{{host_name}}'
-  vm_final_state: 'poweredoff'
   vm_mac: '00:50:56:97:e4:a1'
   vm_network_name: "VM Network"
   answer_file_config:
