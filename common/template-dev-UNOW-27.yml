@@ -41,13 +41,11 @@ clones_parameters:
 # Atlanta & Suwanee VMs
 # CUCM Subscriber Node  
 - datacenter_name: 'Suwanee'
-  vm_state: 'poweredoff'
   vm_name: 'INTCCM1S01SWN'
   vm_template_name: 'CUCM 11.5 SU6 7500usr Skip Template'
   full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: 'datastore8'
   host: '172.10.6.153'
-  vm_final_state: 'poweredoff'
   vm_mac: '00:50:56:97:e4:b9'
   vm_network_name: "VM Network"
   answer_file_config:
@@ -82,13 +80,11 @@ clones_parameters:
     app_user_username: 'intrado_appuser'
 # IM&P Secondary Node
 - datacenter_name: 'Suwanee'
-  vm_state: 'poweredoff'
   vm_name: 'INTIMP1S01SWN'
   vm_template_name: 'IM&P 11.5 SU6 5000usr Skip Template'
   full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: 'datastore8'
   host: '172.10.6.153'
-  vm_final_state: 'poweredoff'
   vm_mac: '00:50:56:97:e4:a1'
   vm_network_name: "VM Network"
   answer_file_config:
@@ -123,13 +119,11 @@ clones_parameters:
     app_user_username: 'intrado_appuser'
 # CUCx Primary Node
 - datacenter_name: 'Suwanee'
-  vm_state: 'poweredoff'
   vm_name: 'INTCUC1P01SWN'
   vm_template_name: 'IM&P 11.5 SU6 5000usr Skip Template'
   full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: 'datastore8'
   host: '172.10.6.153'
-  vm_final_state: 'poweredoff'
   vm_mac: '00:50:56:97:e4:a2'
   vm_network_name: "VM Network"
   answer_file_config:
@@ -166,13 +160,11 @@ clones_parameters:
     ntp_server_3: '199.38.38.3'
 # Expressway C&E Suwanee
 - datacenter_name: 'Suwanee'
-  vm_state: 'poweredoff'
   vm_name: 'INTEWC1P01SWN'
   vm_template_name: 'Expressway C&E'
   full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: 'datastore8'
   host: '172.10.6.153'
-  vm_final_state: 'poweredoff'
   vm_mac: '00:50:56:97:e4:a6'
   vm_network_name: "VM Network"
   answer_file_config:
@@ -210,13 +202,11 @@ clones_parameters:
 # Denver VMs
 # CUCM Publisher Node
 - datacenter_name: 'Denver'
-  vm_state: 'poweredoff'
   vm_name: 'INTCCM1P01DEN'
   vm_template_name: 'CUCM 11.5 SU6 7500usr Template'
   full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: 'datastore3'
   host: '172.10.3.29'
-  vm_final_state: 'poweredoff'
   vm_mac: '00:50:56:97:e4:b8'
   vm_network_name: "VM Network"
   answer_file_config:
@@ -253,13 +243,11 @@ clones_parameters:
     ntp_server_3: '199.38.38.3'
 # CUCM Subscriber Node
 - datacenter_name: 'Denver'
-  vm_state: 'poweredoff'
   vm_name: 'INTCCM1S01DEN'
   vm_template_name: 'CUCM 11.5 SU6 7500usr Skip Template'
   full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: 'datastore3'
   host: '172.10.3.29'
-  vm_final_state: 'poweredoff'
   vm_mac: '00:50:56:97:e4:a3'
   vm_network_name: "VM Network"
   answer_file_config:
@@ -294,13 +282,11 @@ clones_parameters:
     app_user_username: 'intrado_appuser'
 # CUCx Subscriber Node
 - datacenter_name: 'Denver'
-  vm_state: 'poweredoff'
   vm_name: 'INTCUC1S01DEN'
   vm_template_name: 'CUCx 11.5 SU6 5000usr Skip Template'
   full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: 'datastore4'
   host: '172.10.3.29'
-  vm_final_state: 'poweredoff'
   vm_mac: '00:50:56:97:e4:a4'
   vm_network_name: "VM Network"
   answer_file_config:
@@ -335,13 +321,11 @@ clones_parameters:
     app_user_username: 'intrado_appuser'
 # IM&P Subscriber Node
 - datacenter_name: 'Denver'
-  vm_state: 'poweredoff'
   vm_name: 'INTIMP1S01DEN'
   vm_template_name: 'IM&P 11.5 SU6 5000usr Skip Template'
   full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: 'datastore5'
   host: '172.10.3.29'
-  vm_final_state: 'poweredoff'
   vm_mac: '00:50:56:97:e4:a5'
   vm_network_name: "VM Network"
   answer_file_config:
@@ -376,13 +360,11 @@ clones_parameters:
     app_user_username: 'intrado_appuser'
 # Expressway C&E Denver
 - datacenter_name: 'Denver'
-  vm_state: 'poweredoff'
   vm_name: 'INTEWC1P01DEN'
   vm_template_name: 'Expressway C&E'
   full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: 'datastore4'
   host: '172.10.3.29'
-  vm_final_state: 'poweredoff'
   vm_mac: '00:50:56:97:e4:a7'
   vm_network_name: "VM Network"
   answer_file_config:
