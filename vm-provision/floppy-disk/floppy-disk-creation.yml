@@ -1,6 +1,6 @@
 ---
 
-- name: Create Directory to place CUCM platformConfig.xml
+- name: Create Directory to place the final platformConfig.xml
   file:
     path: '/images/{{ customer_id|upper }}'
     state: directory
@@ -35,7 +35,7 @@
     validate_certs: no
     src: '/images/{{ customer_id|upper }}/{{ item.answer_file_config.host_name|upper }}.flp'
     datacenter: '{{ item.datacenter_name }}'
-    datastore: '{{ datastore_name }}'
+    datastore: '{{ item.datastore }}'
     path: '{{ item.answer_file_config.host_name|upper }}.flp'
   delegate_to: localhost
 
