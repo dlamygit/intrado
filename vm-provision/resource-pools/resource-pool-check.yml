@@ -17,6 +17,8 @@
   set_fact:
     resource_pool_names: "{{ resource_pool_names }} + [ '{{ item.name }}' ]"
   with_items: "{{ rp_info.resource_pool_info }}"
+  loop_control:
+      loop_var: resource_pool_item
 
 - fail: msg="Resource Pool Not Found"
   when: resource_pool_name not in resource_pool_names
