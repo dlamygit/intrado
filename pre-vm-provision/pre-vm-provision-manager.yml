@@ -1,0 +1,14 @@
+---
+
+- hosts: localhost
+  tasks:
+
+  - fail:
+      msg: There are missing Parameters for the build
+    when: (folders_parameters is undefined)
+
+  - include_tasks: datastore-validation.yml
+    loop: "{{ clones_parameters }}"
+    when: folders_parameters is defined
+
+  - include_tasks: disk-availability-check-per-datacenter.yml

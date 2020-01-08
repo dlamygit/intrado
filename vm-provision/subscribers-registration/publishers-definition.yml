@@ -1,0 +1,13 @@
+---
+
+- name: setting CUCM Primary Node variables
+  set_fact:
+    host_appuser_name: '{{ clone_item.answer_file_config.app_user_username }}'
+    host_appuser_password: '{{ clone_item.answer_file_config.host_app_user_password }}'
+    cucm_primary_host_ip: '{{ clone_item.answer_file_config.host_ip }}'
+  when: clone_item.answer_file_config.product_type == 'cucm' and clone_item.answer_file_config.node_type == 'primary'
+
+- name: setting CUCx Primary Node variables
+  set_fact:
+    cucx_primary_host_ip: '{{ clone_item.answer_file_config.host_ip }}'
+  when: clone_item.answer_file_config.product_type == 'cucx' and clone_item.answer_file_config.node_type == 'primary'
