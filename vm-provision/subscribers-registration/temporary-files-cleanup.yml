@@ -1,0 +1,6 @@
+---
+
+- name: Recursively remove Client's directory
+  file:
+    path: 'temp/{{ customer_id|upper }}'
+    state: absent

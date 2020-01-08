@@ -9,7 +9,7 @@
 - name: include answer-file-template-imp-primary
   include_vars: answer-file-template-imp-primary.yml
 
-- name: Create Directory to place IM&P platformConfig.xml
+- name: Create Directory to place IM&P platformConfig.xml - Primary
   file:
     path: 'temp/{{ customer_id|upper }}'
     state: directory

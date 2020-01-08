@@ -9,7 +9,7 @@
 - name: include answer-file-template-cucm-secondary
   include_vars: answer-file-template-cucm-secondary.yml
 
-- name: Create Directory to place CUCM platformConfig.xml
+- name: Create Directory to place CUCM platformConfig.xml - Secondary
   file:
     path: 'temp/{{ customer_id|upper }}'
     state: directory

@@ -1,0 +1,24 @@
+---
+
+- name: Gather resource pool info about all resource pools available
+  vmware_resource_pool_info:
+    hostname: '{{ vcenter_hostname }}'
+    username: '{{ vcenter_username }}'
+    password: '{{ vcenter_password }}'
+    validate_certs: no
+  register: rp_info
+  delegate_to: localhost
+
+- name: Create empty array for Resource Pool Names
+  set_fact:
+    resource_pool_names: []
+
+- name: Build a list of all the resource pool names.
+  set_fact:
+    resource_pool_names: "{{ resource_pool_names }} + [ '{{ resource_pool_item.name }}' ]"
+  with_items: "{{ rp_info.resource_pool_info }}"
+  loop_control:
+      loop_var: resource_pool_item
+
+- fail: msg="Resource Pool Not Found"
+  when: resource_pool_name not in resource_pool_names

@@ -11,6 +11,9 @@ vcenter_password: 'Root718293?'
 customer_id: '1206int'
 customer_name: 'INTRADO'
 
+# Build Data
+build_size: 'medium'
+
 # Destination Host (ESXi)
 host_name: '172.10.3.29'
 
@@ -25,17 +28,14 @@ folders_parameters:
 - datacenter_name: 'Datacenters'
   sub_folder_name: '{{customer_id}} - {{customer_name}}'
   parent_folder_name: 'Atlanta & Suwanee - Customers'
-  folder_state: 'present'
 - datacenter_name: 'Datacenters'
   sub_folder_name: '{{customer_id}} - {{customer_name}}'
   parent_folder_name: 'Denver - Customers'
-  folder_state: 'present'
 
 # Clones Configuration
 clones_parameters:
   # Atlanta & Suwanee VMs
 - datacenter_name: 'Datacenters'
-  vm_state: 'poweredoff'
   vm_name: '{{ env_name }}_INTCCM1P01SWN'
   vm_template_name: 'Linux-CentOS-Template-Demo'
   full_folder_path: '/Atlanta & Suwanee - Customers/{{customer_id}} - {{customer_name}}'
@@ -43,7 +43,6 @@ clones_parameters:
   memory_mb: '512'
   num_cpus: '1'
   host: '{{host_name}}'
-  vm_final_state: 'poweredoff'
   answer_file_config:
     # CUCM Primary Node
     product_type: 'cucm'
@@ -67,10 +66,7 @@ clones_parameters:
     certificate_location: 'Santa Fe'
     certificate_state: 'Santa Fe'
     certificate_country: 'AR'
-    locale_id: ''
-    ccm_version: ''
     ccm_first_node: 'yes'
-    call_home_disable: 'Disabled'
     ip_security_first_node: 'yes'
     auto_register_primary: '0'
     app_user_username: 'cucm_appuser'
@@ -79,7 +75,6 @@ clones_parameters:
     ntp_server_3: '199.38.38.3'
   # Denver VMs
 - datacenter_name: 'Datacenters'
-  vm_state: 'poweredoff'
   vm_name: '{{ env_name }}_INTCCM1P01DEN'
   vm_template_name: 'Linux-CentOS-Template-Demo'
   full_folder_path: '/Denver - Customers/{{customer_id}} - {{customer_name}}'
@@ -87,7 +82,6 @@ clones_parameters:
   memory_mb: '512'
   num_cpus: '1'
   host: '{{host_name}}'
-  vm_final_state: 'poweredoff'
   answer_file_config:
     product_type: 'cucm'
     node_type: 'secondary'
@@ -112,9 +106,6 @@ clones_parameters:
     certificate_location: 'Santa Fe'
     certificate_state: 'Santa Fe'
     certificate_country: 'AR'
-    locale_id: ''
-    ccm_version: ''
     ccm_first_node: 'no'
-    call_home_disable: 'Disabled'
     ip_security_first_node: 'no'
     app_user_username: 'cucm_appuser'

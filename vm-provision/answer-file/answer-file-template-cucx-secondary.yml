@@ -96,12 +96,12 @@ cucx_secondary_template_platform_data_children:
 - xpath: /PlatformData/LocaleId
   param_name_text: Microsoft assigned locale identifier value
   param_default_value: '00000409'
-  param_value: "{{ clone_item.answer_file_config.locale_id|default('') }}"
+  param_value: ""
   file_path: '{{ answer_file_path }}'
 - xpath: /PlatformData/CCMVersion
   param_name_text: CM version on the server backed up
   param_default_value: 'CCM ver 5.0'
-  param_value: "{{ clone_item.answer_file_config.ccm_version|default('') }}"
+  param_value: ""
   file_path: '{{ answer_file_path }}'
 - xpath: /PlatformData/CcmFirstNode
   param_name_text: First CCM node in the cluster
@@ -111,7 +111,7 @@ cucx_secondary_template_platform_data_children:
 - xpath: /PlatformData/CallHomeDisable
   param_name_text: This tag will be present when SCH and ACH is disabled by the user
   param_default_value: 'Disable'
-  param_value: "{{ clone_item.answer_file_config.call_home_disable|default('') }}"
+  param_value: "Disabled"
   file_path: '{{ answer_file_path }}'
 - xpath: /PlatformData/SftpPwCrypt
   param_name_text: Security PW for this node
