@@ -93,6 +93,8 @@
   become_user: root
   delegate_to: '{{ item.host }}'
   register: removed_vmx_entry_filename
+  vars:
+    ansible_python_interpreter: auto_silent
 
 - name: Removing VMX Entry - floppy0.present = "FALSE"
   lineinfile:
@@ -103,6 +105,8 @@
   become_user: root
   delegate_to: '{{ item.host }}'
   register: removed_vmx_entry_present
+  vars:
+    ansible_python_interpreter: auto_silent
 
 - name: Removing VMX Entry - floppy0.startConnected = "FALSE"
   lineinfile:
@@ -113,6 +117,8 @@
   become_user: root
   delegate_to: '{{ item.host }}'
   register: removed_vmx_entry_startconnected_false
+  vars:
+    ansible_python_interpreter: auto_silent
 
 - name: Adding VMX Entry - floppy0.startConnected = "TRUE"
   lineinfile:
@@ -122,6 +128,8 @@
   become_user: root
   delegate_to: '{{ item.host }}'
   register: removed_vmx_entry_startconnected_true
+  vars:
+    ansible_python_interpreter: auto_silent
 
 - name: Adding VMX Entry - floppy0.fileType = "file"
   lineinfile:
@@ -131,6 +139,8 @@
   become_user: root
   delegate_to: '{{ item.host }}'
   register: add_vmx_entry_filetype
+  vars:
+    ansible_python_interpreter: auto_silent
 
 - name: Adding VMX Entry - floppy0.fileName
   lineinfile:
@@ -140,6 +150,8 @@
   become_user: root
   delegate_to: '{{ item.host }}'
   register: add_vmx_entry_filename
+  vars:
+    ansible_python_interpreter: auto_silent
 
 - name: Power On the Primary node
   vmware_guest:
