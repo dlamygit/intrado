@@ -8,7 +8,7 @@ vcenter_username: 'administrator@vsphere.local'
 vcenter_password: 'Root718293?'
 
 # Customer Data
-customer_id: '1231INT'
+customer_id: '0107INT'
 customer_name: 'INTRADO'
 
 # Destination Host (ESXi)
@@ -42,7 +42,7 @@ clones_parameters:
 # CUCM Subscriber Node  
 - datacenter_name: 'Suwanee'
   vm_name: 'INTCCM1S01SWN'
-  vm_template_name: 'CUCM 11.5 SU6 7500usr Skip Template'
+  vm_template_name: 'Expressway C&E'
   full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: 'datastore8'
   host: '172.10.6.153'
@@ -50,7 +50,7 @@ clones_parameters:
   vm_network_name: "VM Network"
   answer_file_config:
     product_type: 'cucm'
-    node_type: 'primary'
+    node_type: 'secondary'
     primary_host_name: 'INTCCM1P01DEN'
     primary_host_ip: '172.10.3.80'
     host_name: 'INTCCM1S01SWN'
@@ -81,7 +81,7 @@ clones_parameters:
 # IM&P Secondary Node
 - datacenter_name: 'Suwanee'
   vm_name: 'INTIMP1S01SWN'
-  vm_template_name: 'IM&P 11.5 SU6 5000usr Skip Template'
+  vm_template_name: 'Expressway C&E'
   full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: 'datastore8'
   host: '172.10.6.153'
@@ -120,7 +120,7 @@ clones_parameters:
 # CUCx Primary Node
 - datacenter_name: 'Suwanee'
   vm_name: 'INTCUC1P01SWN'
-  vm_template_name: 'IM&P 11.5 SU6 5000usr Skip Template'
+  vm_template_name: 'Expressway C&E'
   full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: 'datastore8'
   host: '172.10.6.153'
@@ -203,7 +203,7 @@ clones_parameters:
 # CUCM Publisher Node
 - datacenter_name: 'Denver'
   vm_name: 'INTCCM1P01DEN'
-  vm_template_name: 'CUCM 11.5 SU6 7500usr Template'
+  vm_template_name: 'Expressway C&E'
   full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: 'datastore3'
   host: '172.10.3.29'
@@ -244,7 +244,7 @@ clones_parameters:
 # CUCM Subscriber Node
 - datacenter_name: 'Denver'
   vm_name: 'INTCCM1S01DEN'
-  vm_template_name: 'CUCM 11.5 SU6 7500usr Skip Template'
+  vm_template_name: 'Expressway C&E'
   full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: 'datastore3'
   host: '172.10.3.29'
@@ -283,9 +283,9 @@ clones_parameters:
 # CUCx Subscriber Node
 - datacenter_name: 'Denver'
   vm_name: 'INTCUC1S01DEN'
-  vm_template_name: 'CUCx 11.5 SU6 5000usr Skip Template'
+  vm_template_name: 'Expressway C&E'
   full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
-  datastore: 'datastore4'
+  datastore: 'datastore3'
   host: '172.10.3.29'
   vm_mac: '00:50:56:97:e4:a4'
   vm_network_name: "VM Network"
@@ -322,7 +322,7 @@ clones_parameters:
 # IM&P Subscriber Node
 - datacenter_name: 'Denver'
   vm_name: 'INTIMP1S01DEN'
-  vm_template_name: 'IM&P 11.5 SU6 5000usr Skip Template'
+  vm_template_name: 'Expressway C&E'
   full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: 'datastore5'
   host: '172.10.3.29'
@@ -363,7 +363,7 @@ clones_parameters:
   vm_name: 'INTEWC1P01DEN'
   vm_template_name: 'Expressway C&E'
   full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
-  datastore: 'datastore4'
+  datastore: 'datastore3'
   host: '172.10.3.29'
   vm_mac: '00:50:56:97:e4:a7'
   vm_network_name: "VM Network"

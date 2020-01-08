@@ -3,9 +3,6 @@
 - hosts: localhost
   tasks:
   
-  # Validate that the required datastore(s) are created
-  - include_tasks: pre-build-validations/pre-build-validations-manager.yml
-  
   # Create Sub-Folders to place the new upcoming VMs
   - include_tasks: folders/folders-creation.yml
     loop: "{{ folders_parameters }}"
@@ -41,9 +38,4 @@
   - include_tasks: clone.yml
     loop: "{{ clones_parameters }}"
     when: clones_parameters is defined
-  
-  # Power Off the Created VMs
-  #- include_tasks: poweroff.yml
-  #  loop: "{{ clones_parameters }}"
-  #  when: clones_parameters is defined
   
