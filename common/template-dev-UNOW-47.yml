@@ -115,7 +115,7 @@ clones_parameters:
   vm_template_name: 'CUCx 11.5 SU6 5000usr Skip Template'
   full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
   datastore: 'datastore8'
-  host: '172.10.3.29'
+  host: '172.10.6.153'
   vm_mac: '00:50:56:97:e4:a3'
   vm_network_name: "VM Network"
   answer_file_config:
