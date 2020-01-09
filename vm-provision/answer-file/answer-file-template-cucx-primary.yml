@@ -106,7 +106,7 @@ cucx_primary_template_platform_data_children:
 - xpath: /PlatformData/CcmFirstNode
   param_name_text: First CCM node in the cluster
   param_default_value: 'yes'
-  param_value: "{{ clone_item.answer_file_config.ccm_first_node|default('') }}"
+  param_value: "yes"
   file_path: '{{ answer_file_path }}'
 - xpath: /PlatformData/CallHomeDisable
   param_name_text: This tag will be present when SCH and ACH is disabled by the user
@@ -121,7 +121,7 @@ cucx_primary_template_platform_data_children:
 - xpath: /PlatformData/IPSecFirstNode
   param_name_text: First IPSec node in the cluster
   param_default_value: 'yes'
-  param_value: "{{ clone_item.answer_file_config.ip_security_first_node|default('') }}"
+  param_value: "yes"
   file_path: '{{ answer_file_path }}'
 - xpath: /PlatformData/IPSecEnabled
   param_name_text: IPSec Configuration for this node
@@ -136,7 +136,7 @@ cucx_primary_template_platform_data_children:
 - xpath: /PlatformData/PostInstallAutoRegister
   param_name_text: Number of Hours to Enable Auto Register Post-Install on Pub
   param_default_value: '24'
-  param_value: "{{ clone_item.answer_file_config.auto_register_primary|default('') }}"
+  param_value: "0"
   file_path: '{{ answer_file_path }}'
 - xpath: /PlatformData/ApplUserUsername
   param_name_text: Application User Username

@@ -6,7 +6,12 @@ imp_primary_template_platform_data_children:
 - xpath: /PlatformData/ProductDeployment
   param_name_text: Deployment
   param_default_value: CallManager
-  param_value: callmanager
+  param_value: cups
+  file_path: '{{ answer_file_path }}'
+- xpath: /PlatformData/ImpDomainName
+  param_name_text: First IMP node domain name
+  param_default_value: none
+  param_value: "{{ clone_item.answer_file_config.imp_domain_name|default('') }}"
   file_path: '{{ answer_file_path }}'
 - xpath: /PlatformData/PlatformConfigurationDone
   param_name_text: Status of platform configuration
@@ -128,11 +133,38 @@ imp_primary_template_platform_data_children:
   param_default_value: 'password'
   param_value: "{{ encrypted_security_password.stdout_lines[0]|default('') }}"
   file_path: '{{ answer_file_path }}'
-- xpath: /PlatformData/PostInstallAutoRegister
-  param_name_text: Number of Hours to Enable Auto Register Post-Install on Pub
-  param_default_value: '24'
-  param_value: "{{ clone_item.answer_file_config.auto_register_primary|default('') }}"
+
+- xpath: /PlatformData/CcmDBHost
+  param_name_text: Host Name for DataBase
+  param_default_value: 'none'
+  param_value: "{{ clone_item.answer_file_config.ccm_db_host|default('') }}"
   file_path: '{{ answer_file_path }}'
+- xpath: /PlatformData/CcmDBIpAddr
+  param_name_text: Host IP Addr for DataBase
+  param_default_value: 'none'
+  param_value: "{{ clone_item.answer_file_config.ccm_db_ip_addr|default('') }}"
+  file_path: '{{ answer_file_path }}'
+- xpath: /PlatformData/IPSecMasterHost
+  param_name_text: Host name for IPSec
+  param_default_value: 'none'
+  param_value: "{{ clone_item.answer_file_config.ip_security_master_host|default('') }}"
+  file_path: '{{ answer_file_path }}'
+- xpath: /PlatformData/IPSecMasterIpAddr
+  param_name_text: Host IP Addr for IPSec
+  param_default_value: 'none'
+  param_value: "{{ clone_item.answer_file_config.ip_security_master_ip_addr|default('') }}"
+  file_path: '{{ answer_file_path }}'
+- xpath: /PlatformData/NTPServerHost
+  param_name_text: Cluster NTP Server Host name
+  param_default_value: 'none'
+  param_value: "{{ clone_item.answer_file_config.ntp_server_host|default('') }}"
+  file_path: '{{ answer_file_path }}'
+- xpath: /PlatformData/NTPServerIpAddr
+  param_name_text: Cluster NTP Server Host IP Addr
+  param_default_value: 'none'
+  param_value: "{{ clone_item.answer_file_config.ntp_server_ip_addr|default('') }}"
+  file_path: '{{ answer_file_path }}'
+
 - xpath: /PlatformData/ApplUserUsername
   param_name_text: Application User Username
   param_default_value: 'CCMAdministrator'
