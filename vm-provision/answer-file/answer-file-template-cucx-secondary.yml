@@ -106,7 +106,7 @@ cucx_secondary_template_platform_data_children:
 - xpath: /PlatformData/CcmFirstNode
   param_name_text: First CCM node in the cluster
   param_default_value: 'yes'
-  param_value: "no"
+  param_value: "yes"
   file_path: '{{ answer_file_path }}'
 - xpath: /PlatformData/CallHomeDisable
   param_name_text: This tag will be present when SCH and ACH is disabled by the user
