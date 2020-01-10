@@ -63,6 +63,13 @@
   loop_control:
     loop_var: xml_item
 
+# Loop through the NTP Server elements in the processed template
+- include_tasks: answer-file-ntp-servers.yml
+  loop: "{{ cucm_secondary_template_ntpservers }}"
+  when: ntpserver_item.param_value is defined and ntpserver_item.param_value != ""
+  loop_control:
+    loop_var: ntpserver_item
+
 - name: Add a 'CertX509' element to the 'PlatformData' element
   xml:
     path: '{{ answer_file_path }}'

@@ -206,3 +206,10 @@ cucm_secondary_template_certx509_children:
   param_default_value: none
   param_value: "{{ clone_item.answer_file_config.certificate_country|default('') }}"
   file_path: '{{ answer_file_path }}'
+
+cucm_secondary_template_ntpservers:
+- xpath: /PlatformData/NtpServer
+  param_name_text: Address Range for NTP server
+  param_default_value: 'none'
+  param_value: "3.ar.pool.ntp.org"
+  file_path: '{{ answer_file_path }}'
