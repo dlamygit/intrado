@@ -166,6 +166,17 @@
   register: deployed_cloned_vm_poweron
   when: item.answer_file_config.node_type == 'primary'
 
+- name: Upgrade VMware Tools using uuid
+  vmware_guest_tools_upgrade:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    datacenter: "{{ item.datacenter_name }}"
+    validate_certs: no
+    name: "{{ item.vm_name }}"
+  register: deployed_cloned_vm_upgrade_vmtools
+  delegate_to: localhost
+
 - name: Run utils import config on the Primary node
   vmware_vm_shell:
     hostname: "{{ vcenter_hostname }}"
