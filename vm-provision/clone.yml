@@ -178,7 +178,7 @@
 #  delegate_to: localhost
 
 - name: Run utils import config on the Primary node
-  shell: ssh {{ item.answer_file_config.host_admin }}@{{ item.answer_file_config.host_ip }}
+  shell: sshpass -p {{ item.answer_file_config.host_security_password }} ssh -oStrictHostKeyChecking=no {{ item.answer_file_config.host_admin }}@{{ item.answer_file_config.host_ip }} 
   delegate_to: localhost
   register: shell_command_output
 
