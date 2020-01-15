@@ -36,7 +36,7 @@ cucx_secondary_template_platform_data_children:
 - xpath: /PlatformData/LocalHostDHCP
   param_name_text: Is DHCP enabled for this machine
   param_default_value: 'no'
-  param_value: 'yes'
+  param_value: 'no'
   file_path: '{{ answer_file_path }}'
 - xpath: /PlatformData/LocalHostIP0
   param_name_text: Host IP0 addr for this node
