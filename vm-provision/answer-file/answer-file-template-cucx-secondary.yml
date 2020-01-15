@@ -46,7 +46,7 @@ cucx_secondary_template_platform_data_children:
 - xpath: /PlatformData/LocalHostMask0
   param_name_text: Host IP0 mask for this node
   param_default_value: '255.255.255.0'
-  param_value: "{{ clone_item.answer_file_config.host_mask|default('') }}"
+  param_value: "255.255.255.240"
   file_path: '{{ answer_file_path }}'
 - xpath: /PlatformData/LocalHostGW0
   param_name_text: Gateway for this node
