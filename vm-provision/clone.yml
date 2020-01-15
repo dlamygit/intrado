@@ -166,6 +166,17 @@
   register: deployed_cloned_vm_poweron
   when: item.answer_file_config.node_type == 'primary'
 
+- name: Wait for VMware tools to become available by name
+  vmware_guest_tools_wait:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    validate_certs: no
+    name: "{{ item.vm_name }}"
+    folder: "{{ item.full_folder_path }}"
+  delegate_to: localhost
+  register: facts
+
 - name: Upgrade VMware Tools using uuid
   vmware_guest_tools_upgrade:
     hostname: "{{ vcenter_hostname }}"
@@ -174,6 +185,7 @@
     datacenter: "{{ item.datacenter_name }}"
     validate_certs: no
     name: "{{ item.vm_name }}"
+    folder: "{{ item.full_folder_path }}"
   register: deployed_cloned_vm_upgrade_vmtools
   delegate_to: localhost
 
