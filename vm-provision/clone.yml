@@ -37,7 +37,7 @@
     name: "{{ item.vm_name }}"
     gather_network_info: false
     networks:
-      - manual_mac: "00:50:56:97:e4:b8"
+      - manual_mac: "{{ item.vm_mac }}"
         state: present
         label: "Network adapter 1"
         connected: true
