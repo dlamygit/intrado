@@ -194,28 +194,28 @@
 #  delegate_to: localhost
 #  register: shell_command_output
 
-#- name: Run utils import config on the Primary node
-#  vmware_vm_shell:
-#    hostname: "{{ vcenter_hostname }}"
-#    username: "{{ vcenter_username }}"
-#    password: "{{ vcenter_password }}"
-#    validate_certs: no
-#    datacenter: "{{ item.datacenter_name }}"
-#    folder: "{{ item.full_folder_path }}"
-#    vm_id: "{{ item.vm_name }}"
-#    vm_username: "{{ item.answer_file_config.host_admin }}"
-#    vm_password: "{{ item.answer_file_config.host_admin_password }}"
+- name: Run utils import config on the Primary node
+  vmware_vm_shell:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    validate_certs: no
+    datacenter: "{{ item.datacenter_name }}"
+    folder: "{{ item.full_folder_path }}"
+    vm_id: "{{ item.vm_name }}"
+    vm_username: "{{ item.answer_file_config.host_admin }}"
+    vm_password: "{{ item.answer_file_config.host_admin_password }}"
     #vm_shell: /bin/bash
     #vm_shell_args: "utils import config"
-#    vm_shell: /bin/sleep
-#    vm_shell_args: 5
+    vm_shell: /bin/sleep
+    vm_shell_args: 5
     #vm_shell_env:
     #  - "PATH=/bin"
     #  - "VAR=test"
     #vm_shell_cwd: "/tmp"
-#  delegate_to: localhost
-#  register: shell_command_output
-#  when: item.answer_file_config.node_type == 'primary'
+  delegate_to: localhost
+  register: shell_command_output
+  when: item.answer_file_config.node_type == 'primary'
 
 #- name: Add subscriber servers
 #  vmware_host_service_manager:
