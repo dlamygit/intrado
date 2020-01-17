@@ -166,33 +166,8 @@
   register: deployed_cloned_vm_poweron
   when: item.answer_file_config.node_type == 'primary'
 
-#- name: Wait for VMware tools to become available by name
-#  vmware_guest_tools_wait:
-#    hostname: "{{ vcenter_hostname }}"
-#    username: "{{ vcenter_username }}"
-#    password: "{{ vcenter_password }}"
-#    validate_certs: no
-#    name: "{{ item.vm_name }}"
-#    folder: "{{ item.full_folder_path }}"
-#  delegate_to: localhost
-#  register: facts
-
-#- name: Upgrade VMware Tools using uuid
-#  vmware_guest_tools_upgrade:
-#    hostname: "{{ vcenter_hostname }}"
-#    username: "{{ vcenter_username }}"
-#    password: "{{ vcenter_password }}"
-#    datacenter: "{{ item.datacenter_name }}"
-#    validate_certs: no
-#    name: "{{ item.vm_name }}"
-#    folder: "{{ item.full_folder_path }}"
-#  register: deployed_cloned_vm_upgrade_vmtools
-#  delegate_to: localhost
-
-#- name: Run utils import config on the Primary node
-#  shell: sshpass -p {{ item.answer_file_config.host_security_password }} ssh -oStrictHostKeyChecking=no {{ item.answer_file_config.host_admin }}@{{ item.answer_file_config.host_ip }} 
-#  delegate_to: localhost
-#  register: shell_command_output
+- name: Execute the command in remote shell; stdout goes to the specified file on the remote.
+  shell: pwsh -File /home/ansibletower/VMKeystrokes.ps1 -VMName {{ item.vm_name }} -StringInput "{{ item.answer_file_config.host_admin }}" -ReturnCarriage 1 -vCenterURL {{ vcenter_hostname }} -vCenterUser {{ vcenter_username }} -vCenterPassword {{ vcenter_password }}  
 
 #- name: Run utils import config on the Primary node
 #  vmware_vm_shell:
