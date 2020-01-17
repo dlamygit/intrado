@@ -10,7 +10,7 @@
     datacenter: "{{ item.datacenter_name }}"
     folder: "{{ item.full_folder_path }}"
     name: "{{ item.vm_name }}"
-    state: "poweredon"
+    state: "poweredoff"
     esxi_hostname: "{{ item.host }}"
     hardware:
       memory_mb: "{{ item.memory_mb | default(omit) }}"
