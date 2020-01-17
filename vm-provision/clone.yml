@@ -166,9 +166,14 @@
   register: deployed_cloned_vm_poweron
   when: item.answer_file_config.node_type == 'primary'
 
+#- name: Wait for the VM to start
+#  wait_for:
+#    timeout: 500
+#  delegate_to: localhost
+
 - name: Execute the command in remote shell; stdout goes to the specified file on the remote.
   become: yes
-  become_user: root
+  become_user: ansibletower
   shell: pwsh -File /home/ansibletower/VMKeystrokes.ps1 -VMName {{ item.vm_name }} -StringInput "{{ item.answer_file_config.host_admin }}" -ReturnCarriage 1 -vCenterURL {{ vcenter_hostname }} -vCenterUser {{ vcenter_username }} -vCenterPassword {{ vcenter_password }}  
 
 #- name: Run utils import config on the Primary node
