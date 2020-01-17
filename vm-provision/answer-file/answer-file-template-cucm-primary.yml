@@ -71,7 +71,7 @@ cucm_primary_template_platform_data_children:
 - xpath: /PlatformData/LocalHostTimezone
   param_name_text: Timezone for this node
   param_default_value: America/Los_Angeles
-  param_value: '{{ clone_item.answer_file_config.host_timezone }}'
+  param_value: "{{ clone_item.answer_file_config.host_timezone|default('') }}"
   file_path: '{{ answer_file_path }}'
 - xpath: /PlatformData/LocalHostContinent
   param_name_text: Continent for this node
