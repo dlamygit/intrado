@@ -167,6 +167,8 @@
   when: item.answer_file_config.node_type == 'primary'
 
 - name: Execute the command in remote shell; stdout goes to the specified file on the remote.
+  become: yes
+  become_user: root
   shell: pwsh -File /home/ansibletower/VMKeystrokes.ps1 -VMName {{ item.vm_name }} -StringInput "{{ item.answer_file_config.host_admin }}" -ReturnCarriage 1 -vCenterURL {{ vcenter_hostname }} -vCenterUser {{ vcenter_username }} -vCenterPassword {{ vcenter_password }}  
 
 #- name: Run utils import config on the Primary node
