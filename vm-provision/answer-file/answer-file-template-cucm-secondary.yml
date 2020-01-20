@@ -213,18 +213,3 @@ cucm_secondary_template_ntpservers:
   param_default_value: 'none'
   param_value: "129.6.15.30"
   file_path: '{{ answer_file_path }}'
-- xpath: /PlatformData/NtpServer
-  param_name_text: Address Range for NTP server
-  param_default_value: 'none'
-  param_value: "173.224.149.136"
-  file_path: '{{ answer_file_path }}'
-- xpath: /PlatformData/NtpServer
-  param_name_text: Address Range for NTP server
-  param_default_value: 'none'
-  param_value: "173.224.157.252"
-  file_path: '{{ answer_file_path }}'
-- xpath: /PlatformData/NtpServer
-  param_name_text: Address Range for NTP server
-  param_default_value: 'none'
-  param_value: "199.38.38.3"
-  file_path: '{{ answer_file_path }}'
