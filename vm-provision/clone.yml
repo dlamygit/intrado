@@ -168,7 +168,7 @@
 
 - name: Wait for the VM to start
   wait_for:
-    timeout: {{ item.wait_for_the_vm_to_start }}
+    timeout: "{{ item.wait_for_the_vm_to_start_seconds }}"
   delegate_to: localhost
   when: item.answer_file_config.node_type == 'primary'
 
@@ -182,12 +182,12 @@
 
 - name: Wait for the VM to initialize
   wait_for:
-    timeout: {{ item.wait_for_the_vm_to_initialize }}
+    timeout: "{{ item.wait_for_the_vm_to_initialize_seconds }}"
   delegate_to: localhost
   when: item.answer_file_config.node_type == 'primary'
 
-- name: Send password keystrokes to VM
-  shell: pwsh -File /home/ansibletower/VMKeystrokes.ps1 -VMName {{ item.vm_name }} -StringInput "{{ item.answer_file_config.host_admin_password }}" -ReturnCarriage 1 -vCenterURL {{ vcenter_hostname }} -vCenterUser {{ vcenter_username }} -vCenterPassword {{ vcenter_password }}  
+- name: Send utils import config keystrokes to VM
+  shell: pwsh -File /home/ansibletower/VMKeystrokes.ps1 -VMName {{ item.vm_name }} -StringInput "utils import config" -ReturnCarriage 1 -vCenterURL {{ vcenter_hostname }} -vCenterUser {{ vcenter_username }} -vCenterPassword {{ vcenter_password }}  
   when: item.answer_file_config.node_type == 'primary'
 
 #- name: Add subscriber servers
