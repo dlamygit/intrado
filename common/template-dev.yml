@@ -8,45 +8,48 @@ vcenter_username: 'administrator@vsphere.local'
 vcenter_password: 'Root718293?'
 
 # Customer Data
-customer_id: '1223INT'
+customer_id: '0107INT'
 customer_name: 'INTRADO'
-
-# Build Data
-build_size: 'medium'
 
 # Destination Host (ESXi)
 host_name: '172.10.3.29'
 
+#Build Data
+build_size: 'medium'
+
 # DateStore Parameters
-datastore_name: 'datastore3'
-datastore_device_name: 'mpx.vmhba1:C0:T2:L0'
+datastore_name: 'datastore2'
+datastore_device_name: 'mpx.vmhba0:C0:T0:L0'
 datastore_type: 'vmfs'
 vmfs_version: 6
 
 # New Destination Folders for the new VMs
 folders_parameters:
-- datacenter_name: 'Datacenters'
+- datacenter_name: 'Denver'
   sub_folder_name: '{{customer_id}} - {{customer_name}}'
-  parent_folder_name: 'Atlanta & Suwanee - Customers'
+  parent_folder_name: 'HCS Customers'
   folder_state: 'present'
+  cluster_name: 'TEMP-CLU01'
 
 # Clones Configuration
 clones_parameters:
-  # Atlanta & Suwanee VMs
-- datacenter_name: 'Datacenters'
-  vm_name: '{{ env_name }}_INTCCM1P01SWN-TEST'
+# Denver VMs
+# CUCM Subscriber Node
+- datacenter_name: 'Denver'
+  vm_name: 'INTCCM1S01DEN'
   vm_template_name: 'CUCM 11.5 SU6 7500usr Skip Template'
-  full_folder_path: '/Atlanta & Suwanee - Customers/{{customer_id}} - {{customer_name}}'
-  datastore: '{{ datastore_name }}'
-  host: '{{host_name}}'
-  vm_mac: '00:50:56:97:e4:a1'
+  full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
+  datastore: 'datastore3'
+  host: '172.10.3.29'
+  vm_mac: '00:50:56:97:e4:b8'
   vm_network_name: "VM Network"
-  answer_file_config:
-    # CUCM Primary Node
+  wait_for_the_vm_to_start_seconds: 300
+  wait_for_the_vm_to_initialize_seconds: 60
+  answer_file_config:    
     product_type: 'cucm'
     node_type: 'primary'
     host_name: 'testhost'
-    host_ip: '172.10.3.82'
+    host_ip: '172.10.3.80'
     host_mask: '255.255.240.0'
     host_gateway: '172.10.2.2'
     primary_dns: ''
@@ -69,6 +72,5 @@ clones_parameters:
     ccm_first_node: 'yes'
     call_home_disable: 'Disabled'
     ip_security_first_node: 'yes'
-    auto_register_primary: '0'
     app_user_username: 'cucm_appuser'
     ntp_server_1: '129.6.15.30'
