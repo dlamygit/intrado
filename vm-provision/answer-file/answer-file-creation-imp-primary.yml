@@ -1,0 +1,102 @@
+---
+
+# Playbook to create the Answer File for a Primary Node for the IM&P (Cisco Unified Communications Manager IM and Presence)
+
+- name: setting answer_file_path variable
+  set_fact:
+    answer_file_path: "temp/{{ customer_id|upper }}/IM&P/{{ clone_item.answer_file_config.host_name|upper }}.xml"
+
+- name: include answer-file-template-imp-primary
+  include_vars: answer-file-template-imp-primary.yml
+
+- name: Create Directory to place IM&P platformConfig.xml - Primary
+  file:
+    path: 'temp/{{ customer_id|upper }}'
+    state: directory
+    mode: 0777
+  register: "customer_folder"
+  delegate_to: localhost
+
+- name: Create Directory to place the XML File
+  file:
+    path: 'temp/{{ customer_id|upper }}/IM&P'
+    state: directory
+    mode: 0777
+  register: "answer_files_folder"
+  delegate_to: localhost
+
+# Encrypt Passwords
+- include_tasks: answer-file-passwords.yml
+
+- name: Delete the XML File if it already exists
+  file:
+    path: '{{ answer_file_path }}'
+    state: absent
+  register: "imp_primary_answer_file"
+  delegate_to: localhost
+
+- name: Create IM&P platformConfig.xml
+  file:
+    path: '{{ answer_file_path }}'
+    state: touch
+    mode: 0777
+  register: "imp_primary_answer_file"
+  delegate_to: localhost
+
+- name: Add initial XML line
+  lineinfile:
+    path: '{{ answer_file_path }}'
+    line: '<?xml version="1.0"?><PlatformData></PlatformData>'
+  register: "imp_initial_line_primary_answer_file"
+  delegate_to: localhost
+
+- name: Add a 'Version' element to the 'PlatformData' element
+  xml:
+    path: '{{ answer_file_path }}'
+    xpath: /PlatformData/Version
+    value: 11.5.1
+    pretty_print: yes
+
+# Loop through the elements in the processed template, to add direct children of the root element (PlatformData)
+- include_tasks: answer-file-base-element.yml
+  loop: "{{ imp_primary_template_platform_data_children }}"
+  loop_control:
+    loop_var: xml_item
+
+# Loop through the NTP Server elements in the processed template
+- include_tasks: answer-file-ntp-servers.yml
+  loop: "{{ imp_primary_template_ntpservers }}"
+  when: ntpserver_item.param_value is defined and ntpserver_item.param_value != ""
+  loop_control:
+    loop_var: ntpserver_item
+
+- name: Add a 'CertX509' element to the 'PlatformData' element
+  xml:
+    path: '{{ answer_file_path }}'
+    xpath: /PlatformData/CertX509
+    pretty_print: yes
+
+# Loop through the elements in the processed template, to add direct children of the CertX509 element
+- include_tasks: answer-file-base-element.yml
+  loop: "{{ imp_primary_template_certx509_children }}"
+  loop_control:
+    loop_var: xml_item
+
+- name: Create Directory to place XML files for the following playbook
+  file:
+    path: '/images/{{ customer_id|upper }}'
+    state: directory
+    mode: 0777
+  register: "customer_folder_flp"
+  delegate_to: localhost
+
+- name: Copy XML file to common the folder with the following playbook
+  copy:
+    src: '{{ answer_file_path }}'
+    dest: '/images/{{ customer_id|upper }}/{{ clone_item.answer_file_config.host_name|upper }}.xml'
+    force: no
+
+- name: Recursively remove Client's directory
+  file:
+    path: 'temp/{{ customer_id|upper }}'
+    state: absent

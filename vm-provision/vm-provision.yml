@@ -1,0 +1,41 @@
+---
+
+- hosts: localhost
+  tasks:
+  
+  # Create Sub-Folders to place the new upcoming VMs
+  - include_tasks: folders/folders-creation.yml
+    loop: "{{ folders_parameters }}"
+    when: folders_parameters is defined
+  
+  # Create Resource Pool
+  - include_tasks: resource-pools/resource-pool-creation.yml
+    loop: "{{ folders_parameters }}"
+    when: folders_parameters is defined
+
+  # Check Created Resource Pool
+  - include_tasks: resource-pools/resource-pool-check.yml
+    loop: "{{ folders_parameters }}"
+    when: folders_parameters is defined
+
+  # Create Answer Files
+  - include_tasks: answer-file/answer-file-manager.yml
+    loop: "{{ clones_parameters }}"
+    when: clones_parameters is defined
+    loop_control:
+      loop_var: clone_item
+
+  # Create Floppy Disks
+  - include_tasks: floppy-disk/floppy-disk-creation.yml
+    loop: "{{ clones_parameters }}"
+    when: clones_parameters is defined
+  
+  #Cleanup Answer Files
+  - include_tasks: answer-file/answer-file-cleanup.yml
+    when: clones_parameters is defined
+  
+  # Clone Templates to VMs
+  - include_tasks: clone.yml
+    loop: "{{ clones_parameters }}"
+    when: clones_parameters is defined
+  

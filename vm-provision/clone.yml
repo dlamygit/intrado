@@ -1,0 +1,214 @@
+---
+
+- name: Clone a virtual machine on the given ESXi hostname, from the specified template
+  vmware_guest:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    datastore: "{{ item.datastore }}"
+    validate_certs: no
+    datacenter: "{{ item.datacenter_name }}"
+    folder: "{{ item.full_folder_path }}"
+    name: "{{ item.vm_name }}"
+    state: "poweredoff"
+    esxi_hostname: "{{ item.host }}"
+    hardware:
+      memory_mb: "{{ item.memory_mb | default(omit) }}"
+      num_cpus: "{{ item.num_cpus | default(omit) }}"
+    
+    # Network configuration is only for the lab
+    networks:
+      - name: "{{ item.vm_network_name }}"
+        mac: "{{ item.vm_mac }}"
+
+    template: "{{ item.vm_template_name }}"
+    wait_for_ip_address: no
+  delegate_to: localhost
+  register: deployed_cloned_vm
+
+# Network configuration is only for the lab
+- name: Change network adapter settings of virtual machine
+  vmware_guest_network:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    validate_certs: no
+    datacenter: "{{ item.datacenter_name }}"
+    name: "{{ item.vm_name }}"
+    gather_network_info: false
+    networks:
+      - manual_mac: "00:50:56:97:e4:b8"
+        state: present
+        label: "Network adapter 1"
+        connected: true
+        start_connected: true
+  delegate_to: localhost
+  register: network_info
+
+- name: Change virtual machine's boot order and related parameters
+  vmware_guest_boot_manager:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    validate_certs: no
+    name: "{{ item.vm_name }}"
+    boot_firmware: bios
+    boot_order:
+      - cdrom
+      - disk
+      - floppy
+  delegate_to: localhost
+  register: vm_boot_order
+
+- name: Enable ESX SSH (TSM-SSH)
+  vmware_host_service_manager:  
+    hostname: '{{ vcenter_hostname }}'
+    username: '{{ vcenter_username }}'
+    password: '{{ vcenter_password }}'
+    esxi_hostname: '{{ item.host }}'
+    validate_certs: no
+    service_name: TSM-SSH
+    state: present
+  delegate_to: localhost
+  register: enabled_esx_ssh
+
+- name: Enable ESX Shell (TSM)
+  vmware_host_service_manager:
+    hostname: '{{ vcenter_hostname }}'
+    username: '{{ vcenter_username }}'
+    password: '{{ vcenter_password }}'
+    esxi_hostname: '{{ item.host }}'
+    validate_certs: no
+    service_name: TSM
+    state: present
+  delegate_to: localhost
+  register: enabled_esx_shell
+
+- name: Removing VMX Entry - floppy0.fileName = "Floppy drive 1"
+  lineinfile:
+    path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
+    line: 'floppy0.fileName = "Floppy drive 1"'
+    state: absent
+  become: yes
+  become_user: root
+  delegate_to: '{{ item.host }}'
+  register: removed_vmx_entry_filename
+  vars:
+    ansible_python_interpreter: auto_silent
+
+- name: Removing VMX Entry - floppy0.present = "FALSE"
+  lineinfile:
+    path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
+    line: 'floppy0.present = "FALSE"'
+    state: absent
+  become: yes
+  become_user: root
+  delegate_to: '{{ item.host }}'
+  register: removed_vmx_entry_present
+  vars:
+    ansible_python_interpreter: auto_silent
+
+- name: Removing VMX Entry - floppy0.startConnected = "FALSE"
+  lineinfile:
+    path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
+    line: 'floppy0.startConnected = "FALSE"'
+    state: absent
+  become: yes
+  become_user: root
+  delegate_to: '{{ item.host }}'
+  register: removed_vmx_entry_startconnected_false
+  vars:
+    ansible_python_interpreter: auto_silent
+
+- name: Adding VMX Entry - floppy0.startConnected = "TRUE"
+  lineinfile:
+    path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
+    line: 'floppy0.startConnected = "TRUE"'
+  become: yes
+  become_user: root
+  delegate_to: '{{ item.host }}'
+  register: removed_vmx_entry_startconnected_true
+  vars:
+    ansible_python_interpreter: auto_silent
+
+- name: Adding VMX Entry - floppy0.fileType = "file"
+  lineinfile:
+    path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
+    line: 'floppy0.fileType = "file"'
+  become: yes
+  become_user: root
+  delegate_to: '{{ item.host }}'
+  register: add_vmx_entry_filetype
+  vars:
+    ansible_python_interpreter: auto_silent
+
+- name: Adding VMX Entry - floppy0.fileName
+  lineinfile:
+    path: '/vmfs/volumes/{{ item.datastore }}/{{ item.vm_name }}/{{ item.vm_name }}.vmx'
+    line: 'floppy0.fileName = "/vmfs/volumes/{{ item.datastore  }}/{{ item.answer_file_config.host_name|upper }}.flp"'
+  become: yes
+  become_user: root
+  delegate_to: '{{ item.host }}'
+  register: add_vmx_entry_filename
+  vars:
+    ansible_python_interpreter: auto_silent
+
+- name: Power On the Primary node
+  vmware_guest:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    datastore: "{{ item.datastore }}"
+    validate_certs: no
+    name: "{{ item.vm_name }}"
+    state: poweredon
+  delegate_to: localhost
+  register: deployed_cloned_vm_poweron
+  when: item.answer_file_config.node_type == 'primary'
+
+#- name: Run utils import config on the Primary node
+#  vmware_vm_shell:
+#    hostname: "{{ vcenter_hostname }}"
+#    username: "{{ vcenter_username }}"
+#    password: "{{ vcenter_password }}"
+#    validate_certs: no
+#    datacenter: "{{ item.datacenter_name }}"
+#    folder: "{{ item.full_folder_path }}"
+#    vm_id: "{{ item.vm_name }}"
+#    vm_username: "{{ item.answer_file_config.host_admin }}"
+#    vm_password: "{{ item.answer_file_config.host_admin_password }}"
+#    vm_shell: /bin/bash
+#    vm_shell_args: "utils import config"
+    #vm_shell_env:
+    #  - "PATH=/bin"
+    #  - "VAR=test"
+    #vm_shell_cwd: "/tmp"
+#  delegate_to: localhost
+#  register: shell_command_output
+#  when: item.answer_file_config.node_type == 'primary'
+
+#- name: Add subscriber servers
+#  vmware_host_service_manager:
+#    hostname: '{{ vcenter_hostname }}'
+#    username: '{{ vcenter_username }}'
+#    password: '{{ vcenter_password }}'
+#    esxi_hostname: '{{ host_name }}'
+#    validate_certs: no
+#    service_name: TSM
+#    state: present
+#  delegate_to: localhost
+#  when: item.answer_file_config.node_type == 'secondary'
+
+- name: Power On the Secondary node
+  vmware_guest:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    datastore: "{{ item.datastore }}"
+    validate_certs: no
+    name: "{{ item.vm_name }}"
+    state: poweredon
+  delegate_to: localhost
+  register: deployed_cloned_vm_poweron
+  when: item.answer_file_config.node_type == 'secondary'
+

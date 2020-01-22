@@ -1,0 +1,34 @@
+---
+
+- hosts: localhost
+  tasks:
+
+  - include_tasks: publishers-definition.yml
+    loop: "{{ clones_parameters }}"
+    when: clone_item.answer_file_config.node_type == 'primary'
+    loop_control:
+      loop_var: clone_item
+
+  - name: Create Temporary Files
+    include_tasks: temporary-files-creation.yml
+
+  - include_tasks: subscribers-registration-cucm.yml
+    loop: "{{ clones_parameters }}"
+    when: (clone_item.answer_file_config.node_type == 'secondary' and (clone_item.answer_file_config.product_type == 'cucm') )
+    loop_control:
+      loop_var: clone_item
+
+  - include_tasks: subscribers-registration-cucx.yml
+    loop: "{{ clones_parameters }}"
+    when: (clone_item.answer_file_config.node_type == 'secondary' and (clone_item.answer_file_config.product_type == 'cucx') )
+    loop_control:
+      loop_var: clone_item
+
+  - include_tasks: subscribers-registration-imp.yml
+    loop: "{{ clones_parameters }}"
+    when: (clone_item.answer_file_config.node_type == 'secondary' and (clone_item.answer_file_config.product_type == 'im&p') )
+    loop_control:
+      loop_var: clone_item
+
+  - name: Cleanup all the Temporary Files
+    include_tasks: temporary-files-cleanup.yml

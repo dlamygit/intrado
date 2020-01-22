@@ -1,0 +1,14 @@
+---
+
+- name: Create a sub Folder to save the new upcoming clones
+  vcenter_folder:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    datacenter_name: "{{ item.datacenter_name }}"
+    folder_name: "{{ item.sub_folder_name }}"
+    parent_folder: "{{ item.parent_folder_name }}"
+    state: "present"
+    validate_certs: no
+  register: "sub_folder_creation_result"
+  delegate_to: localhost
