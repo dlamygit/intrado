@@ -8,10 +8,23 @@
     loop: "{{ folders_parameters }}"
     when: folders_parameters is defined
   
+  # Create Resource Pool
+  - include_tasks: resource-pools/resource-pool-creation.yml
+    loop: "{{ folders_parameters }}"
+    when: folders_parameters is defined
+
+  # Check Created Resource Pool
+  - include_tasks: resource-pools/resource-pool-check.yml
+    loop: "{{ folders_parameters }}"
+    when: folders_parameters is defined
+
   # Create Answer Files
-  - include_tasks: answer-file/answer-file-creation-cucm.yml
+  - include_tasks: answer-file/answer-file-manager.yml
+    loop: "{{ clones_parameters }}"
     when: clones_parameters is defined
-  
+    loop_control:
+      loop_var: clone_item
+
   # Create Floppy Disks
   - include_tasks: floppy-disk/floppy-disk-creation.yml
     loop: "{{ clones_parameters }}"
@@ -26,7 +39,3 @@
     loop: "{{ clones_parameters }}"
     when: clones_parameters is defined
   
-  # Power Off the Created VMs
-  - include_tasks: poweroff.yml
-    loop: "{{ clones_parameters }}"
-    when: clones_parameters is defined

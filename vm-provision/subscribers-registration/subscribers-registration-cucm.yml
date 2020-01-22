@@ -1,0 +1,6 @@
+---
+
+- name: Subscribe CUCM 
+  command: '/usr/bin/python axl-client.py {{ customer_id|upper }} CUCM CUCM {{ clone_item.answer_file_config.host_name }}'
+  register: cucm_subscription
+  delegate_to: localhost

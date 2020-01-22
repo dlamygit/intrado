@@ -5,10 +5,16 @@
 - import_playbook: common/common.yml
 
 # Call Playbook for Storage Provisioning
-- import_playbook: storage-provision/storage-provision.yml
+# - import_playbook: storage-provision/storage-provision.yml
+
+# Call Playbook for Pre-VM Provisioning work
+- import_playbook: pre-vm-provision/pre-vm-provision-manager.yml
 
 # Call Playbook for VM Provisioning
 - import_playbook: vm-provision/vm-provision.yml
 
 # Call Playbook for the Overbuild
-- import_playbook: overbuild/overbuild.yml
+# - import_playbook: overbuild/overbuild.yml
+
+# Call Playbook for Post-VM Provisioning work
+- import_playbook: post-vm-provision/post-vm-provision-manager.yml
