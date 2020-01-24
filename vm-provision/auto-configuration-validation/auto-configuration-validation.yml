@@ -13,10 +13,10 @@
       register: info_vsphere
 
     - name: Perform some common tasks
-      command: sh ../common/behavior-mock.sh
+      command: sh validation-pause.sh
       register: result
       until: ((info_vsphere.instance.layout.logFile is defined) and (info_vsphere.instance.layout.logFile|length > 0))
-      retries: 20
+      retries: 30
       delay: 300
 
   rescue:
