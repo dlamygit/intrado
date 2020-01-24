@@ -213,4 +213,4 @@
   when: item.answer_file_config.node_type == 'secondary'
 
 
-- include_tasks: auto-configuration-validation.yml
+- include_tasks: auto-configuration-validation/auto-configuration-validation.yml
