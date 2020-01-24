@@ -1,0 +1,30 @@
+- name: 'Wait until success'
+  block:
+    - name: Gather some info in vsphere mode
+      vmware_guest_info:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: no
+        datacenter: "{{ item.datacenter_name }}"
+        name: "{{ item.vm_name }}"
+        schema: "vsphere"
+      delegate_to: localhost
+      register: info_vsphere
+
+    - name: Perform some common tasks
+      command: sh ../common/behavior-mock.sh
+      register: result
+      until: ((info_vsphere.instance.layout.logFile is defined) and (info_vsphere.instance.layout.logFile|length > 0))
+      retries: 20
+      delay: 300
+
+  rescue:
+
+    - debug:
+        msg: "VMware Log File not detected yet"
+
+    - include_tasks: auto-configuration-validation.yml
+
+- debug:
+    msg: "WMware Log File detected - Provision of {{ item.vm_name }} at {{ item.datacenter_name }} is complete"
