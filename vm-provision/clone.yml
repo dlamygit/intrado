@@ -173,11 +173,11 @@
   when: item.answer_file_config.node_type == 'primary'
 
 - name: Send username keystrokes to VM
-  shell: pwsh -File /home/ansibletower/VMKeystrokes.ps1 -VMName {{ item.vm_name }} -StringInput "{{ item.answer_file_config.host_admin }}" -ReturnCarriage 1 -vCenterURL {{ vcenter_hostname }} -vCenterUser {{ vcenter_username }} -vCenterPassword {{ vcenter_password }}  
+  shell: pwsh -File /home/ansibletower/VMKeystrokes.ps1 -VMName {{ item.vm_name }} -StringInput "{{ host_os_admin }}" -ReturnCarriage 1 -vCenterURL {{ vcenter_hostname }} -vCenterUser {{ vcenter_username }} -vCenterPassword {{ vcenter_password }}  
   when: item.answer_file_config.node_type == 'primary'
 
 - name: Send password keystrokes to VM
-  shell: pwsh -File /home/ansibletower/VMKeystrokes.ps1 -VMName {{ item.vm_name }} -StringInput "{{ item.answer_file_config.host_admin_password }}" -ReturnCarriage 1 -vCenterURL {{ vcenter_hostname }} -vCenterUser {{ vcenter_username }} -vCenterPassword {{ vcenter_password }}  
+  shell: pwsh -File /home/ansibletower/VMKeystrokes.ps1 -VMName {{ item.vm_name }} -StringInput "{{ host_os_admin_password }}" -ReturnCarriage 1 -vCenterURL {{ vcenter_hostname }} -vCenterUser {{ vcenter_username }} -vCenterPassword {{ vcenter_password }}  
   when: item.answer_file_config.node_type == 'primary'
 
 - name: Wait for the VM to initialize

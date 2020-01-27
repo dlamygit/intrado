@@ -7,4 +7,7 @@ host_os_admin: cisco
 host_app_username: admin
 
 # Username to connect to the vCenter Server
-vcenter_username: smst\ucautomation
+vcenter_username: 'smst\ucautomation'
+
+# Username to connect to the vCenter Server
+vcenter_hostname: ''

@@ -9,7 +9,8 @@
     register: completed_common
     delegate_to: localhost
 
-  - name: Include Template parameters as variables
-    include_vars: template-dev-UNOW-47.yml
-    when: (call_from_tower is undefined or call_from_tower|bool == False)
-    register: included_template_parameters
+  - name: Including access users
+    include_vars: access-users.yml
+
+  - name: Including access passwords
+    include_vars: access-passwords.yml

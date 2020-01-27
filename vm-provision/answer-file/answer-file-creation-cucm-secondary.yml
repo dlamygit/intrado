@@ -25,9 +25,6 @@
   register: "answer_files_folder"
   delegate_to: localhost
 
-# Encrypt Passwords
-- include_tasks: answer-file-passwords.yml
-
 - name: Delete the XML File if it already exists
   file:
     path: '{{ answer_file_path }}'

@@ -6,12 +6,7 @@ key = b'\xef\x00\xff\x02\xfb\x00\xffB';
 
 cipher = DES.new(key, DES.MODE_ECB);
 
-file_name = sys.argv[1];
-
-customer_name = sys.argv[2];
-
-with open('./temp/'+customer_name+'/'+file_name+'.txt') as f:
-    password = f.readline().rstrip();
+password = sys.argv[1];
 
 trailing_characters_count = 32 - len(password);
 

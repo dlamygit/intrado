@@ -3,6 +3,9 @@
 # Answer Files Manager
 # Playbook that orchestrates the creation of the required answer files
 
+# Encrypt Passwords
+- include_tasks: answer-file-passwords.yml
+
 # Create Answer Files for CUCM Primary Nodes
 - include_tasks: answer-file-creation-cucm-primary.yml
   when: clone_item.answer_file_config.product_type == 'cucm' and clone_item.answer_file_config.node_type == 'primary'

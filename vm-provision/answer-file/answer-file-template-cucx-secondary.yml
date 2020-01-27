@@ -86,12 +86,12 @@ cucx_secondary_template_platform_data_children:
 - xpath: /PlatformData/LocalHostAdminName
   param_name_text: Administrator name for this node
   param_default_value: administrator
-  param_value: "{{ clone_item.answer_file_config.host_admin|default('') }}"
+  param_value: "{{ host_os_admin }}"
   file_path: '{{ answer_file_path }}'
 - xpath: /PlatformData/LocalHostAdminPwCrypt
   param_name_text: Admin PW for this node
   param_default_value: password
-  param_value: "{{ encrypted_admin_password.stdout_lines[0]|default('') }}"
+  param_value: "{{ encrypted_host_os_admin_password }}"
   file_path: '{{ answer_file_path }}'
 - xpath: /PlatformData/LocaleId
   param_name_text: Microsoft assigned locale identifier value
@@ -116,7 +116,7 @@ cucx_secondary_template_platform_data_children:
 - xpath: /PlatformData/SftpPwCrypt
   param_name_text: Security PW for this node
   param_default_value: 'password'
-  param_value: "{{ encrypted_security_password.stdout_lines[0]|default('') }}"
+  param_value: "{{ encrypted_security_password }}"
   file_path: '{{ answer_file_path }}'
 - xpath: /PlatformData/IPSecFirstNode
   param_name_text: First IPSec node in the cluster
@@ -131,7 +131,7 @@ cucx_secondary_template_platform_data_children:
 - xpath: /PlatformData/IPSecSecurityPwCrypt
   param_name_text: Security PW for this node
   param_default_value: 'password'
-  param_value: "{{ encrypted_security_password.stdout_lines[0]|default('') }}"
+  param_value: "{{ encrypted_security_password }}"
   file_path: '{{ answer_file_path }}'
 - xpath: /PlatformData/CcmDBHost
   param_name_text: Host Name for DataBase
@@ -172,12 +172,12 @@ cucx_secondary_template_platform_data_children:
 - xpath: /PlatformData/ApplUserUsername
   param_name_text: Application User Username
   param_default_value: 'CCMAdministrator'
-  param_value: "{{ clone_item.answer_file_config.app_user_username|default('') }}"
+  param_value: "{{ host_app_username }}"
   file_path: '{{ answer_file_path }}'
 - xpath: /PlatformData/ApplUserPwCrypt
   param_name_text: Application User Password
   param_default_value: 'password'
-  param_value: "{{ encrypted_app_user_password.stdout_lines[0]|default('') }}"
+  param_value: "{{ encrypted_host_app_password }}"
   file_path: '{{ answer_file_path }}'
 - xpath: /PlatformData/DRSMasterHost
   param_name_text: DRSMasterHost
