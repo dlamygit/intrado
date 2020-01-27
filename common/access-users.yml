@@ -1,1 +1,10 @@
 ---
+
+# Administrator name for this node
+host_os_admin: cisco
+
+# Application Username (WebUI)
+host_app_username: admin
+
+# Username to connect to the vCenter Server
+vcenter_username: smst\ucautomation
