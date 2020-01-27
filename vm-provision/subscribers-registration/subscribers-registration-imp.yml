@@ -1,6 +1,6 @@
 ---
 
 - name: Subscribe IM&P
-  command: '/usr/bin/python axl-client.py {{ customer_id|upper }} CUCM IMP {{ clone_item.answer_file_config.host_name }} {{ clone_item.answer_file_config.imp_domain_name }}'
+  command: '/usr/bin/python axl-client.py {{ host_app_username|quote }} {{ host_app_password|quote }} CUCM IMP {{ clone_item.answer_file_config.host_name|quote }} {{ cucx_primary_host_ip|quote }} {{ clone_item.answer_file_config.imp_domain_name }}'
   register: imp_subscription
   delegate_to: localhost

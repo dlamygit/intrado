@@ -9,8 +9,8 @@
     loop_control:
       loop_var: clone_item
 
-  - name: Create Temporary Files
-    include_tasks: temporary-files-creation.yml
+#  - name: Create Temporary Files
+#    include_tasks: temporary-files-creation.yml
 
   - include_tasks: subscribers-registration-cucm.yml
     loop: "{{ clones_parameters }}"
@@ -30,5 +30,5 @@
     loop_control:
       loop_var: clone_item
 
-  - name: Cleanup all the Temporary Files
-    include_tasks: temporary-files-cleanup.yml
+#  - name: Cleanup all the Temporary Files
+#    include_tasks: temporary-files-cleanup.yml

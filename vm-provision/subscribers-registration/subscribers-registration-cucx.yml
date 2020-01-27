@@ -1,6 +1,6 @@
 ---
 
 - name: Subscribe CUCX
-  command: '/usr/bin/python axl-client.py {{ customer_id|upper }} CUCX CUCX {{ clone_item.answer_file_config.host_name }}'
+  command: '/usr/bin/python axl-client.py {{ host_app_username|quote }} {{ host_app_password|quote }} CUCX CUCX {{ clone_item.answer_file_config.host_name|quote }} {{ cucx_primary_host_ip|quote }}'
   register: cucx_subscription
   delegate_to: localhost

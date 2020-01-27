@@ -35,7 +35,7 @@
 - name: Add Application User Username Line
   lineinfile:
     path: 'temp/{{ customer_id|upper }}/COMMON_DATA.txt'
-    line: '{{ host_appuser_name }}'
+    line: '{{ host_app_username }}'
   register: "temporary_data"
   delegate_to: localhost
 

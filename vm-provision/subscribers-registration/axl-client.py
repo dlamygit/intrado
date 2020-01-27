@@ -10,23 +10,14 @@ from zeep.plugins import HistoryPlugin;
 from zeep.exceptions import Fault;
 
 # Get Arguments
-CUSTOMER_NAME = sys.argv[1];
-PUBLISHER_PRODUCT_TYPE = sys.argv[2];
-SUBSCRIBER_PRODUCT_TYPE = sys.argv[3];
-SUBSCRIBER_HOST_NAME = sys.argv[4];
+USERNAME = sys.argv[1];
+PASSWD = sys.argv[2];
+PUBLISHER_PRODUCT_TYPE = sys.argv[3];
+SUBSCRIBER_PRODUCT_TYPE = sys.argv[4];
+SUBSCRIBER_HOST_NAME = sys.argv[5];
+PUBLISHER_HOST_IP = sys.argv[6];
 if SUBSCRIBER_PRODUCT_TYPE == 'IMP':
-    IMP_DOMAIN_NAME = sys.argv[5];
-
-# Get Data from Temporary File with Common Data
-fcd = open('./temp/'+CUSTOMER_NAME+'/'+'COMMON_DATA.txt');
-common_data_array = fcd.read().splitlines();
-USERNAME = common_data_array[0];
-PASSWD = common_data_array[1];
-
-# Get Data from Temporary File with Specific Data
-fsd = open('./temp/'+CUSTOMER_NAME+'/'+PUBLISHER_PRODUCT_TYPE+'_DATA.txt');
-specific_data_array = fsd.read().splitlines();
-PUBLISHER_HOST_IP = specific_data_array[0];
+    IMP_DOMAIN_NAME = sys.argv[7];
 
 # this is a local file
 WSDL_URL = PUBLISHER_PRODUCT_TYPE + '/AXLAPI.wsdl'
@@ -58,7 +49,6 @@ class MyLoggingPlugin(Plugin):
         return envelope, http_headers;
 
 # Create a SOAP client session
-
 session = Session();
 
 #session.verify = CERT
