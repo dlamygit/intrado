@@ -1,6 +1,6 @@
 - name: setting auto_configuration_done control variable
   set_fact:
-    auto_configuration_done: False
+    auto_configuration_done: false
 
 - name: 'Wait until success'
   block:
@@ -18,22 +18,22 @@
 
     - name: setting auto_configuration_done control variable
       set_fact:
-        auto_configuration_done: True
+        auto_configuration_done: true
       when: ((info_vsphere.instance.layout.logFile is defined) and (info_vsphere.instance.layout.logFile|length > 0))
 
     - name: Perform some common tasks
       command: sh validation-pause.sh
       register: result
-      when: auto_configuration_done is False
+      when: auto_configuration_done|bool == false
 
   rescue:
 
     - debug:
         msg: "VMware Log File not detected yet"
-      when: auto_configuration_done is False
+      when: auto_configuration_done|bool == false
 
     - include_tasks: auto-configuration-validation.yml
-      when: auto_configuration_done is False
+      when: auto_configuration_done|bool == false
 
 - debug:
     msg: "WMware Log File detected - Provision of {{ item.vm_name }} at {{ item.datacenter_name }} is complete"

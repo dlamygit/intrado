@@ -2,6 +2,6 @@
 
 echo "Starting Pause"
 
-sleep 350
+sleep 700
 
 echo "Finishing Pause"
