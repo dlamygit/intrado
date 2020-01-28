@@ -21,6 +21,9 @@
         auto_configuration_done: true
       when: ((info_vsphere.instance.layout.logFile is defined) and (info_vsphere.instance.layout.logFile|length > 0))
 
+    - name: Log File Check
+      debug: msg="{{ info_vsphere.instance.layout }}"
+
     - name: Before Pause
       debug: msg="{{ ansible_date_time.date }} {{ ansible_date_time.time }}"
 
