@@ -4,8 +4,6 @@
 
 - name: 'Wait until success'
   block:
-    - pip:
-        name: pyvmomi>6.7.1
 
     - name: get the username running the deploy
       become: false
@@ -13,6 +11,9 @@
       register: username_on_the_host
 
     - debug: var=username_on_the_host
+    
+    - pip:
+        name: pyvmomi>6.7.1
 
     - name: Gather some info in vsphere mode
       vmware_guest_info:
