@@ -15,6 +15,8 @@
         schema: "vsphere"
       delegate_to: localhost
       register: info_vsphere
+      vars:
+        ansible_python_interpreter: /usr/bin/python3
 
     - name: setting auto_configuration_done control variable
       set_fact:
