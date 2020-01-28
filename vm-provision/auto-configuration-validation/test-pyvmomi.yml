@@ -12,7 +12,7 @@
 
   - pip:
       name: pyvmomi>6.7.1
-      executable: pip
+      executable: pip3
 
   - name: Gather some info in vsphere mode
     vmware_guest_info:
@@ -25,3 +25,5 @@
       schema: "vsphere"
     delegate_to: localhost
     register: info_vsphere
+    vars:
+        ansible_python_interpreter: /usr/bin/python3
