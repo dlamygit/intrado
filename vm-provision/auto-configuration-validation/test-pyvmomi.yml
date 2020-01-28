@@ -12,7 +12,7 @@
 
   - pip:
       name: pyvmomi>6.7.1
-      executable: pip3
+      executable: pip
 
   - name: Gather some info in vsphere mode
     vmware_guest_info:
