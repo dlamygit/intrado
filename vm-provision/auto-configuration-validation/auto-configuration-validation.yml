@@ -5,7 +5,7 @@
 - name: 'Wait until success'
   block:
     - pip:
-      name: pyvmomi>6.7.1
+        name: pyvmomi>6.7.1
 
     - name: get the username running the deploy
       become: false
