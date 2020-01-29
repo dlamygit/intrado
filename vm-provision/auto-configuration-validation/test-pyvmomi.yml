@@ -8,6 +8,11 @@
     local_action: command whoami
     register: username_on_the_host
 
+  - name: get pip
+    become: false
+    local_action: command which pip
+    register: which_pip
+
   - debug: var=username_on_the_host
 
   - name: Gather some info in vsphere mode
