@@ -27,7 +27,7 @@
     pip:
       name: pyvmomi>3.7.1
       virtualenv: "{{ tempvenv.path }}"
-      virtualenv_site_packages: yes
+      virtualenv_site_packages: no
     delegate_to: localhost
     become: no
 
