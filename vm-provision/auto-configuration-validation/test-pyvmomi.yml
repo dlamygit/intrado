@@ -10,6 +10,7 @@
     register: tempvenv
     delegate_to: localhost
     become: no
+    ignore_errors: yes
 
   - name: Install the Pyvmomi Python module
     pip:
