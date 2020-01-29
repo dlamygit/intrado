@@ -10,6 +10,21 @@
 
   - debug: var=username_on_the_host
 
+  - pip:
+      name: pyvmomi>6.7.1
+      executable: virtualenv
+      state: latest
+
+  - pip:
+      name: enum34
+      executable: pip3
+      state: absent
+
+  - pip:
+      name: pyvmomi>6.7.1
+      executable: pip3
+      state: latest
+
   - name: Gather some info in vsphere mode
     vmware_guest_info:
       hostname: "photon-machine.localdomain"
@@ -22,4 +37,8 @@
     delegate_to: localhost
     register: info_vsphere
     vars:
-        ansible_python_interpreter: /usr/bin/python
+        ansible_python_interpreter: /usr/bin/python3
+
+  - pip:
+      name: enum34
+      executable: pip3
