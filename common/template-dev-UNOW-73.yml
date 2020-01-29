@@ -26,7 +26,7 @@ vmfs_version: 6
 # New Destination Folders for the new VMs
 folders_parameters:
 - datacenter_name: 'Suwanee'
-  sub_folder_name: '{{customer_id}} - {{customer_name}}'
+  sub_folder_name: '0129INT - INTRADO'
   parent_folder_name: 'HCS Customers'
   folder_state: 'present'
   cluster_name: 'DEV-CLUSTER'
@@ -38,7 +38,7 @@ clones_parameters:
 - datacenter_name: 'Suwanee'
   vm_name: 'INTCCM1S02SWN'
   vm_template_name: 'CUCM 11.5 SU6 7500usr Skip Template'
-  full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
+  full_folder_path: '/HCS Customers/0129INT - INTRADO'
   datastore: 'datastore8'
   host: '172.10.6.153'
   vm_mac: '00:50:56:97:e4:a2'
