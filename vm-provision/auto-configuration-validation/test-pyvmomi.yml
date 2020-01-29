@@ -22,6 +22,7 @@
       virtualenv_python: /usr/bin/python
     delegate_to: localhost
     become: no
+    ignore_errors: yes
 
   - name: Gather some info in vsphere mode
     vars:
