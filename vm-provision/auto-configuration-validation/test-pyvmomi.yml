@@ -15,7 +15,7 @@
 
   - pip:
       name: pyvmomi
-      executable: pip
+      executable: /usr/bin/pip
       state: latest
 
   - debug: var=username_on_the_host
