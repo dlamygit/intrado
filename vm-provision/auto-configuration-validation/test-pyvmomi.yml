@@ -10,19 +10,16 @@
     register: tempvenv
     delegate_to: localhost
     become: no
-    ignore_errors: yes
 
   - name: Install the Pyvmomi Python module
     pip:
       name: pyvmomi
       state: latest
-      executable: /usr/bin/pip
-      #virtualenv: "{{ tempvenv.path }}"
+      virtualenv: "{{ tempvenv.path }}"
       virtualenv_site_packages: no
       virtualenv_python: /usr/bin/python
     delegate_to: localhost
     become: no
-    ignore_errors: yes
 
   - name: Gather some info in vsphere mode
     vars:
