@@ -5,16 +5,6 @@
 - name: 'Wait until success'
   block:
 
-    - name: get the username running the deploy
-      become: false
-      local_action: command whoami
-      register: username_on_the_host
-
-    - debug: var=username_on_the_host
-    
-    - pip:
-        name: pyvmomi>6.7.1
-
     - name: Gather some info in vsphere mode
       vmware_guest_info:
         hostname: "{{ vcenter_hostname }}"

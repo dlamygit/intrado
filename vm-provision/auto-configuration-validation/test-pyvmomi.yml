@@ -13,11 +13,6 @@
     local_action: command which pip
     register: which_pip
 
-  - pip:
-      name: pyvmomi
-      executable: /usr/bin/pip
-      state: latest
-
   - debug: var=username_on_the_host
 
   - name: Gather some info in vsphere mode

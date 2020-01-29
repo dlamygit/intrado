@@ -1,0 +1,69 @@
+---
+call_from_tower: True
+env_name: 'dev'
+
+# vCenter Server Data
+vcenter_hostname: 'photon-machine.localdomain'
+vcenter_username: 'administrator@vsphere.local'
+vcenter_password: 'Root718293?'
+
+# Customer Data
+customer_id: '0129INT'
+customer_name: 'INTRADO'
+
+# Destination Host (ESXi)
+host_name: '172.10.6.153'
+
+#Build Data
+build_size: 'medium'
+
+# DateStore Parameters
+datastore_name: 'datastore2'
+datastore_device_name: 'mpx.vmhba0:C0:T0:L0'
+datastore_type: 'vmfs'
+vmfs_version: 6
+
+# New Destination Folders for the new VMs
+folders_parameters:
+- datacenter_name: 'Suwanee'
+  sub_folder_name: '{{customer_id}} - {{customer_name}}'
+  parent_folder_name: 'HCS Customers'
+  folder_state: 'present'
+  cluster_name: 'DEV-CLUSTER'
+
+# Clones Configuration
+clones_parameters:
+# Suwanee VMs
+# CUCM Subscriber Node  
+- datacenter_name: 'Suwanee'
+  vm_name: 'INTCCM1S02SWN'
+  vm_template_name: 'CUCM 11.5 SU6 7500usr Skip Template'
+  full_folder_path: '/HCS Customers/{{customer_id}} - {{customer_name}}'
+  datastore: 'datastore8'
+  host: '172.10.6.153'
+  vm_mac: '00:50:56:97:e4:a2'
+  vm_network_name: "VM Network"
+  answer_file_config:
+    product_type: 'cucm'
+    node_type: 'secondary'
+    primary_host_name: ''
+    primary_host_ip: ''
+    host_name: 'INTCCM1S02SWN'
+    host_ip: '172.10.3.83'
+    host_gateway: '172.10.2.2'
+    primary_dns: ''
+    secondary_dns: ''
+    domain_name: 'west.com'
+    host_timezone: 'America/Argentina/Buenos_Aires'
+    host_continent: 'America'
+    host_city: 'Argentina'
+    host_admin: 'cisco'
+    host_admin_password: 'Int_ado1*'
+    host_security_password: 'Int_ado1*'
+    host_app_user_password: 'Int_ado1*'
+    certificate_organization: 'Intrado'
+    certificate_unit: '0115INT'
+    certificate_location: 'Santa Fe'
+    certificate_state: 'Santa Fe'
+    certificate_country: 'AR'
+    app_user_username: 'admin'
