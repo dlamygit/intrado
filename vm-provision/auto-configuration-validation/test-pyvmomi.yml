@@ -3,18 +3,6 @@
 - hosts: localhost
   tasks:
 
-  - name: get the username running the deploy
-    become: false
-    local_action: command whoami
-    register: username_on_the_host
-
-  - name: get pip
-    become: false
-    local_action: command which pip
-    register: which_pip
-
-  - debug: var=username_on_the_host
-
   - name: Make temp directory for Python virtualenv
     tempfile:
       state: directory
@@ -23,7 +11,7 @@
     delegate_to: localhost
     become: no
 
-  - name: Install the zabbix-api Python module
+  - name: Install the Pyvmomi Python module
     pip:
       name: pyvmomi>3.7.1
       virtualenv: "{{ tempvenv.path }}"
