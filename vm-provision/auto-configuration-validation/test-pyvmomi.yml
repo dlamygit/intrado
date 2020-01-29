@@ -13,6 +13,11 @@
     local_action: command which pip
     register: which_pip
 
+  - pip:
+      name: pyvmomi
+      executable: pip
+      state: latest
+
   - debug: var=username_on_the_host
 
   - name: Gather some info in vsphere mode
@@ -26,3 +31,5 @@
       schema: "vsphere"
     delegate_to: localhost
     register: info_vsphere
+    vars:
+        ansible_python_interpreter: /usr/bin/python
