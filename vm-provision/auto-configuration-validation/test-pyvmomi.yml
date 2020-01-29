@@ -15,16 +15,33 @@
 
   - debug: var=username_on_the_host
 
-  - name: Gather some info in vsphere mode
-    vmware_guest_info:
-      hostname: "photon-machine.localdomain"
-      username: "administrator@vsphere.local"
-      password: "Root718293?"
-      validate_certs: no
-      datacenter: "Suwanee"
-      name: "INTCCM1S01DEN"
-      schema: "vsphere"
-    delegate_to: localhost
-    register: info_vsphere
-    vars:
-        ansible_python_interpreter: /usr/bin/python
+  - name: Make temp directory for Python virtualenv
+      tempfile:
+        state: directory
+        prefix: vmware_guest_info.
+      register: tempvenv
+      delegate_to: localhost
+      become: no
+
+    - name: Install the zabbix-api Python module
+      pip:
+        name: pyvmomi>3.7.1
+        virtualenv: "{{ tempvenv.path }}"
+        virtualenv_site_packages: yes
+      delegate_to: localhost
+      become: no
+
+    - name: Gather some info in vsphere mode
+      vars:
+        ansible_python_interpreter: "{{ tempvenv.path }}/bin/python"
+      vmware_guest_info:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: no
+        datacenter: "{{ item.datacenter_name }}"
+        name: "{{ item.vm_name }}"
+        schema: "vsphere"
+      delegate_to: localhost
+      register: info_vsphere
+      become: no
