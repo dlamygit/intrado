@@ -16,7 +16,7 @@
       name: pyvmomi
       state: latest
       virtualenv: "{{ tempvenv.path }}"
-      virtualenv_site_packages: yes
+      virtualenv_site_packages: no
       virtualenv_python: /usr/bin/python
     delegate_to: localhost
     become: no
