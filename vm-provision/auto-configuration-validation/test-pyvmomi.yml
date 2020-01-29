@@ -13,9 +13,11 @@
 
   - name: Install the Pyvmomi Python module
     pip:
-      name: pyvmomi>3.7.1
+      name: pyvmomi
+      state: latest
       virtualenv: "{{ tempvenv.path }}"
       virtualenv_site_packages: yes
+      virtualenv_python: /usr/bin/python
     delegate_to: localhost
     become: no
 
