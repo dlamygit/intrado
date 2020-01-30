@@ -16,12 +16,24 @@
 
   - name: Install the zabbix-api Python module
     pip:
-      name: zabbix-api
-      state: latest
+      name: enum34
+      state: absent
       virtualenv: "{{ tempvenv.path }}"
       virtualenv_site_packages: yes
     delegate_to: localhost
     become: no
+    ignore_errors: yes
+
+  - name: Install the zabbix-api Python module
+    pip:
+      name: zabbix-api
+      state: latest
+      executable: /usr/bin/pip
+      #virtualenv: "{{ tempvenv.path }}"
+      virtualenv_site_packages: yes
+    delegate_to: localhost
+    become: no
+    ignore_errors: yes
 
   - name: Install the Pyvmomi Python module
     pip:
@@ -32,6 +44,7 @@
       virtualenv_python: /usr/bin/python
     delegate_to: localhost
     become: no
+    ignore_errors: yes
 
   - name: Gather some info in vsphere mode
     vars:
