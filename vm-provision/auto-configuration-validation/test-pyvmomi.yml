@@ -50,12 +50,12 @@
     vars:
       ansible_python_interpreter: "{{ tempvenv.path }}/bin/python"
     vmware_guest_info:
-      hostname: "{{ vcenter_hostname }}"
-      username: "{{ vcenter_username }}"
-      password: "{{ vcenter_password }}"
+      hostname: "photon-machine.localdomain"
+      username: "administrator@vsphere.local"
+      password: "Root718293?"
       validate_certs: no
-      datacenter: "{{ item.datacenter_name }}"
-      name: "{{ item.vm_name }}"
+      datacenter: "Denver"
+      name: "INTCCM1S01DEN"
       schema: "vsphere"
     delegate_to: localhost
     register: info_vsphere
