@@ -12,6 +12,14 @@
       register: tempvenv
       delegate_to: localhost
       become: no
+    
+    - name: Install the zabbix-api Python module
+      pip:
+        name: zabbix-api
+        virtualenv: "{{ tempvenv.path }}"
+        virtualenv_site_packages: yes
+      delegate_to: localhost
+      become: no
 
     - name: Install the zabbix-api Python module
       pip:
@@ -20,7 +28,7 @@
         virtualenv_site_packages: yes
       delegate_to: localhost
       become: no
-
+    
     - name: Gather some info in vsphere mode
       vars:
         ansible_python_interpreter: "{{ tempvenv.path }}/bin/python"
@@ -50,11 +58,6 @@
 
     - name: After Pause
       debug: msg="{{ ansible_date_time.date }} {{ ansible_date_time.time }}"
-
-#    - name: Perform some common tasks
-#      command: sh validation-pause.sh
-#      register: result
-#      when: auto_configuration_done|bool == false
 
   rescue:
 
