@@ -10,6 +10,18 @@
     register: tempvenv
     delegate_to: localhost
     become: no
+  
+  - name: Before Installing zabbix-api
+    debug: msg="{{ ansible_date_time.date }} {{ ansible_date_time.time }}"
+
+  - name: Install the zabbix-api Python module
+    pip:
+      name: zabbix-api
+      state: latest
+      virtualenv: "{{ tempvenv.path }}"
+      virtualenv_site_packages: yes
+    delegate_to: localhost
+    become: no
 
   - name: Install the Pyvmomi Python module
     pip:
