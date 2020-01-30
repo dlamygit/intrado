@@ -3,7 +3,6 @@
 - hosts: localhost
   tasks:
 
-
   - name: which pip
     command: which pip
     register: which_pip
@@ -11,6 +10,10 @@
   - name: which python
     command: which python
     register: which_python
+
+  - name: pip list
+    command: pip list
+    register: which_pip
 
   - name: Make temp directory for Python virtualenv
     tempfile:
