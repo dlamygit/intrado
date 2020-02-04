@@ -1,0 +1,20 @@
+---
+
+- include_vars: log-template.yml
+
+- name: Publish a message to a queue with headers
+  rabbitmq_publish:
+    url: "amqp://admin:password@localhost:5672/%2F"
+    queue: 'intrado'
+    durable: true
+    body: "{{ log_template }}"
+    content_type: "text/plain"
+    headers:
+      myHeader: myHeaderValue
+
+# Example call
+# - include_tasks: log-publisher.yml
+#   vars:
+#     log_description: "Completed Answer File creation for CUCM Primary Node"
+#     log_playbook: "Answer Files Manager"
+#     log_datetime: "{{ now() }}"

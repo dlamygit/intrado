@@ -1,0 +1,3 @@
+---
+
+log_template: '{"buildIdentifier": "{{ build_identifier }}", "logType": "{{ log_type }}", "logDescription": "{{ log_description }}", "logDateTime": "{{ log_datetime }}", "logPlaybook": "{{ log_playbook }}" }'
